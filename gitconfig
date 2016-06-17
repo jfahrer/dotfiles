@@ -3,6 +3,7 @@
   name = Julian
 [core]
   editor = /usr/bin/vim
+  excludesfile = ~/.gitignore
 [push]
   default = simple
 [alias]
@@ -13,3 +14,4 @@
   co = checkout
   pf = push --force-with-lease
   st = status
+
