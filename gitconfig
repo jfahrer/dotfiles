@@ -1,0 +1,7 @@
+[user]
+	email = julian@fahrer.net
+	name = Julian
+[core]
+	editor = /usr/bin/vim
+[push]
+	default = simple
