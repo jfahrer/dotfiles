@@ -304,3 +304,8 @@ function! RenameFile()
     endif
 endfunction
 map <Leader>n :call RenameFile()<cr>
+
+" Local config
+if filereadable($HOME . "/.vimrc.local")
+  source ~/.vimrc.local
+endif
