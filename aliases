@@ -2,13 +2,15 @@
 alias ll="ls -al"
 alias lt="ls -altr"
 alias e="$EDITOR"
+alias ..=cd ..
 
 # SSH
 alias sshr="ssh -l root"
 
-# Bundler
+# Bundler / rails
 alias b="bundle"
 alias be="bundle exec"
+alias pconsole="bundle exec cap production rails:console"
 
 # Rails
 alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
