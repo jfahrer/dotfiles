@@ -1,0 +1,2 @@
+caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+hardstatus alwayslastline " [ %H  ] %{wb} %c:%s | %d.%m.%Y %{wr} Load: %l %{wb} %w "
