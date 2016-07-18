@@ -283,6 +283,7 @@ nnoremap <leader>gaf :Gwrite<CR>
 nnoremap <leader>ga. :Git add .<CR>:Gstatus<CR>
 nnoremap <leader>ga% :Git add %<CR>:Gstatus<CR>
 nnoremap <leader>gaa :Git add -A<CR>:Gstatus<CR>
+nnoremap <leader>gap :Git add -A -p<CR>:Gstatus<CR>
 nnoremap <leader>gp :Git push<CR>
 
 " Display extra whitespace
