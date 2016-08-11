@@ -1,0 +1,240 @@
+snippet ccontroller
+	class ${1:Model}Controller < ApplicationController
+	  $0
+	end
+#
+snippet cmodel
+	class ${1:Model} < ActiveRecord::Base
+	  $0
+	end
+#
+###############
+# Redirection #
+###############
+snippet rt
+	redirect_to ${0}
+snippet rtn
+	redirect_to ${1}, notice: t('.${2:msg}')
+##################
+# Before actions #
+##################
+snippet ba
+	before_action :${0:method}
+snippet bf
+	before_filter :${0:method}
+snippet bt
+	belongs_to :${0:association}
+snippet btp
+	belongs_to :${1:association}, polymorphic: true
+snippet crw
+	cattr_accessor :${0:attr_names}
+
+snippet defcreate
+	def create
+		@${1:model_class_name} = ${2:ModelClassName}.new($1_params)
+
+		respond_to do |format|
+			if @$1.save
+				flash[:notice] = '$2 was successfully created.'
+				format.html { redirect_to(@$1) }
+				format.xml  { render xml: @$1, status: :created, location: @$1 }
+			else
+				format.html { render action: 'new' }
+				format.xml  { render xml: @$1.errors, status: :unprocessable_entity }
+			end
+		end
+	end
+snippet defdestroy
+	def destroy
+		@${1:model_class_name} = ${2:ModelClassName}.find(params[:id])
+		@$1.destroy
+
+		respond_to do |format|
+			format.html { redirect_to($1s_url) }
+			format.xml  { head :ok }
+		end
+	end
+snippet defedit
+	def edit
+		@${1:model_class_name} = ${0:ModelClassName}.find(params[:id])
+	end
+snippet defindex
+	def index
+		@${1:model_class_name} = ${2:ModelClassName}.all
+
+		respond_to do |format|
+			format.html # index.html.erb
+			format.xml  { render xml: @$1s }
+		end
+	end
+snippet defnew
+	def new
+		@${1:model_class_name} = ${2:ModelClassName}.new
+
+		respond_to do |format|
+			format.html # new.html.erb
+			format.xml  { render xml: @$1 }
+		end
+	end
+snippet defshow
+	def show
+		@${1:model_class_name} = ${2:ModelClassName}.find(params[:id])
+
+		respond_to do |format|
+			format.html # show.html.erb
+			format.xml  { render xml: @$1 }
+		end
+	end
+snippet defupdate
+	def update
+		@${1:model_class_name} = ${2:ModelClassName}.find(params[:id])
+
+		respond_to do |format|
+			if @$1.update($1_params)
+				flash[:notice] = '$2 was successfully updated.'
+				format.html { redirect_to(@$1) }
+				format.xml  { head :ok }
+			else
+				format.html { render action: 'edit' }
+				format.xml  { render xml: @$1.errors, status: :unprocessable_entity }
+			end
+		end
+	end
+snippet defparams
+	def ${1:model_class_name}_params
+		params.require(:$1).permit()
+	end
+snippet dele delegate .. to
+	delegate :${1:methods}, to: :${0:object}
+snippet dele delegate .. to .. prefix .. allow_nil
+	delegate :${1:methods}, to: :${2:object}, prefix: :${3:prefix}, allow_nil: ${0:allow_nil}
+snippet amc
+	alias_method_chain :${1:method_name}, :${0:feature}
+snippet flash
+	flash[:${1:notice}] = '${0}'
+snippet habtm
+	has_and_belongs_to_many :${1:object}, join_table: '${2:table_name}', foreign_key: '${3}_id'
+snippet hm
+	has_many :${0:object}
+snippet hmd
+	has_many :${1:other}s, class_name: '${2:$1}', foreign_key: '${3:$1}_id', dependent: :destroy
+snippet hmt
+	has_many :${1:object}, through: :${0:object}
+snippet ho
+	has_one :${0:object}
+snippet hod
+	has_one :${1:object}, dependent: :${0:destroy}
+snippet i18
+	I18n.t('${1:type.key}')
+snippet ist
+	<%= image_submit_tag('${1:agree.png}', id: '${2:id}'${0}) %>
+snippet log
+	Rails.logger.${1:debug} ${0}
+snippet log2
+	RAILS_DEFAULT_LOGGER.${1:debug} ${0}
+snippet logd
+	logger.debug { '${1:message}' }
+snippet loge
+	logger.error { '${1:message}' }
+snippet logf
+	logger.fatal { '${1:message}' }
+snippet logi
+	logger.info { '${1:message}' }
+snippet logw
+	logger.warn { '${1:message}' }
+snippet mapc
+	${1:map}.${2:connect} '${0:controller/:action/:id}'
+snippet mapca
+	${1:map}.catch_all '*${2:anything}', controller: '${3:default}', action: '${4:error}'
+snippet mapr
+	${1:map}.resource :${0:resource}
+snippet maprs
+	${1:map}.resources :${0:resource}
+snippet mapwo
+	${1:map}.with_options ${2:controller}: '${3:thing}' do |$3|
+		${0}
+	end
+
+###############################
+#   model callback snippets   #
+###############################
+
+# before callback
+snippet mbv
+	before_validation :${0:method}
+snippet mbc
+	before_create :${0:method}
+snippet mbu
+	before_update :${0:method}
+snippet mbs
+	before_save :${0:method}
+snippet mbd
+	before_destroy :${0:method}
+
+# after callback
+snippet mav
+	after_validation :${0:method}
+snippet maf
+	after_find :${0:method}
+snippet mat
+	after_touch :${0:method}
+snippet macr
+	after_create :${0:method}
+snippet mau
+	after_update :${0:method}
+snippet mas
+	after_save :${0:method}
+snippet mad
+	after_destroy :${0:method}
+
+# around callback
+snippet marc
+	around_create :${0:method}
+snippet maru
+	around_update :${0:method}
+snippet mars
+	around_save :${0:method}
+snippet mard
+	around_destroy :${0:method}
+
+snippet mcht
+	change_table :${1:table_name} do |t|
+		${0}
+	end
+
+snippet oa
+	order('${0:field}')
+snippet od
+	order('${0:field} DESC')
+
+snippet pa
+	params[:${1:id}]
+
+snippet rest
+	respond_to do |format|
+		format.${1:html} { ${0} }
+	end
+
+snippet rjson
+	render json: '${0:text to render}'
+snippet rl
+	render layout: '${0:layoutname}'
+snippet rn
+	render nothing: ${0:true}
+snippet rns
+	render nothing: ${1:true}, status: ${0:401}
+snippet sc
+	scope :${1:name}, -> { where(${2:field}: ${0:value}) }
+snippet sl
+	scope :${1:name}, lambda do |${2:value}|
+		where('${3:field = ?}', ${0:value})
+	end
+snippet format
+	format.${1:js|xml|html} { ${0} }
+
+snippet han
+	${1:Model}.human_attribute_name(${2:field})
+
+snippet mn
+	${1:Model}.model_name.human(count: ${2:1})
+

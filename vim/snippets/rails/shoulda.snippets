@@ -1,0 +1,73 @@
+#ShouldaMatchers#ActionController
+snippet isfp
+	it { should filter_param :${0:key} }
+snippet isrt
+	it { should redirect_to ${0:url} }
+snippet isrtp
+	it { should render_template ${0} }
+snippet isrwl
+	it { should render_with_layout ${0} }
+snippet isrf
+	it { should rescue_from ${0:exception} }
+snippet isrw
+	it { should respond_with ${0:status} }
+snippet isr
+	it { should route(:${1:method}, '${0:path}') }
+snippet isss
+	it { should set_session :${0:key} }
+snippet issf
+	it { should set_the_flash('${0}') }
+snippet ispa
+	it { should permit(${2:attributes}).for(${1:action}) }
+
+#ShouldaMatchers#ActiveModel
+snippet isama
+	it { should allow_mass_assignment_of :${0} }
+snippet isav
+	it { should allow_value(${1}).for :${0} }
+snippet isee
+	it { should ensure_exclusion_of :${0} }
+snippet isei
+	it { should ensure_inclusion_of :${0} }
+snippet isel
+	it { should ensure_length_of :${0} }
+snippet isva
+	it { should validate_acceptance_of :${0} }
+snippet isvc
+	it { should validate_confirmation_of :${0} }
+snippet isvn
+	it { should validate_numericality_of :${0} }
+snippet isvp
+	it { should validate_presence_of :${0} }
+snippet isvu
+	it { should validate_uniqueness_of :${0} }
+	
+#ShouldaMatchers#ActiveRecord
+snippet isana
+	it { should accept_nested_attributes_for :${0} }
+snippet isbt
+	it { should belong_to :${0} }
+snippet isbtcc
+	it { should belong_to(:${1}).counter_cache ${0:true} }
+snippet ishabtm
+	it { should have_and_belong_to_many :${0} }
+snippet isbv
+	it { should be_valid }
+snippet ishc
+	it { should have_db_column :${0} }
+snippet ishi
+	it { should have_db_index :${0} }
+snippet ishm
+	it { should have_many :${0} }
+snippet ishmt
+	it { should have_many(:${1}).through :${0} }
+snippet isho
+	it { should have_one :${0} }
+snippet ishro
+	it { should have_readonly_attribute :${0} }
+snippet iss
+	it { should serialize :${0} }
+snippet isres
+	it { should respond_to :${0} }
+snippet isresw
+	it { should respond_to(:${1}).with(${0}).arguments }

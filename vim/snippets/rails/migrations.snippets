@@ -1,0 +1,77 @@
+###########################
+#   migrations snippets   #
+###########################
+snippet mac
+	add_column :${1:table_name}, :${2:column_name}, :${0:data_type}
+snippet mai
+	add_index :${1:table_name}, :${0:column_name}
+snippet mrc
+	remove_column :${1:table_name}, :${0:column_name}
+snippet mrnc
+	rename_column :${1:table_name}, :${2:old_column_name}, :${0:new_column_name}
+snippet mcc
+	change_column :${1:table}, :${2:column}, :${0:type}
+snippet mnc
+	t.${1:string} :${2:title}${3:, null: false}
+snippet mct
+	create_table :${1:table_name} do |t|
+		${0}
+	end
+snippet migration class .. < ActiveRecord::Migration .. def change .. end
+	class ${1:class_name} < ActiveRecord::Migration
+		def change
+			${0}
+		end
+	end
+snippet trc
+	t.remove :${0:column}
+snippet tre
+	t.rename :${1:old_column_name}, :${2:new_column_name}
+	${0}
+snippet tref
+	t.references :${0:model}
+snippet tcb
+	t.boolean :${1:title}
+	${0}
+snippet tcbi
+	t.binary :${1:title}, limit: ${2:2}.megabytes
+	${0}
+snippet tcd
+	t.decimal :${1:title}, precision: ${2:10}, scale: ${3:2}
+	${0}
+snippet tcda
+	t.date :${1:title}
+	${0}
+snippet tcdt
+	t.datetime :${1:title}
+	${0}
+snippet tcf
+	t.float :${1:title}
+	${0}
+snippet tch
+	t.change :${1:name}, :${2:string}, ${3:limit}: ${4:80}
+	${0}
+snippet tci
+	t.integer :${1:title}
+	${0}
+snippet tcl
+	t.integer :lock_version, null: false, default: 0
+	${0}
+snippet tcr
+	t.references :${1:taggable}, polymorphic: { default: '${2:Photo}' }
+	${0}
+snippet tcs
+	t.string :${1:title}
+	${0}
+snippet tct
+	t.text :${1:title}
+	${0}
+snippet tcti
+	t.time :${1:title}
+	${0}
+snippet tcts
+	t.timestamp :${1:title}
+	${0}
+snippet tctss
+	t.timestamps
+	${0}
