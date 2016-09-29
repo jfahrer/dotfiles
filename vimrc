@@ -31,6 +31,9 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'd11wtq/ctrlp_bdelete.vim'
 Plugin 'tacahiroy/ctrlp-funky'
 
+" Sublime styile multiple cursors
+Plugin 'terryma/vim-multiple-cursors' " Use <C-n> to set new cursors in visual in insert mode
+
 " Buffer and file management
 Plugin 'Shougo/unite.vim' " See https://coderwall.com/p/pwh5jg/ignoring-gitignore-files-in-unite-vim for performance
 Plugin 'Shougo/vimproc.vim' " Run make inside ~/.vim/bundle/vimproc.vim after installation!
@@ -242,20 +245,28 @@ map <left> <nop>
 map <right> <nop>
 
 " Disable Arrow keys in Insert mode
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
+" imap <up> <nop>
+" imap <down> <nop>
+" imap <left> <nop>
+" imap <right> <nop>
 
 " noremap <A-Up> <NOP>
 " noremap <A-Down> <NOP>
 " noremap <A-Left> <NOP>
 " noremap <A-Right> <NOP>
- 
+
+" provide hjkl movements in Insert mode <Alt> key
+imap <A-h> <C-o>h
+imap <A-j> <C-o>j
+imap <A-k> <C-o>k
+imap <A-l> <C-o>l
+
+" Use hjkl to move between splits with <Ctrl> key
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
 
 
 " Use only 1 space after "." when joining lines instead of 2
