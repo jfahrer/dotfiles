@@ -1,14 +1,14 @@
 " Clear autocmds
 " autocmd!
 
-" Map the leader key
+" Map the leader key to space
 let mapleader = ' '
 
-" Use Vim settings, rather then Vi settings (much better!).
+" Use Vim settings, rather then Vi settings
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" set the runtime path to include Vundle and initialize
+" Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
@@ -19,69 +19,50 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'duggiefresh/vim-easydir'  " Easily create direcories and files
 Plugin 'tpope/vim-fugitive'       " Git wrapper
 Plugin 'tpope/vim-vinegar'        " Better file browser
-Plugin 'tpope/vim-speeddating'    " Add <C-A> and <C-X> helpers for dates. d<C-A> and d<C-X> for current timestamps
+" Plugin 'tpope/vim-speeddating'    " Add <C-A> and <C-X> helpers for dates. d<C-A> and d<C-X> for current timestamps
 Plugin 'tpope/vim-commentary'     " Add comment via <leader>gcc and <leader>9gcc 
 Plugin 'tpope/vim-endwise'        " Add end tags to if, def, ...
-Plugin 'jiangmiao/auto-pairs'     " Add pairs for brackets etc
+Plugin 'raimondi/delimitmate'     " Add pairs for brackets etc
 Plugin 'bling/vim-airline'        " Better status line
 Plugin 'tpope/vim-unimpaired'     " https://github.com/tpope/vim-unimpaired
+Plugin 'tpope/vim-surround'       " Use cs to change surroundings. For example cs{[
+Plugin 'tpope/vim-repeat'         " Make (some) Plugins work work with the . command
 
 " Sublime / TextMate style Ctrl+P
-Plugin 'kien/ctrlp.vim'
-Plugin 'd11wtq/ctrlp_bdelete.vim'
-Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'kien/ctrlp.vim'            " For files with <C-p>
+Plugin 'd11wtq/ctrlp_bdelete.vim'  " For buffers with <C-b> (Close with C-2 / Mark multiple with C-z)
+" Plugin 'tacahiroy/ctrlp-funky'   " Could be used for definitions inside a file. Usefull?
 
 " Sublime styile multiple cursors
 Plugin 'terryma/vim-multiple-cursors' " Use <C-n> to set new cursors in visual in insert mode
 
-" Buffer and file management
-Plugin 'Shougo/unite.vim' " See https://coderwall.com/p/pwh5jg/ignoring-gitignore-files-in-unite-vim for performance
-Plugin 'Shougo/vimproc.vim' " Run make inside ~/.vim/bundle/vimproc.vim after installation!
- 
 " Ruby and Rails helpers
-Plugin 'rorymckinley/vim-rubyhash'
-Plugin 'ecomba/vim-ruby-refactoring'
-Plugin 'tmhedberg/matchit'
-Plugin 'tpope/vim-rails'
-
-" Rspec
-Plugin 'thoughtbot/vim-rspec'
+Plugin 'rorymckinley/vim-rubyhash'    " Change ruby hash syntax with <leader>rr / <leader>rs / <leader>rt
+Plugin 'ecomba/vim-ruby-refactoring'  " Handy helpers to refactor ruby code.
+Plugin 'tpope/vim-rails'              " Rails integration
+Plugin 'thoughtbot/vim-rspec'         " Run specs with <leader>ta / <leader>tf / <leader>tt
 
 " Syntax extensions
-Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'pangloss/vim-javascript'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rake'
 Plugin 'avakhov/vim-yaml'
+Plugin 'pearofducks/ansible-vim'
 
-" Open alternative file
+" Open alternative file with :A / :AV / :AH
 Plugin 'compactcode/open.vim'
 Plugin 'compactcode/alternate.vim'
 
 " Snippets
 " See https://github.com/honza/vim-snippets/tree/master/snippets for snippets
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'garbas/vim-snipmate'
 
-" Autocompletion
-" Also see
-" http://vertuxeltes.blogspot.de/2013/05/powerful-insert-mode-completion.html
-Plugin 'ervandew/supertab'
-Plugin 'vim-scripts/AutoComplPop'
 
-" Helpers for ",' and tag sourindings
-" See https://github.com/tpope/vim-surround
-Plugin 'tpope/vim-surround'
-
-" TODO
 " Plugin 'junegunn/vim-easy-align'
-" https://github.com/gabrielelana/vim-markdown
-" lugin 'gabrielelana/vim-markdown'
-" Vielleicht nützlich?
-" https://github.com/vim-ruby/vim-ruby/wiki/VimRubySupport
-" Bundle 'vim-ruby/vim-ruby'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -92,10 +73,9 @@ call vundle#end()
 set backspace=indent,eol,start
 
 " Mixed stuff
-set history=100
+set history=100      " Keep 100 commands in the history
 set ruler            " show the cursor position all the time
 set showcmd          " display incomplete commands
-set incsearch        " do incremental searching
 set relativenumber   " relative line numbers
 set nowrap           " don't wrap lines
 set vb               " disable alert sound
@@ -105,25 +85,32 @@ set splitbelow       " open the horizontal split below
 set splitright       " open vertical splits on the right
 set linespace=0      " number of pixels between the lines
 set wildmenu         " show completion on the modeline
-" set hlsearch       " Highlight the search
 set ls=2             " show a status line even if there's only one window
 set exrc             " enable per-project .vimrc files
+set synmaxcol=1200   " Syntax coloring lines that are too long just slows down the world
+set nostartofline    " Don't reset cursor to start of line when moving around
+set nojoinspaces     " Use only 1 space after "." when joining lines instead of 2
 
+" Searching
+set incsearch        " do incremental searching
+set hlsearch         " Highlight the search
+set ignorecase       " Case insensitive search
+set smartcase        " Case sensitive search if the string contains captible letters
+nnoremap <leader>, :nohlsearch<CR>
 
-" Enable file type detection and load plugin indent files
+" Enable file type detection and load plugin indent files as well as syntax
+" highlighting
 filetype plugin on
 filetype indent on
-
 syntax enable
-syntax sync fromstart
+syntax sync fromstart  " http://vim.wikia.com/wiki/Fix_syntax_highlighting
 
 " Appereance
+" set background=dark
 set t_Co=256 " 256 colors
-set background=dark
 colorscheme molokai
-
-" Make C-c send Esc in insert mode
-inoremap <C-c> <Esc>
+highlight ColorColumn ctermbg=235 " Make it more obviouser when lines are too long
+set list listchars=tab:»·,trail:· " Display extra whitespace
 
 " Improve vim's scrolling speed
 set ttyfast
@@ -131,15 +118,17 @@ set ttyscroll=3
 set lazyredraw
 
 " Indention
-set autoindent                  " indent on enter
-set smartindent                 " do smart indenting when starting a new line
-set shiftround                  " indent to the closest shiftwidth
+set autoindent      " indent on enter
+set smartindent     " do smart indenting when starting a new line
+set shiftround      " indent to the closest shiftwidth:w
 
 " Folding
-set foldmethod=indent
-set foldlevel=1
-set foldnestmax=10
-set nofoldenable       " Open all folds by default
+" See http://vimcasts.org/episodes/how-to-fold/ for examples
+set foldmethod=indent    " Fold by indention by default
+set foldnestmax=10       " Limit to 10 nested folds
+" set nofoldenable       " Open all folds by default
+set foldlevelstart=7     " Open most folds by default
+nnoremap , za            " Toogle folds with ,
 
 " Undo stuff
 set undofile                    " Save undo's after file closes
@@ -148,11 +137,13 @@ set undolevels=1000             " How many undos
 set undoreload=10000            " number of lines to save for undo
 
 
-" set tabstop value and shift width
-set ts=2
-set sw=2
-set expandtab
+" Spaces & Tabs
+set expandtab       " use spaces instead of tabs
+set tabstop=2       " number of visual spaces per TAB
+set softtabstop=2   " number of spaces in tab when editing
+set shiftwidth=2    " how many columns text is indented with the reindent operations (<< and >>)
 
+" Filetype specific settings
 augroup myfiletypes
   " Clear old autocmds in group
   autocmd!
@@ -164,15 +155,10 @@ augroup myfiletypes
   autocmd FileType ruby,eruby,yaml setlocal iskeyword+=?
 augroup END
 
-" Case insensitive search
-set ignorecase
-set smartcase
-
 " Encoding
 set fileencoding=utf-8
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,gb2312,cp936
-
 
 " Ignored files
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem          " Disable output and VCS files
@@ -183,54 +169,15 @@ set wildignore+=*/tmp/cache/assets/*/sprockets/*,*/tmp/cache/assets/*/sass/* " I
 set wildignore+=*.swp,*~,._*                                                 " Disable temp and backup files
 set wildignore+=.DS_Store                                                    " Disable osx index files
 
-" Autocompletion settings - see http://vim.wikia.com/wiki/VimTip1386
-set omnifunc=syntaxcomplete#Complete " Enable omnicompletion
-set completeopt=longest,menuone
-" See http://vim.wikia.com/wiki/VimTip1486
-let g:SuperTabDefaultCompletionType = "context"
-" Autocomplete ids and classes in CSS
-autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
-" Add the '-' as a keyword in erb files
-autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
-
-" Invisible characters
-" set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:_,extends:❯,precedes:❮
-
-" Syntax coloring lines that are too long just slows down the world
-set synmaxcol=1200
-
-" Don't reset cursor to start of line when moving around
-set nostartofline
-
-
-" " CtrlP Settings
-" hi def link CtrlPMatch CursorLine
+" CtrlP Settings
 let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
   \ }
 nnoremap <C-b> :CtrlPBuffer<cr>
-" CtrlP Delete
 call ctrlp_bdelete#init()
-" CtrlP Funky
-let g:ctrlp_extensions = ['funky']
-let g:ctrlp_funky_multi_buffers = 1
 let g:ctrlp_max_files=0
-
-" unite.vim settings
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#custom#source('file_rec/async', 'ignore_pattern', '.git/')
-call unite#custom#source('file_rec/async', 'ignore_pattern', 'tmp/')
-nnoremap <leader>b :<C-u>Unite -buffer-name=buffer buffer<cr>
-autocmd FileType unite call s:unite_my_settings()
-" Make dd available to delete buffers (to get around waiting for d due to
-" vim-sourroundings
-function! s:unite_my_settings()
-  nnoremap <silent><buffer><expr> dd unite#do_action('delete')
-endfunction
-
 
 " rspec
 map <Leader>tf :call RunCurrentSpecFile()<CR>
@@ -261,21 +208,16 @@ imap <A-j> <C-o>j
 imap <A-k> <C-o>k
 imap <A-l> <C-o>l
 
-" Use hjkl to move between splits with <Ctrl> key
+" Use C-h/j/k/l to move between splits
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-
-
-" Use only 1 space after "." when joining lines instead of 2
-set nojoinspaces
-
 " Airline apperance
 let g:airline_branch_prefix = '⎇ '
 
-" Setup open alternative file (alternate)
+" Setup open compactcode/alternate.vim file (alternate)
 :command A Open(alternate#FindAlternate())
 :command AH OpenHorizontal(alternate#FindAlternate())
 :command AV OpenVertical(alternate#FindAlternate())
@@ -297,11 +239,12 @@ nnoremap <leader>gaa :Git add -A<CR>:Gstatus<CR>
 nnoremap <leader>gap :Git add -A -p<CR>:Gstatus<CR>
 nnoremap <leader>gp :Git push<CR>
 
-" Display extra whitespace
-set list listchars=tab:»·,trail:·
+" Commentary Setup
+nmap <leader>c <Plug>Commentary
+omap <leader>c <Plug>Commentary
 
-" Make it more obviouser when lines are too long
-highlight ColorColumn ctermbg=235
+" Make C-c send Esc in insert mode
+inoremap <C-c> <Esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE (thanks Gary Bernhardt)
