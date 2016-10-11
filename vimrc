@@ -36,6 +36,9 @@ Plugin 'd11wtq/ctrlp_bdelete.vim'  " For buffers with <C-b> (Close with C-2 / Ma
 " Sublime styile multiple cursors
 Plugin 'terryma/vim-multiple-cursors' " Use <C-n> to set new cursors in visual in insert mode
 
+" Autocomplete
+Plugin 'valloric/youcompleteme'       " Autocomplete
+
 " Ruby and Rails helpers
 Plugin 'rorymckinley/vim-rubyhash'    " Change ruby hash syntax with <leader>rr / <leader>rs / <leader>rt
 Plugin 'ecomba/vim-ruby-refactoring'  " Handy helpers to refactor ruby code.
@@ -147,12 +150,28 @@ set shiftwidth=2    " how many columns text is indented with the reindent operat
 augroup myfiletypes
   " Clear old autocmds in group
   autocmd!
+
   " autoindent with two spaces, always expand tabs
   autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
+
   autocmd FileType ruby,eruby,yaml setlocal path+=lib
+
   autocmd FileType ruby,eruby,yaml setlocal colorcolumn=115
+
   " Make ?s part of words
   autocmd FileType ruby,eruby,yaml setlocal iskeyword+=?
+
+  " Autocomplete ids and classes in CSS
+  autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
+
+  " Add the '-' as a keyword in erb files
+  autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
+
+  " Ruby autocomplete
+  autocmd FileType ruby set omnifunc=rubycomplete#Complete
+  autocmd FileType ruby let g:rubycomplete_buffer_loading=1
+  autocmd FileType ruby let g:rubycomplete_classes_in_global=1
+
 augroup END
 
 " Encoding
