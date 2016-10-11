@@ -20,7 +20,7 @@ Plugin 'duggiefresh/vim-easydir'  " Easily create direcories and files
 Plugin 'tpope/vim-fugitive'       " Git wrapper
 Plugin 'tpope/vim-vinegar'        " Better file browser
 " Plugin 'tpope/vim-speeddating'    " Add <C-A> and <C-X> helpers for dates. d<C-A> and d<C-X> for current timestamps
-Plugin 'tpope/vim-commentary'     " Add comment via <leader>gcc and <leader>9gcc 
+Plugin 'tpope/vim-commentary'     " Add comment via gcc and 9gcc or gloabl :g/PATTERN/Commentary
 Plugin 'tpope/vim-endwise'        " Add end tags to if, def, ...
 Plugin 'raimondi/delimitmate'     " Add pairs for brackets etc
 Plugin 'bling/vim-airline'        " Better status line
@@ -238,10 +238,6 @@ nnoremap <leader>ga% :Git add %<CR>:Gstatus<CR>
 nnoremap <leader>gaa :Git add -A<CR>:Gstatus<CR>
 nnoremap <leader>gap :Git add -A -p<CR>:Gstatus<CR>
 nnoremap <leader>gp :Git push<CR>
-
-" Commentary Setup
-nmap <leader>c <Plug>Commentary
-omap <leader>c <Plug>Commentary
 
 " Make C-c send Esc in insert mode
 inoremap <C-c> <Esc>
