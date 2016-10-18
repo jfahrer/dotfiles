@@ -80,6 +80,7 @@ set history=100      " Keep 100 commands in the history
 set ruler            " show the cursor position all the time
 set showcmd          " display incomplete commands
 set relativenumber   " relative line numbers
+set number           " show current line numver
 set nowrap           " don't wrap lines
 set vb               " disable alert sound
 set autoread         " Auto-reload buffers when files are changed on disk
@@ -131,7 +132,7 @@ set foldmethod=indent    " Fold by indention by default
 set foldnestmax=10       " Limit to 10 nested folds
 " set nofoldenable       " Open all folds by default
 set foldlevelstart=7     " Open most folds by default
-nnoremap , za            " Toogle folds with ,
+" nnoremap <leader>. za            " Toogle folds with ,
 
 " Undo stuff
 set undofile                    " Save undo's after file closes
@@ -145,6 +146,11 @@ set expandtab       " use spaces instead of tabs
 set tabstop=2       " number of visual spaces per TAB
 set softtabstop=2   " number of spaces in tab when editing
 set shiftwidth=2    " how many columns text is indented with the reindent operations (<< and >>)
+
+" Enable omnicompletion
+set omnifunc=syntaxcomplete#Complete
+" Inserts the longest common text of all matches; and the menu will come up even if there's only one match
+set completeopt=longest,menuone
 
 " Filetype specific settings
 augroup myfiletypes
@@ -171,7 +177,6 @@ augroup myfiletypes
   autocmd FileType ruby set omnifunc=rubycomplete#Complete
   autocmd FileType ruby let g:rubycomplete_buffer_loading=1
   autocmd FileType ruby let g:rubycomplete_classes_in_global=1
-
 augroup END
 
 " Encoding
@@ -242,7 +247,7 @@ let g:airline_branch_prefix = '⎇ '
 :command AV OpenVertical(alternate#FindAlternate())
 
 " Project wide search with vimgrep and git ls-files
-:nnoremap <leader>/ :vimgrep  `git ls-files`<C-left><C-left><C-left>
+nnoremap <leader>/ :vimgrep  `git ls-files`<C-left><C-left><C-left>
 
 " Git shortcuts
 nnoremap <leader>gca :Git add -A<CR>:Git commit<CR>
@@ -260,6 +265,11 @@ nnoremap <leader>gp :Git push<CR>
 
 " Make C-c send Esc in insert mode
 inoremap <C-c> <Esc>
+
+" Ansible settings
+let g:ansible_attribute_highlight = 'od'
+let g:ansible_name_highlight = 'b'
+let g:ansible_extra_keywords_highlight = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE (thanks Gary Bernhardt)
