@@ -201,6 +201,8 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
   \ }
 nnoremap <C-b> :CtrlPBuffer<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
+nnoremap <leader>p :CtrlP<cr>
 call ctrlp_bdelete#init()
 let g:ctrlp_max_files=0
 
