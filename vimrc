@@ -274,6 +274,9 @@ let g:ansible_attribute_highlight = 'od'
 let g:ansible_name_highlight = 'b'
 let g:ansible_extra_keywords_highlight = 1
 
+" Setup vim-vinegar (netrw) to display line numbers
+let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE (thanks Gary Bernhardt)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
