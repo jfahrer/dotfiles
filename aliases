@@ -2,7 +2,7 @@
 alias ll="ls -al"
 alias lt="ls -altr"
 alias e="$EDITOR"
-alias ..=cd ..
+alias ..="cd .."
 
 # SSH
 alias sshr="ssh -l root"
