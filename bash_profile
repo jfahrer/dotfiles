@@ -1,5 +1,4 @@
 eval "$(rbenv init -)"
-PATH=./bin:$PATH
 
 export EDITOR=vim
 
