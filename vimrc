@@ -54,6 +54,9 @@ Plugin 'tpope/vim-rake'
 Plugin 'avakhov/vim-yaml'
 Plugin 'pearofducks/ansible-vim'
 
+" Searching
+Plugin 'mileszs/ack.vim'
+
 " Open alternative file with :A / :AV / :AH
 Plugin 'compactcode/open.vim'
 Plugin 'compactcode/alternate.vim'
@@ -205,6 +208,13 @@ nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>p :CtrlP<cr>
 call ctrlp_bdelete#init()
 let g:ctrlp_max_files=0
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 " rspec
 map <Leader>tf :call RunCurrentSpecFile()<CR>
@@ -249,8 +259,30 @@ let g:airline_branch_prefix = '⎇ '
 :command AH OpenHorizontal(alternate#FindAlternate())
 :command AV OpenVertical(alternate#FindAlternate())
 
-" Project wide search with vimgrep and git ls-files
-nnoremap <leader>/ :vimgrep  `git ls-files`<C-left><C-left><C-left>
+" Searching with ag/ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case --path-to-ignore ~/.agignore'
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+
+" Projetc wide search
+nnoremap <leader>/ :Ack<SPACE>
+" Search current word in project
+nnoremap <leader>? :Ack! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" Search current word in file
+nnoremap <leader>* :Ack! "\b<C-R><C-W>\b" %<CR>:cw<CR>
+
+" Setting up tags
+" Generate tags witch :tc (project) or :tb (gems)
+command Tc !ctags -R -f ./tags .
+command Tb !ctags -R -f ./gems.tags $(bundle list --paths)
+cnoreabbrev tc Tc
+cnoreabbrev tb Tb
+" Use CtrlP to navigate tags
+nnoremap <leader>. :CtrlPTag<cr>
+" Add gems.tags for the tags
+set tags+=gems.tags
+
 
 " Git shortcuts
 nnoremap <leader>gca :Git add -A<CR>:Git commit<CR>
@@ -281,13 +313,13 @@ let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
 " RENAME CURRENT FILE (thanks Gary Bernhardt)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
 endfunction
 map <Leader>n :call RenameFile()<cr>
 
