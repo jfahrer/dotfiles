@@ -205,7 +205,8 @@ let g:ctrlp_custom_ignore = {
   \ }
 nnoremap <C-b> :CtrlPBuffer<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
-nnoremap <leader>p :CtrlP<cr>
+nnoremap <leader>v :CtrlP<cr>
+nnoremap <leader>c :CtrlPTag<cr> " Use CtrlP to navigate tags
 call ctrlp_bdelete#init()
 let g:ctrlp_max_files=0
 if executable('ag')
@@ -278,8 +279,6 @@ command Tc !ctags -R -f ./tags .
 command Tb !ctags -R -f ./gems.tags $(bundle list --paths)
 cnoreabbrev tc Tc
 cnoreabbrev tb Tb
-" Use CtrlP to navigate tags
-nnoremap <leader>. :CtrlPTag<cr>
 " Add gems.tags for the tags
 set tags+=gems.tags
 
