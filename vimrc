@@ -280,8 +280,11 @@ command Tb !ctags -R -f ./gems.tags $(bundle list --paths)
 cnoreabbrev tc Tc
 cnoreabbrev tb Tb
 " Add gems.tags for the tags
-set tags+=gems.tags
-
+" set tags+=gems.tags
+command Tp :set tags-=gems.tags
+command Tg :set tags+=gems.tags
+cnoreabbrev tp Tp
+cnoreabbrev tg Tg
 
 " Git shortcuts
 nnoremap <leader>gca :Git add -A<CR>:Git commit<CR>
