@@ -279,6 +279,10 @@ command Tc !ctags -R -f ./tags .
 command Tb !ctags -R -f ./gems.tags $(bundle list --paths)
 cnoreabbrev tc Tc
 cnoreabbrev tb Tb
+
+" Tags for the word under the curser
+command Tw :normal :ts <C-R><C-W><CR>
+cnoreabbrev tw Tw
 " Add gems.tags for the tags
 " set tags+=gems.tags
 command Tp :set tags-=gems.tags
