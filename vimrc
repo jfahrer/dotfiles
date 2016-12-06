@@ -67,10 +67,7 @@ Plugin 'compactcode/alternate.vim'
 " Plugin 'tomtom/tlib_vim'
 " Plugin 'garbas/vim-snipmate'
 
-
-" Plugin 'junegunn/vim-easy-align'
-
-" All of your Plugins must be added before the following line
+" All Plugins must be added before the following line
 call vundle#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
