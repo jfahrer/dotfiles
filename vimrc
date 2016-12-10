@@ -272,20 +272,18 @@ nnoremap <leader>* :Ack! "\b<C-R><C-W>\b" %<CR>:cw<CR>
 
 " Setting up tags
 " Generate tags witch :tc (project) or :tb (gems)
-command Tc !ctags -R -f ./tags .
-command Tb !ctags -R -f ./gems.tags $(bundle list --paths)
-cnoreabbrev tc Tc
-cnoreabbrev tb Tb
+command TagsGenerate !ctags -R -f ./tags .
+command TagsGenerateGems !ctags -R -f ./gems.tags $(bundle list --paths)
+cnoreabbrev tg TagsGenerate
+cnoreabbrev tgg TagsGenerateGems
 
-" Tags for the word under the curser
-command Tw :normal :ts <C-R><C-W><CR>
-cnoreabbrev tw Tw
+" List tags for the word under the curser
+nnoremap <C-[> :ts <C-R><C-W><CR>
 " Add gems.tags for the tags
-" set tags+=gems.tags
-command Tl :set tags-=gems.tags
-command Tg :set tags+=gems.tags
-cnoreabbrev tl Tl
-cnoreabbrev tg Tg
+command TagsExcludeGems :set tags-=gems.tags
+command TagsIncludeGems :set tags+=gems.tags
+cnoreabbrev te TagsExcludeGems
+cnoreabbrev ti TagsIncludeGems
 
 " Git shortcuts
 nnoremap <leader>gca :Git add -A<CR>:Git commit<CR>
