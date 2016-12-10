@@ -219,6 +219,13 @@ map <Leader>tf :call RunCurrentSpecFile()<CR>
 map <Leader>tt :call RunNearestSpec()<CR>
 map <Leader>tl :call RunLastSpec()<CR>
 map <Leader>ta :call RunAllSpecs()<CR>
+function! CreateSpec()
+  let suggested_spec_name = 'spec/' . substitute(expand('%'), "app/", "", "")
+  let suggested_spec_name = substitute(suggested_spec_name, ".rb$", "_spec.rb", "")
+  let spec_name = input('Spec file name: ', suggested_spec_name, 'file')
+  exec ':e ' . spec_name
+endfunction
+map <Leader>tc :call CreateSpec()<CR>
 
 " Disable Arrow keys in Escape mode
 map <up> <nop>
