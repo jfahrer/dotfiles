@@ -282,9 +282,9 @@ command Tw :normal :ts <C-R><C-W><CR>
 cnoreabbrev tw Tw
 " Add gems.tags for the tags
 " set tags+=gems.tags
-command Tp :set tags-=gems.tags
+command Tl :set tags-=gems.tags
 command Tg :set tags+=gems.tags
-cnoreabbrev tp Tp
+cnoreabbrev tl Tl
 cnoreabbrev tg Tg
 
 " Git shortcuts
