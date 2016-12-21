@@ -285,7 +285,7 @@ cnoreabbrev tg TagsGenerate
 cnoreabbrev tgg TagsGenerateGems
 
 " List tags for the word under the curser
-nnoremap <C-[> :ts <C-R><C-W><CR>
+nnoremap <leader>] :ts <C-R><C-W><CR>
 " Add gems.tags for the tags
 command TagsExcludeGems :set tags-=gems.tags
 command TagsIncludeGems :set tags+=gems.tags
