@@ -23,6 +23,6 @@ if [ -f $(brew --prefix)/etc/bash_completion  ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
+. ~/bash_it_profile
 PATH=./bin:$PATH
 export PATH
-. ~/bash_it_profile
