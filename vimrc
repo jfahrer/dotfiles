@@ -256,6 +256,9 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
 " Airline apperance
 let g:airline_branch_prefix = '⎇ '
 
