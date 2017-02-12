@@ -4,6 +4,8 @@ alias lt="ls -altr"
 alias e="$EDITOR"
 alias ..="cd .."
 
+alias tmux='TERM=screen-256color-bce tmux'
+
 # SSH
 alias sshr="ssh -l root"
 
