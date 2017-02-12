@@ -3,40 +3,40 @@
 	name = Julian Fahrer
 	initials = jf
 [core]
-  editor = vim
-  excludesfile = ~/.gitignore
-  pager = less -FXRS -x2
+	editor = vim
+	excludesfile = ~/.gitignore
+	pager = less -FXRS -x2
 [push]
-  default = current
+	default = current
 [alias]
-  aa = add --all
-  ap = add --patch
-  branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
-  ci = commit -v
-  co = checkout
-  st = status
-  fixup = commit --amend -C HEAD
-  g = log --pretty=format:\"%h %an - %s\" --graph
-  lc = log ORIG_HEAD.. --stat --no-merges
-  lgo = log --oneline
-  ol = log --format=\"%C(yellow)%h%Creset %C(cyan)%aN%Creset\t%s\"
-  w = whatchanged
-  uncommit = reset --soft HEAD^
+	aa = add --all
+	ap = add --patch
+	branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
+	ci = commit -v
+	co = checkout
+	st = status
+	fixup = commit --amend -C HEAD
+	g = log --pretty=format:\"%h %an - %s\" --graph
+	lc = log ORIG_HEAD.. --stat --no-merges
+	lgo = log --oneline
+	ol = log --format=\"%C(yellow)%h%Creset %C(cyan)%aN%Creset\t%s\"
+	w = whatchanged
+	uncommit = reset --soft HEAD^
 [include]
-  path = ~/.gitconfig.local
+	path = ~/.gitconfig.local
 [hub]
-  protocol = https
+	protocol = https
 [autosetup]
-  rebase = true
+	rebase = true
 [branch]
-  autosetuprebase = remote
-  autosetupmerge = true
-  mergeoptions = --no-commit --no-ff
+	autosetuprebase = remote
+	autosetupmerge = true
+	mergeoptions = --no-commit --no-ff
 [color]
-  branch = auto
-  diff = auto
-  interactive = auto
-  status = auto
-  ui = true
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	ui = true
 [pull]
-  default = current
+	default = current
