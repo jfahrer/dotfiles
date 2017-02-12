@@ -26,3 +26,5 @@ fi
 . ~/bash_it_profile
 PATH=./bin:$PATH
 export PATH
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
