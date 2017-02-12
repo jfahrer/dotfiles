@@ -19,7 +19,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'duggiefresh/vim-easydir'  " Easily create direcories and files
 Plugin 'tpope/vim-fugitive'       " Git wrapper
 Plugin 'tpope/vim-vinegar'        " Better file browser
-" Plugin 'tpope/vim-speeddating'    " Add <C-A> and <C-X> helpers for dates. d<C-A> and d<C-X> for current timestamps
 Plugin 'tpope/vim-commentary'     " Add comment via gcc and 9gcc or gloabl :g/PATTERN/Commentary
 Plugin 'tpope/vim-endwise'        " Add end tags to if, def, ...
 Plugin 'raimondi/delimitmate'     " Add pairs for brackets etc
@@ -30,27 +29,36 @@ Plugin 'tpope/vim-repeat'         " Make (some) Plugins work work with the . com
 
 " Sublime / TextMate style Ctrl+P
 Plugin 'kien/ctrlp.vim'            " For files with <C-p>
-Plugin 'd11wtq/ctrlp_bdelete.vim'  " For buffers with <C-b> (Close with C-2 / Mark multiple with C-z)
-" Plugin 'tacahiroy/ctrlp-funky'   " Could be used for definitions inside a file. Usefull?
+Plugin 'd11wtq/ctrlp_bdelete.vim'  " For buffers with <leader>b (Close with C-2 / Mark multiple with C-z)
+Plugin 'tacahiroy/ctrlp-funky'     " Fuzzy find definitions in current buffer with <leader>fu
 
 " Sublime styile multiple cursors
 Plugin 'terryma/vim-multiple-cursors' " Use <C-n> to set new cursors in visual in insert mode
 
 " Autocomplete
-Plugin 'valloric/youcompleteme'       " Autocomplete
+" Need to recompile after an upgrade:
+" cd ~/.vim/bundle/YouCompleteMe
+" ./install.py --all
+Plugin 'valloric/youcompleteme'
 
 " Ruby and Rails helpers
-Plugin 'rorymckinley/vim-rubyhash'    " Change ruby hash syntax with <leader>rr / <leader>rs / <leader>rt
-Plugin 'ecomba/vim-ruby-refactoring'  " Handy helpers to refactor ruby code.
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rake'
+Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-rails'              " Rails integration
 Plugin 'thoughtbot/vim-rspec'         " Run specs with <leader>ta / <leader>tf / <leader>tt
+Plugin 'ecomba/vim-ruby-refactoring'  " Handy helpers to refactor ruby code.
+" Plugin 'rorymckinley/vim-rubyhash'    " Change ruby hash syntax with <leader>rr / <leader>rs / <leader>rt
+
+" Provides ruby movements for inner / around block and methods: ar, ir, am, im
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
 
 " Syntax extensions
 " Plugin 'jelera/vim-javascript-syntax'
 " Plugin 'pangloss/vim-javascript'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-rake'
 Plugin 'avakhov/vim-yaml'
 Plugin 'pearofducks/ansible-vim'
 
@@ -61,6 +69,10 @@ Plugin 'mileszs/ack.vim'
 Plugin 'compactcode/open.vim'
 Plugin 'compactcode/alternate.vim'
 
+" tmux integration
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-runner'
+
 " Snippets
 " See https://github.com/honza/vim-snippets/tree/master/snippets for snippets
 " Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -69,6 +81,8 @@ Plugin 'compactcode/alternate.vim'
 
 " All Plugins must be added before the following line
 call vundle#end()
+
+runtime macros/matchit.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -164,8 +178,8 @@ augroup myfiletypes
 
   autocmd FileType ruby,eruby,yaml setlocal colorcolumn=115
 
-  " Make ?s part of words
-  autocmd FileType ruby,eruby,yaml setlocal iskeyword+=?
+  " Make ? part of keywords
+  autocmd FileType ruby,eruby,yaml setlocal iskeyword+=\?
 
   " Autocomplete ids and classes in CSS
   autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
@@ -195,37 +209,79 @@ set wildignore+=*.swp,*~,._*                                                 " D
 set wildignore+=.DS_Store                                                    " Disable osx index files
 
 " CtrlP Settings
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:25,results:25'
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
   \ }
-nnoremap <C-b> :CtrlPBuffer<cr>
+"nnoremap <C-b> :CtrlPBuffer<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
-nnoremap <leader>v :CtrlP<cr>
-nnoremap <leader>c :CtrlPTag<cr> " Use CtrlP to navigate tags
+nnoremap <leader>ft :CtrlPTag<cr>   " Use CtrlP to navigate tags
+nnoremap <leader>fd :CtrlPFunky<cr> " Use CtrlP to navigate definitions in current buffer
 call ctrlp_bdelete#init()
 let g:ctrlp_max_files=0
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag --path-to-ignore ~/.vim/ctrlp_ignore %s -l --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
 
 " rspec
-map <Leader>tf :call RunCurrentSpecFile()<CR>
-map <Leader>tt :call RunNearestSpec()<CR>
-map <Leader>tl :call RunLastSpec()<CR>
-map <Leader>ta :call RunAllSpecs()<CR>
+map <Leader>tf :call SpecRunner('f', 'tmux')<CR>
+map <Leader>tt :call SpecRunner('t', 'vim')<CR>
+map <Leader>ta :call SpecRunner('a', 'tmux')<CR>
+map <Leader>tl :call SpecRunner('l', 'tmux')<CR>
+map <Leader>tc :call CreateSpec()<CR>
+
+function! SpecRunner(type, runner)
+  if a:runner == 'vim'
+    let g:rspec_command = "!rspec {spec}"
+  elseif a:runner == 'tmux'
+    let g:rspec_command = "call VtrSendCommand('rspec {spec}')"
+  endif
+
+  if a:type=='t'
+    call RunNearestSpec()
+  elseif a:type=='f'
+    call RunCurrentSpecFile()
+  elseif a:type == 'l'
+    call RunLastSpec()
+  elseif a:type == 'a'
+    call RunAllSpecs()
+  endif
+endfunction
+
 function! CreateSpec()
   let suggested_spec_name = 'spec/' . substitute(expand('%'), "app/", "", "")
   let suggested_spec_name = substitute(suggested_spec_name, ".rb$", "_spec.rb", "")
   let spec_name = input('Spec file name: ', suggested_spec_name, 'file')
   exec ':e ' . spec_name
 endfunction
-map <Leader>tc :call CreateSpec()<CR>
+
+" tmux integration
+map <Leader>vo :VtrOpenRunner<CR>
+map <Leader>va :VtrAttachToPane<CR>
+map <Leader>vf :VtrFocusRunner<CR>
+map <Leader>vt :VtrSendFile<CR>
+map <Leader>vd :VtrSendCtrlD<CR>
+map <Leader>vr :VtrSendLinesToRunner<CR>
+map <Leader>vi :VtrOpenRunner<cr>:VtrSendCommandToRunner 'irb'<cr>
+map <Leader>vc :VtrOpenRunner<cr>:VtrSendCommandToRunner rails c<cr>
+map <Leader>ro :VtrOpenRunner<CR>
+map <Leader>ra :VtrAttachToPane<CR>
+map <Leader>rf :VtrFocusRunner<CR>
+map <Leader>rt :VtrSendFile<CR>
+map <Leader>rd :VtrSendCtrlD<CR>
+map <Leader>rr :VtrSendLinesToRunner<CR>
+map <Leader>ri :VtrOpenRunner<cr>:VtrSendCommandToRunner 'irb'<cr>
+map <Leader>rc :VtrOpenRunner<cr>:VtrSendCommandToRunner rails c<cr>
+" let g:VtrStripLeadingWhitespace = 0
+" let g:VtrClearEmptyLines = 0
+" let g:VtrAppendNewline = 1
+
 
 " Disable Arrow keys in Escape mode
 map <up> <nop>
@@ -234,33 +290,38 @@ map <left> <nop>
 map <right> <nop>
 
 " Disable Arrow keys in Insert mode
-" imap <up> <nop>
-" imap <down> <nop>
-" imap <left> <nop>
-" imap <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
 
 " noremap <A-Up> <NOP>
 " noremap <A-Down> <NOP>
 " noremap <A-Left> <NOP>
 " noremap <A-Right> <NOP>
 
-" provide hjkl movements in Insert mode <Alt> key
-imap <A-h> <C-o>h
-imap <A-j> <C-o>j
-imap <A-k> <C-o>k
-imap <A-l> <C-o>l
+" " provide hjkl movements in Insert
+" imap <C-h> <C-o>h
+" imap <C-j> <C-o>j
+" imap <C-k> <C-o>k
+" imap <C-l> <C-o>l
 
 " Use C-h/j/k/l to move between splits
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-l> <C-w>l
+" provided by christoomey/vim-tmux-runner
+
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
 " Airline apperance
-let g:airline_branch_prefix = '⎇ '
+" let g:airline_branch_prefix = ' sss '
 
 " Setup open compactcode/alternate.vim file (alternate)
 :command A Open(alternate#FindAlternate())
@@ -283,17 +344,17 @@ nnoremap <leader>* :Ack! "\b<C-R><C-W>\b" %<CR>:cw<CR>
 " Setting up tags
 " Generate tags witch :tc (project) or :tb (gems)
 command TagsGenerate !ctags -R -f ./tags .
-command TagsGenerateGems !ctags -R -f ./gems.tags $(bundle list --paths)
+command TagsGenerateGems !rbenv ctags && gem ctags
 cnoreabbrev tg TagsGenerate
 cnoreabbrev tgg TagsGenerateGems
 
 " List tags for the word under the curser
 nnoremap <leader>] :ts <C-R><C-W><CR>
 " Add gems.tags for the tags
-command TagsExcludeGems :set tags-=gems.tags
-command TagsIncludeGems :set tags+=gems.tags
-cnoreabbrev te TagsExcludeGems
-cnoreabbrev ti TagsIncludeGems
+" command TagsExcludeGems :set tags-=gems.tags
+" command TagsIncludeGems :set tags+=gems.tags
+" cnoreabbrev te TagsExcludeGems
+" cnoreabbrev ti TagsIncludeGems
 
 " Git shortcuts
 nnoremap <leader>gs :Gstatus<CR>

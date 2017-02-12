@@ -1,0 +1,12 @@
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+*.pdf
+/tmp/
+/log
+/.git/
+/.svn/
+/.hg/
+/public/assets/
