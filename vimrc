@@ -268,21 +268,14 @@ function! CreateSpec()
 endfunction
 
 " tmux integration
-map <Leader>vo :VtrOpenRunner<CR>
-map <Leader>va :VtrAttachToPane<CR>
-map <Leader>vf :VtrFocusRunner<CR>
-map <Leader>vt :VtrSendFile<CR>
-map <Leader>vd :VtrSendCtrlD<CR>
-map <Leader>vr :VtrSendLinesToRunner<CR>
-map <Leader>vi :VtrOpenRunner<cr>:VtrSendCommandToRunner 'irb'<cr>
-map <Leader>vc :VtrOpenRunner<cr>:VtrSendCommandToRunner rails c<cr>
 map <Leader>ro :VtrOpenRunner<CR>
 map <Leader>ra :VtrAttachToPane<CR>
 map <Leader>rf :VtrFocusRunner<CR>
 map <Leader>rt :VtrSendFile<CR>
 map <Leader>rd :VtrSendCtrlD<CR>
 map <Leader>rr :VtrSendLinesToRunner<CR>
-map <Leader>ri :VtrOpenRunner<cr>:VtrSendCommandToRunner 'irb'<cr>
+map <Leader>rl :VtrOpenRunner<cr>:VtrSendCommandToRunner !!<cr>
+map <Leader>ri :VtrOpenRunner<cr>:VtrSendCommandToRunner irb<lr>
 map <Leader>rc :VtrOpenRunner<cr>:VtrSendCommandToRunner rails c<cr>
 " let g:VtrStripLeadingWhitespace = 0
 " let g:VtrClearEmptyLines = 0
