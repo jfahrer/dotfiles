@@ -74,10 +74,8 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'christoomey/vim-tmux-runner'
 
 " Snippets
-" See https://github.com/honza/vim-snippets/tree/master/snippets for snippets
-" Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'tomtom/tlib_vim'
-" Plugin 'garbas/vim-snipmate'
+" Track the engine.
+Plugin 'SirVer/ultisnips'
 
 " All Plugins must be added before the following line
 call vundle#end()
@@ -207,6 +205,14 @@ set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/* " I
 set wildignore+=*/tmp/cache/assets/*/sprockets/*,*/tmp/cache/assets/*/sass/* " Ignore rails temporary asset caches
 set wildignore+=*.swp,*~,._*                                                 " Disable temp and backup files
 set wildignore+=.DS_Store                                                    " Disable osx index files
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<C-Space>"
+let g:UltiSnipsJumpForwardTrigger="<c-f>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " CtrlP Settings
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:25,results:25'
