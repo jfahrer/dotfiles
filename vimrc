@@ -59,12 +59,13 @@ Plugin 'kana/vim-textobj-line'
 Plugin 'nelstrom/vim-textobj-rubyblock' " Provides ruby movements for inner / around block and methods: ar, ir, am, im
 
 " Syntax extensions
-" Plugin 'jelera/vim-javascript-syntax'
-" Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-haml'
 Plugin 'avakhov/vim-yaml'
 Plugin 'pearofducks/ansible-vim'
+Plugin 'moll/vim-node'
 
 " Searching
 Plugin 'mileszs/ack.vim'
