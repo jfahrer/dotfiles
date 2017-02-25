@@ -282,10 +282,10 @@ endfunction
 " tmux integration
 map <Leader>ro :VtrOpenRunner<CR>
 map <Leader>ra :VtrAttachToPane<CR>
-map <Leader>rf :VtrFocusRunner<CR>
-map <Leader>rt :VtrSendFile<CR>
+map <Leader>rr :VtrFocusRunner<CR>
+map <Leader>rf :VtrSendFile<CR>
 map <Leader>rd :VtrSendCtrlD<CR>
-map <Leader>rr :VtrSendLinesToRunner<CR>
+map <Leader>rs :VtrSendLinesToRunner<CR>
 map <Leader>rl :VtrOpenRunner<cr>:VtrSendCommandToRunner !!<cr>
 map <Leader>ri :VtrOpenRunner<cr>:VtrSendCommandToRunner irb<lr>
 map <Leader>rc :VtrOpenRunner<cr>:VtrSendCommandToRunner rails c<cr>
