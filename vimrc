@@ -16,16 +16,17 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Little helpers
-Plugin 'duggiefresh/vim-easydir'  " Easily create direcories and files
-Plugin 'tpope/vim-fugitive'       " Git wrapper
-Plugin 'tpope/vim-vinegar'        " Better file browser
-Plugin 'tpope/vim-commentary'     " Add comment via gcc and 9gcc or gloabl :g/PATTERN/Commentary
-Plugin 'tpope/vim-endwise'        " Add end tags to if, def, ...
-Plugin 'raimondi/delimitmate'     " Add pairs for brackets etc
-Plugin 'bling/vim-airline'        " Better status line
-Plugin 'tpope/vim-unimpaired'     " https://github.com/tpope/vim-unimpaired
-Plugin 'tpope/vim-surround'       " Use cs to change surroundings. For example cs{[
-Plugin 'tpope/vim-repeat'         " Make (some) Plugins work work with the . command
+Plugin 'duggiefresh/vim-easydir'     " Easily create direcories and files
+Plugin 'tpope/vim-fugitive'          " Git wrapper
+Plugin 'tpope/vim-vinegar'           " Better file browser
+Plugin 'tpope/vim-commentary'        " Add comment via gcc and 9gcc or gloabl :g/PATTERN/Commentary
+Plugin 'tpope/vim-endwise'           " Add end tags to if, def, ...
+Plugin 'raimondi/delimitmate'        " Add pairs for brackets etc
+Plugin 'bling/vim-airline'           " Better status line
+Plugin 'tpope/vim-unimpaired'        " https://github.com/tpope/vim-unimpaired
+Plugin 'tpope/vim-surround'          " Use cs to change surroundings. For example cs{[
+Plugin 'tpope/vim-repeat'            " Make (some) Plugins work work with the . command
+Plugin 'christoomey/vim-system-copy' " Copy / paste from the system clipboard
 
 " Sublime / TextMate style Ctrl+P
 Plugin 'kien/ctrlp.vim'            " For files with <C-p>
@@ -50,9 +51,12 @@ Plugin 'thoughtbot/vim-rspec'         " Run specs with <leader>ta / <leader>tf /
 Plugin 'ecomba/vim-ruby-refactoring'  " Handy helpers to refactor ruby code.
 " Plugin 'rorymckinley/vim-rubyhash'    " Change ruby hash syntax with <leader>rr / <leader>rs / <leader>rt
 
-" Provides ruby movements for inner / around block and methods: ar, ir, am, im
+" More VIm  text objects
 Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'kana/vim-textobj-entire'
+Plugin 'kana/vim-textobj-indent'
+Plugin 'kana/vim-textobj-line'
+Plugin 'nelstrom/vim-textobj-rubyblock' " Provides ruby movements for inner / around block and methods: ar, ir, am, im
 
 " Syntax extensions
 " Plugin 'jelera/vim-javascript-syntax'
