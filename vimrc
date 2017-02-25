@@ -240,6 +240,13 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" vim-surround
+" Map it it to gs (instead of ys)
+map gs <Plug>Ysurround
+map gss <Plug>Yssurround
+vmap gs <Plug>VSurround
+vmap gS <Plug>VgSurround
+
 " rspec
 map <Leader>tf :call SpecRunner('f', 'tmux')<CR>
 map <Leader>tt :call SpecRunner('t', 'vim')<CR>
