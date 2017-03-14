@@ -30,7 +30,7 @@
 	rebase = true
 [branch]
 	autosetuprebase = remote
-	autosetupmerge = always
+	autosetupmerge = true
 	mergeoptions = --no-commit --no-ff
 [color]
 	branch = auto
