@@ -37,9 +37,9 @@ Plugin 'tacahiroy/ctrlp-funky'     " Fuzzy find definitions in current buffer wi
 Plugin 'terryma/vim-multiple-cursors' " Use <C-n> to set new cursors in visual in insert mode
 
 " Autocomplete
-" Need to recompile after an upgrade:
-" cd ~/.vim/bundle/YouCompleteMe
-" ./install.py --all
+" Needs to be recompiled after an upgrade:
+" cd ~/.vim/bundle/youcompleteme
+" ./install.py
 Plugin 'valloric/youcompleteme'
 
 " Ruby and Rails helpers
