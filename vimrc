@@ -220,6 +220,8 @@ let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 let g:UltiSnipsEditSplit="vertical"
 
 " CtrlP Settings
+let g:ctrlp_mruf_max = 250
+let g:ctrlp_mruf_relative = 1
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:25,results:25'
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_custom_ignore = {
@@ -227,6 +229,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
   \ }
 "nnoremap <C-b> :CtrlPBuffer<cr>
+nnoremap <leader><leader> :CtrlPMixed<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>ft :CtrlPTag<cr>   " Use CtrlP to navigate tags
 nnoremap <leader>fd :CtrlPFunky<cr> " Use CtrlP to navigate definitions in current buffer
@@ -239,6 +242,12 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+nnoremap <leader>pm :CtrlP app/models/<CR>
+nnoremap <leader>pc :CtrlP app/controllers/<CR>
+nnoremap <leader>pv :CtrlP app/views/<CR>
+nnoremap <leader>po :CtrlP app/operations/<CR>
+nnoremap <leader>ps :CtrlP app/services/<CR>
+
 
 " vim-surround
 " Map it it to gs (instead of ys)
