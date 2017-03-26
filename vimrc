@@ -289,15 +289,24 @@ function! CreateSpec()
 endfunction
 
 " tmux integration
-map <Leader>ro :VtrOpenRunner<CR>
-map <Leader>ra :VtrAttachToPane<CR>
-map <Leader>rr :VtrFocusRunner<CR>
-map <Leader>rf :VtrSendFile<CR>
-map <Leader>rd :VtrSendCtrlD<CR>
-map <Leader>rs :VtrSendLinesToRunner<CR>
-map <Leader>rl :VtrOpenRunner<cr>:VtrSendCommandToRunner !!<cr>
-map <Leader>ri :VtrOpenRunner<cr>:VtrSendCommandToRunner irb<lr>
-map <Leader>rc :VtrOpenRunner<cr>:VtrSendCommandToRunner rails c<cr>
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <C-j> :TmuxNavigateDown<CR>
+nnoremap <silent> <C-k> :TmuxNavigateUp<CR>
+nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
+" nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
+nnoremap <silent> <C-\> :VtrFocusRunner<CR>
+" map <leader>\ :VtrFocusRunner<CR>
+map <leader>ro :VtrOpenRunner<CR>
+map <leader>ra :VtrAttachToPane<CR>
+" map <leader>rr :VtrFocusRunner<CR>
+map <leader>rf :VtrSendFile<CR>
+map <leader>rd :VtrSendCtrlD<CR>
+map <leader>rc :VtrClearRunner<CR>
+map <leader>rs :VtrSendLinesToRunner<CR>
+map <leader>rl :VtrOpenRunner<CR>:VtrSendCommandToRunner !!<CR>
+map <leader>rri :VtrOpenRunner<CR>:VtrSendCommandToRunner irb<CR>
+map <leader>rrc :VtrOpenRunner<CR>:VtrSendCommandToRunner rails c<CR>
 " let g:VtrStripLeadingWhitespace = 0
 " let g:VtrClearEmptyLines = 0
 " let g:VtrAppendNewline = 1
