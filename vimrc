@@ -228,11 +228,11 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
   \ }
-"nnoremap <C-b> :CtrlPBuffer<cr>
-nnoremap <leader><leader> :CtrlPMixed<cr>
-nnoremap <leader>b :CtrlPBuffer<cr>
-nnoremap <leader>ft :CtrlPTag<cr>   " Use CtrlP to navigate tags
-nnoremap <leader>fd :CtrlPFunky<cr> " Use CtrlP to navigate definitions in current buffer
+"nnoremap <C-b> :CtrlPBuffer<CR>
+nnoremap <leader><leader> :CtrlPMixed<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>ft :CtrlPTag<CR>   " Use CtrlP to navigate tags
+nnoremap <leader>fd :CtrlPFunky<CR> " Use CtrlP to navigate definitions in current buffer
 call ctrlp_bdelete#init()
 let g:ctrlp_max_files=0
 if executable('ag')
@@ -257,11 +257,11 @@ vmap gs <Plug>VSurround
 vmap gS <Plug>VgSurround
 
 " rspec
-map <Leader>tf :call SpecRunner('f', 'tmux')<CR>
-map <Leader>tt :call SpecRunner('t', 'vim')<CR>
-map <Leader>ta :call SpecRunner('a', 'tmux')<CR>
-map <Leader>tl :call SpecRunner('l', 'tmux')<CR>
-map <Leader>tc :call CreateSpec()<CR>
+map <leader>tf :call SpecRunner('f', 'tmux')<CR>
+map <leader>tt :call SpecRunner('t', 'tmux')<CR>
+map <leader>ta :call SpecRunner('a', 'tmux')<CR>
+map <leader>tl :call SpecRunner('l', 'tmux')<CR>
+map <leader>tc :call CreateSpec()<CR>
 
 function! SpecRunner(type, runner)
   if a:runner == 'vim'
@@ -343,8 +343,8 @@ imap <right> <nop>
 " provided by christoomey/vim-tmux-runner
 
 " zoom a vim pane, <C-w>= to re-balance
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>= :wincmd =<cr>
+nnoremap <leader>- :wincmd _<CR>:wincmd \|<CR>
+nnoremap <leader>= :wincmd =<CR>
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
@@ -424,7 +424,7 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-map <Leader>n :call RenameFile()<cr>
+map <leader>n :call RenameFile()<CR>
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
