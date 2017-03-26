@@ -6,8 +6,8 @@
 db/*.sqlite3
 log/*.log
 rerun.txt
-gems.tags
 tags
+tags.bkp
 !tags/
 tmp/**/*
 !tmp/cache/.keep

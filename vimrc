@@ -195,6 +195,8 @@ augroup myfiletypes
   autocmd FileType ruby let g:rubycomplete_buffer_loading=1
   autocmd FileType ruby let g:rubycomplete_classes_in_global=1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+  autocmd BufWritePost *.rb,*.coffee,*.js exe ":UpdateTags"
 augroup END
 
 " Encoding
@@ -371,11 +373,25 @@ nnoremap <leader>? :Ack! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <leader>* :Ack! "\b<C-R><C-W>\b" %<CR>:cw<CR>
 
 " Setting up tags
-" Generate tags witch :tc (project) or :tb (gems)
-command TagsGenerate !ctags -R -f ./tags .
-command TagsGenerateGems !rbenv ctags && gem ctags
-cnoreabbrev tg TagsGenerate
-cnoreabbrev tgg TagsGenerateGems
+" Generate tags witch :tg (project) or :tgg (gems)
+function! UpdateTags()
+  let fullpath = expand("%:p")
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let f = substitute(fullpath, cwd . "/", "", "")
+  let f = escape(f, './')
+  let cmd = 'sed -i.bkp "/' . f . '/d" "' . tagfilename . '"'
+  let resp = system(cmd)
+  let cmd = 'ctags -a -f ' . tagfilename . ' ' . f
+  let resp = system(cmd)
+endfunction
+
+command GenerateTags !ctags -R -f ./tags .
+command GenerateGemTags !rbenv ctags && gem ctags
+command UpdateTags call UpdateTags()
+cnoreabbrev tg GenerateTags
+cnoreabbrev tgg GenerateGemTags
+cnoreabbrev tu UpdateTags
 
 " List tags for the word under the curser
 nnoremap <leader>] :ts <C-R><C-W><CR>
