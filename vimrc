@@ -111,6 +111,7 @@ set exrc             " enable per-project .vimrc files
 set synmaxcol=1200   " Syntax coloring lines that are too long just slows down the world
 set nostartofline    " Don't reset cursor to start of line when moving around
 set nojoinspaces     " Use only 1 space after "." when joining lines instead of 2
+set cursorline       " Display a cursor line
 
 " Searching
 set incsearch        " do incremental searching
