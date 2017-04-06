@@ -120,6 +120,9 @@ set ignorecase       " Case insensitive search
 set smartcase        " Case sensitive search if the string contains captible letters
 nnoremap <leader>, :nohlsearch<CR>
 
+" Turn pasting on / off
+nnoremap cop :setlocal paste!<CR>
+
 " Enable file type detection and load plugin indent files as well as syntax
 " highlighting
 filetype plugin on
