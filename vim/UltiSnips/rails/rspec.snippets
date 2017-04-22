@@ -1,0 +1,39 @@
+snippet reqrh "require rails helper"
+require 'rails_helper'
+endsnippet
+
+snippet RSpec "RSpec describe block"
+RSpec.describe ${1:Class} do
+  $0
+end
+endsnippet
+
+snippet desc "RSpec describe block"
+describe '${1:name}' do
+  $0
+end
+endsnippet
+
+snippet cont "RSpec context block"
+cont '${1:name}' do
+  $0
+end
+endsnippet
+
+snippet it "RSpec it block"
+it '${1:name}' do
+  $0
+end
+endsnippet
+
+snippet fgc "FactoryGirl.create"
+FactoryGirl.create(:${1:factory})
+endsnippet
+
+snippet fgb "FactoryGirl.build"
+FactoryGirl.build(:${1:factory})
+endsnippet
+
+snippet fgcl "FactoryGirl.create_list"
+FactoryGirl.create_list(:${1:factory}, ${2:count})
+endsnippet
