@@ -314,6 +314,7 @@ map <leader>rs :VtrSendLinesToRunner<CR>
 map <leader>rl :VtrOpenRunner<CR>:VtrSendCommandToRunner !!<CR>
 map <leader>rri :VtrOpenRunner<CR>:VtrSendCommandToRunner irb<CR>
 map <leader>rrc :VtrOpenRunner<CR>:VtrSendCommandToRunner rails c<CR>
+map <leader>rrs :VtrOpenRunner<CR>:VtrSendCommandToRunner spring stop<CR>
 " let g:VtrStripLeadingWhitespace = 0
 " let g:VtrClearEmptyLines = 0
 " let g:VtrAppendNewline = 1
