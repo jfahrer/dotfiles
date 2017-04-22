@@ -66,6 +66,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'avakhov/vim-yaml'
 Plugin 'pearofducks/ansible-vim'
 Plugin 'moll/vim-node'
+Plugin 'ekalinin/Dockerfile.vim'
 
 " Searching
 Plugin 'mileszs/ack.vim'
