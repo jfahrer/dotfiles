@@ -201,6 +201,8 @@ augroup myfiletypes
   autocmd FileType ruby let g:rubycomplete_classes_in_global=1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
+  autocmd FileType git set foldlevel=0
+
   autocmd BufWritePost *.rb,*.coffee,*.js exe ":UpdateTags"
 augroup END
 
