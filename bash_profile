@@ -1,5 +1,3 @@
-eval "$(rbenv init -)"
-
 export EDITOR=vim
 
 . ~/.aliases
@@ -9,6 +7,7 @@ if [ -f ~/.bashrc ]; then
 fi
 
 eval "$(rbenv init -)"
+(docker-machine ls | grep default > /dev/null) && eval $(docker-machine env)
 
 export WS=$HOME/workspace
 export LANG=en_US.UTF-8

@@ -22,5 +22,8 @@ alias gsp='git stash && git pull --rebase && git stash pop'
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 
+# Docker
+alias dm='docker-machine'
+
 # Include custom aliases
 [[ -f ~/.aliases.local  ]] && source ~/.aliases.local
