@@ -20,6 +20,7 @@ alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 #Git
 alias gpp="git pull --rebase && git push"
 alias gs="git status"
+alias gsp='git stash && git pull --rebase && git stash pop'
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
