@@ -403,11 +403,6 @@ cnoreabbrev tu UpdateTags
 
 " List tags for the word under the curser
 nnoremap <leader>] :ts <C-R><C-W><CR>
-" Add gems.tags for the tags
-" command TagsExcludeGems :set tags-=gems.tags
-" command TagsIncludeGems :set tags+=gems.tags
-" cnoreabbrev te TagsExcludeGems
-" cnoreabbrev ti TagsIncludeGems
 
 " Git shortcuts
 nnoremap <leader>gs :Gstatus<CR>
