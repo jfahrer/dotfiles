@@ -14,9 +14,6 @@ alias b="bundle"
 alias be="bundle exec"
 alias pconsole="bundle exec cap production rails:console"
 
-# Rails
-alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
-
 #Git
 alias gpp="git pull --rebase && git push"
 alias gs="git status"
