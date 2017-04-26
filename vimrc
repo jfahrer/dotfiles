@@ -414,12 +414,12 @@ nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gca :Git add -A<CR>:Git commit<CR>
 nnoremap <leader>gcw :Git add -A<CR>:Git commit -m "WIP"<CR>
-nnoremap <leader>gcc :Git commit<CR>
+nnoremap <leader>gci :Git commit<CR>
 nnoremap <leader>gc% :Git add %<CR>:Git commit %<CR>
-nnoremap <leader>ga. :Git add .<CR>:Gstatus<CR>
-nnoremap <leader>ga% :Git add %<CR>:Gstatus<CR>
+nnoremap <leader>ga. :Git add -p .<CR>:Gstatus<CR>
+nnoremap <leader>ga% :Git add -p %<CR>:Gstatus<CR>
 nnoremap <leader>gaa :Git add -A<CR>:Gstatus<CR>
-nnoremap <leader>gap :Git add -A -p<CR>:Gstatus<CR>
+nnoremap <leader>gap :Git add -p -A -p<CR>:Gstatus<CR>
 nnoremap <leader>gps :Git push<CR>
 nnoremap <leader>gpl :Git pull<CR>
 nnoremap <leader>gpr :Git pull --rebase<CR>
