@@ -2,6 +2,10 @@ snippet reqrh "require rails helper"
 require 'rails_helper'
 endsnippet
 
+snippet reqsh "require spec helper"
+require 'spec_helper'
+endsnippet
+
 snippet RSpec "RSpec describe block"
 RSpec.describe ${1:Class} do
   $0
@@ -24,6 +28,22 @@ snippet it "RSpec it block"
 it '${1:name}' do
   $0
 end
+endsnippet
+
+snippet be "RSpec before each"
+before(:each) do
+  $0
+end
+endsnippet
+
+snippet ae "RSpec after each"
+after(:each) do
+  $0
+end
+endsnippet
+
+snippet let "RSpec let"
+let(:${1:name}) { $0 }
 endsnippet
 
 snippet fgc "FactoryGirl.create"
