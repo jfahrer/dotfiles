@@ -42,12 +42,14 @@ Plugin 'terryma/vim-multiple-cursors' " Use <C-n> to set new cursors in visual i
 " ./install.py
 Plugin 'valloric/youcompleteme'
 
+" Testing
+Plugin 'janko-m/vim-test'
+
 " Ruby and Rails helpers
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-rails'              " Rails integration
-Plugin 'thoughtbot/vim-rspec'         " Run specs with <leader>ta / <leader>tf / <leader>tt
 Plugin 'ecomba/vim-ruby-refactoring'  " Handy helpers to refactor ruby code.
 " Plugin 'rorymckinley/vim-rubyhash'    " Change ruby hash syntax with <leader>rr / <leader>rs / <leader>rt
 
@@ -262,30 +264,12 @@ nmap gss <Plug>Yssurround
 vmap gs <Plug>VSurround
 vmap gS <Plug>VgSurround
 
-" rspec
-nnoremap <leader>f :call SpecRunner('f', 'tmux')<CR>
-nnoremap <leader>t :call SpecRunner('t', 'tmux')<CR>
-nnoremap <leader>T :call SpecRunner('a', 'tmux')<CR>
-nnoremap <leader>l :call SpecRunner('l', 'tmux')<CR>
+" Tests
+nnoremap <leader>f :TestFile<CR>
+nnoremap <leader>t :TestNearest<CR>
+nnoremap <leader>T :TestSuite<CR>
+nnoremap <leader>l :TestLast<CR>
 nnoremap <leader>c :call CreateSpec()<CR>
-
-function! SpecRunner(type, runner)
-  if a:runner == 'vim'
-    let g:rspec_command = "!rspec {spec}"
-  elseif a:runner == 'tmux'
-    let g:rspec_command = "call VtrSendCommand('rspec {spec}')"
-  endif
-
-  if a:type=='t'
-    call RunNearestSpec()
-  elseif a:type=='f'
-    call RunCurrentSpecFile()
-  elseif a:type == 'l'
-    call RunLastSpec()
-  elseif a:type == 'a'
-    call RunAllSpecs()
-  endif
-endfunction
 
 function! CreateSpec()
   let suggested_spec_name = 'spec/' . substitute(expand('%'), "app/", "", "")
@@ -293,6 +277,18 @@ function! CreateSpec()
   let spec_name = input('Spec file name: ', suggested_spec_name, 'file')
   exec ':e ' . spec_name
 endfunction
+
+function! DockerTransform(cmd) abort
+  if filereadable("docker-compose.dev.yml")
+    return "docker-compose exec app " . a:cmd
+  else
+    return a:cmd
+  endif
+endfunction
+
+let g:test#custom_transformations = {'docker': function('DockerTransform')}
+let g:test#transformation = 'docker'
+let test#strategy = "vtr"
 
 " tmux integration
 let g:tmux_navigator_no_mappings = 1
