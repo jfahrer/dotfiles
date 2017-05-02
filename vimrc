@@ -237,8 +237,8 @@ let g:ctrlp_custom_ignore = {
 "nnoremap <C-b> :CtrlPBuffer<CR>
 nnoremap <leader><leader> :CtrlPMixed<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>ft :CtrlPTag<CR>   " Use CtrlP to navigate tags
-nnoremap <leader>fd :CtrlPFunky<CR> " Use CtrlP to navigate definitions in current buffer
+nnoremap <leader>d :CtrlPFunky<CR> " Use CtrlP to navigate definitions in current buffer
+nnoremap <leader>D :CtrlPTag<CR>   " Use CtrlP to navigate tags
 call ctrlp_bdelete#init()
 let g:ctrlp_max_files=0
 if executable('ag')
@@ -263,11 +263,11 @@ vmap gs <Plug>VSurround
 vmap gS <Plug>VgSurround
 
 " rspec
-map <leader>tf :call SpecRunner('f', 'tmux')<CR>
-map <leader>tt :call SpecRunner('t', 'tmux')<CR>
-map <leader>ta :call SpecRunner('a', 'tmux')<CR>
-map <leader>tl :call SpecRunner('l', 'tmux')<CR>
-map <leader>tc :call CreateSpec()<CR>
+nnoremap <leader>f :call SpecRunner('f', 'tmux')<CR>
+nnoremap <leader>t :call SpecRunner('t', 'tmux')<CR>
+nnoremap <leader>T :call SpecRunner('a', 'tmux')<CR>
+nnoremap <leader>l :call SpecRunner('l', 'tmux')<CR>
+nnoremap <leader>c :call CreateSpec()<CR>
 
 function! SpecRunner(type, runner)
   if a:runner == 'vim'
