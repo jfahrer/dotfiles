@@ -186,9 +186,6 @@ augroup myfiletypes
 
   autocmd FileType ruby,eruby,yaml setlocal colorcolumn=115
 
-  " Make ? part of keywords
-  autocmd FileType ruby,eruby,yaml setlocal iskeyword+=\?
-
   " Autocomplete ids and classes in CSS
   autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
 
@@ -375,10 +372,10 @@ endif
 
 " Projetc wide search
 nnoremap <leader>/ :Ack<SPACE>
-" Search current word in project
-nnoremap <leader>? :Ack! "\b<C-R><C-W>\b"<CR>:cw<CR>
-" Search current word in file
-nnoremap <leader>* :Ack! "\b<C-R><C-W>\b" %<CR>:cw<CR>
+" Search current word in project / current file
+" This requires nmap. Otherwise the iskeyword is not interpreted properly
+nmap <leader>? :Ack! "<C-R><C-W>" -Q<CR>:cw<CR>
+nmap <leader>* :Ack! "<C-R><C-W>" % -Q<CR>:cw<CR>
 
 " Setting up tags
 " Generate tags witch :tg (project) or :tgg (gems)
@@ -402,7 +399,7 @@ cnoreabbrev tgg GenerateGemTags
 cnoreabbrev tu UpdateTags
 
 " List tags for the word under the curser
-nnoremap <leader>] :ts <C-R><C-W><CR>
+nmap <leader>] g<C-]>
 
 " Git shortcuts
 nnoremap <leader>gs :Gstatus<CR>
