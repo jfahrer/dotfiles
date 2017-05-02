@@ -258,7 +258,7 @@ nnoremap <leader>ps :CtrlP app/services/<CR>
 
 
 " vim-surround
-" Map it it to gs (instead of ys)
+" Map it to gs (instead of ys)
 nmap gs <Plug>Ysurround
 nmap gss <Plug>Yssurround
 vmap gs <Plug>VSurround
@@ -298,10 +298,8 @@ nnoremap <silent> <C-k> :TmuxNavigateUp<CR>
 nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
 " nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
 nnoremap <silent> <C-\> :VtrFocusRunner<CR>
-" map <leader>\ :VtrFocusRunner<CR>
 nnoremap <leader>ro :VtrOpenRunner<CR>
 nnoremap <leader>ra :VtrAttachToPane<CR>
-" map <leader>rr :VtrFocusRunner<CR>
 nnoremap <leader>rf :VtrSendFile<CR>
 nnoremap <leader>rd :VtrSendCtrlD<CR>
 nnoremap <leader>rc :VtrClearRunner<CR>
@@ -315,7 +313,6 @@ nnoremap <leader>rrM :VtrOpenRunner<CR>:VtrSendCommandToRunner rake db:migrate R
 " let g:VtrStripLeadingWhitespace = 0
 " let g:VtrClearEmptyLines = 0
 " let g:VtrAppendNewline = 1
-
 
 " Disable Arrow keys in Escape mode
 map <up> <nop>
