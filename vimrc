@@ -376,8 +376,8 @@ endif
 nnoremap <leader>/ :Ack<SPACE>
 " Search current word in project / current file
 " This requires nmap. Otherwise the iskeyword is not interpreted properly
-nmap <leader>? :Ack! "<C-R><C-W>" -Q<CR>:cw<CR>
-nmap <leader>* :Ack! "<C-R><C-W>" % -Q<CR>:cw<CR>
+nmap <leader>? :Ack! "<C-r><C-w>" -Q<CR>:cw<CR>
+nmap <leader>* :Ack! "<C-r><C-w>" % -Q<CR>:cw<CR>
 
 " Setting up tags
 " Generate tags witch :tg (project) or :tgg (gems)
