@@ -257,8 +257,8 @@ nnoremap <leader>ps :CtrlP app/services/<CR>
 
 " vim-surround
 " Map it it to gs (instead of ys)
-map gs <Plug>Ysurround
-map gss <Plug>Yssurround
+nmap gs <Plug>Ysurround
+nmap gss <Plug>Yssurround
 vmap gs <Plug>VSurround
 vmap gS <Plug>VgSurround
 
@@ -303,17 +303,19 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
 " nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
 nnoremap <silent> <C-\> :VtrFocusRunner<CR>
 " map <leader>\ :VtrFocusRunner<CR>
-map <leader>ro :VtrOpenRunner<CR>
-map <leader>ra :VtrAttachToPane<CR>
+nnoremap <leader>ro :VtrOpenRunner<CR>
+nnoremap <leader>ra :VtrAttachToPane<CR>
 " map <leader>rr :VtrFocusRunner<CR>
-map <leader>rf :VtrSendFile<CR>
-map <leader>rd :VtrSendCtrlD<CR>
-map <leader>rc :VtrClearRunner<CR>
-map <leader>rs :VtrSendLinesToRunner<CR>
-map <leader>rl :VtrOpenRunner<CR>:VtrSendCommandToRunner !!<CR>
-map <leader>rri :VtrOpenRunner<CR>:VtrSendCommandToRunner irb<CR>
-map <leader>rrc :VtrOpenRunner<CR>:VtrSendCommandToRunner rails c<CR>
-map <leader>rrs :VtrOpenRunner<CR>:VtrSendCommandToRunner spring stop<CR>
+nnoremap <leader>rf :VtrSendFile<CR>
+nnoremap <leader>rd :VtrSendCtrlD<CR>
+nnoremap <leader>rc :VtrClearRunner<CR>
+nnoremap <leader>rs :VtrSendLinesToRunner<CR>
+nnoremap <leader>rl :VtrOpenRunner<CR>:VtrSendCommandToRunner !!<CR>
+nnoremap <leader>rri :VtrOpenRunner<CR>:VtrSendCommandToRunner irb<CR>
+nnoremap <leader>rrc :VtrOpenRunner<CR>:VtrSendCommandToRunner rails c<CR>
+nnoremap <leader>rrs :VtrOpenRunner<CR>:VtrSendCommandToRunner spring stop<CR>
+nnoremap <leader>rrm :VtrOpenRunner<CR>:VtrSendCommandToRunner rake db:migrate<CR>
+nnoremap <leader>rrM :VtrOpenRunner<CR>:VtrSendCommandToRunner rake db:migrate RAILS_ENV=test<CR>
 " let g:VtrStripLeadingWhitespace = 0
 " let g:VtrClearEmptyLines = 0
 " let g:VtrAppendNewline = 1
@@ -440,7 +442,7 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-map <leader>n :call RenameFile()<CR>
+nnoremap <leader>n :call RenameFile()<CR>
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
