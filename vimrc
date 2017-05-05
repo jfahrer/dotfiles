@@ -372,6 +372,9 @@ nnoremap <leader>/ :Ack<SPACE>
 nmap <leader>? :Ack! "<C-r><C-w>" -Q<CR>:cw<CR>
 nmap <leader>* :Ack! "<C-r><C-w>" % -Q<CR>:cw<CR>
 
+nnoremap <leader>o <C-w><C-o>
+nnoremap <leader>O <C-w><C-o>:AV<CR>
+
 " Setting up tags
 " Generate tags witch :tg (project) or :tgg (gems)
 function! UpdateTags()
