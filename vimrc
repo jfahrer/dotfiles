@@ -314,6 +314,9 @@ nnoremap <leader>rrM :VtrOpenRunner<CR>:VtrSendCommandToRunner rake db:migrate R
 " let g:VtrClearEmptyLines = 0
 " let g:VtrAppendNewline = 1
 
+" this should go in a ftplugin
+nnoremap <leader>rad $?^\s*task<CR>:nohlsearch<CR>Odesc ""<ESC>i
+
 " Disable Arrow keys in Escape mode
 map <up> <nop>
 map <down> <nop>
