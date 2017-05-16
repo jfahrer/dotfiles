@@ -1,0 +1,37 @@
+snippet onr "capistrano on roles"
+on(roles(:${1:all})) do
+  $0
+end
+endsnippet
+
+snippet within "capistrano within"
+within("#{${1:current_path}}") do
+  $0
+end
+endsnippet
+
+snippet capdeployrb "capistrano default deploy.rb"
+# config valid only for current version of Capistrano
+lock '3.8.0'
+
+set :application, 'CapTalk'
+set :repo_url, 'https://github.com/jfahrer/cap_talk.git'
+
+# Default deploy_to directory is /var/www/my_app_name
+set :deploy_to, '/home/captalk/app'
+
+set :log_level, :info
+endsnippet
+
+snippet capsrv1 "capistrano cap talk server 1"
+server "172.31.255.11", user: "captalk", roles: %w{app}
+endsnippet
+
+snippet capsrv2 "capistrano cap talk server 1"
+server "172.31.255.12", user: "captalk", roles: %w{app}, no_release: true
+endsnippet
+
+snippet capexec "cap talk execute examples"
+execute "$HOME/.rbenv/bin/rbenv", "exec", "bundle", "install"
+execute "$HOME/.rbenv/bin/rbenv", "exec", "bundle", "exec", "rake", "run_service"
+endsnippet
