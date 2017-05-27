@@ -203,6 +203,9 @@ augroup myfiletypes
   autocmd FileType git set foldlevel=0
 
   autocmd BufWritePost *.rb,*.coffee,*.js exe ":UpdateTags"
+
+  " automatically rebalance windows on vim resize
+  autocmd VimResized * :wincmd =
 augroup END
 
 " Encoding
@@ -351,9 +354,6 @@ imap <right> <nop>
 " zoom a vim pane, <C-w>= to re-balance
 nnoremap <leader>- :wincmd _<CR>:wincmd \|<CR>
 nnoremap <leader>= :wincmd =<CR>
-
-" automatically rebalance windows on vim resize
-autocmd VimResized * :wincmd =
 
 " Airline apperance
 " let g:airline_branch_prefix = ' sss '
