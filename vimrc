@@ -51,7 +51,7 @@ Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-rails'              " Rails integration
 Plugin 'ecomba/vim-ruby-refactoring'  " Handy helpers to refactor ruby code.
-" Plugin 'rorymckinley/vim-rubyhash'    " Change ruby hash syntax with <leader>rr / <leader>rs / <leader>rt
+Plugin 'rorymckinley/vim-rubyhash'    " Change ruby hash syntax with <leader>rr / <leader>rs / <leader>rt
 
 " More VIm  text objects
 Plugin 'kana/vim-textobj-user'
