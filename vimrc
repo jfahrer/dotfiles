@@ -260,7 +260,7 @@ nnoremap <leader>ps :CtrlP app/services/<CR>
 " vim-surround
 " Map it to gs (instead of ys)
 nmap gs <Plug>Ysurround
-nmap gss <Plug>Yssurround
+nmap gS <Plug>Yssurround
 vmap gs <Plug>VSurround
 vmap gS <Plug>VgSurround
 
