@@ -312,8 +312,10 @@ nnoremap <leader>a :VtrAttachToPane<CR>
 nnoremap <leader>rf :VtrSendFile<CR>
 nnoremap <leader>rd :VtrSendCtrlD<CR>
 nnoremap <leader>rc :VtrClearRunner<CR>
-noremap <leader>rS :VtrSendLinesToRunner<CR>
-nnoremap <leader>rF ggVG:VtrSendLinesToRunner<CR>
+nnoremap <leader>s :VtrSendLinesToRunner<CR>
+vnoremap <leader>s :VtrSendLinesToRunner<CR>
+nnoremap <leader>S mmggVG:VtrSendLinesToRunner<CR>'m
+vnoremap <leader>S mm<C-c>ggVG:VtrSendLinesToRunner<CR>'m
 nnoremap <leader>rl :VtrOpenRunner<CR>:VtrSendCommandToRunner !!<CR>
 nnoremap <leader>rri :VtrOpenRunner<CR>:VtrSendCommandToRunner irb<CR>
 nnoremap <leader>rrc :VtrOpenRunner<CR>:VtrSendCommandToRunner rails c<CR>
