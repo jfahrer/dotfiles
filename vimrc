@@ -290,9 +290,14 @@ function! DockerTransform(cmd) abort
   endif
 endfunction
 
+function! SimpleVtrStrategy(cmd) abort
+  call VtrSendCommand(a:cmd)
+endfunction
+
 let g:test#custom_transformations = {'docker': function('DockerTransform')}
+let g:test#custom_strategies = {'simple_vtr': function('SimpleVtrStrategy')}
 let g:test#transformation = 'docker'
-let test#strategy = "vtr"
+let test#strategy = "simple_vtr"
 
 " tmux integration
 let g:tmux_navigator_no_mappings = 1
