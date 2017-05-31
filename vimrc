@@ -429,6 +429,7 @@ nnoremap <leader>gpp :Git pull --rebase<CR>:Git push<CR>
 
 " Make C-c send Esc in insert mode
 inoremap <C-c> <Esc>
+inoremap jk <Esc>
 
 " Ansible settings
 let g:ansible_attribute_highlight = 'od'
