@@ -378,7 +378,7 @@ if executable('ag')
 endif
 
 " Projetc wide search
-nnoremap <leader>/ :Ack<SPACE>
+nnoremap <leader>/ :Ack!<SPACE>
 " Search current word in project / current file
 " This requires nmap. Otherwise the iskeyword is not interpreted properly
 nmap <leader>? :Ack! "<C-r><C-w>" -Q<CR>:cw<CR>
