@@ -367,9 +367,9 @@ nnoremap <leader>= :wincmd =<CR>
 " let g:airline_branch_prefix = ' sss '
 
 " Setup open compactcode/alternate.vim file (alternate)
-:command A Open(alternate#FindAlternate())
-:command AH OpenHorizontal(alternate#FindAlternate())
-:command AV OpenVertical(alternate#FindAlternate())
+command! A Open(alternate#FindAlternate())
+command! AH OpenHorizontal(alternate#FindAlternate())
+command! AV OpenVertical(alternate#FindAlternate())
 
 " Searching with ag/ack
 if executable('ag')
@@ -401,9 +401,9 @@ function! UpdateTags()
   let resp = system(cmd)
 endfunction
 
-command GenerateTags !ctags -R -f ./tags .
-command GenerateGemTags !rbenv ctags && gem ctags
-command UpdateTags call UpdateTags()
+command! GenerateTags !ctags -R -f ./tags .
+command! GenerateGemTags !rbenv ctags && gem ctags
+command! UpdateTags call UpdateTags()
 cnoreabbrev tg GenerateTags
 cnoreabbrev tgg GenerateGemTags
 cnoreabbrev tu UpdateTags
@@ -457,3 +457,5 @@ nnoremap <leader>n :call RenameFile()<CR>
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
+
+nnoremap <leader>v :source ~/.vimrc<CR>
