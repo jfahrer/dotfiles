@@ -326,7 +326,7 @@ nnoremap <leader>rrM :VtrOpenRunner<CR>:VtrSendCommandToRunner rake db:migrate R
 " this should go in a ftplugin
 nnoremap <leader>rad $?^\s*task<CR>:nohlsearch<CR>Odesc ""<ESC>i
 
-" Disable Arrow keys in Escape mode
+" Disable Arrow keys
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
@@ -337,6 +337,12 @@ imap <up> <nop>
 imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
+
+" Allow movement in insert mode via <C-...>
+imap <C-j> <C-o>j
+imap <C-k> <C-o>k
+imap <C-l> <C-o>l
+imap <C-h> <C-o>h
 
 " Use C-h/j/k/l to move between splits
 " nnoremap <C-j> <C-w>j
