@@ -359,9 +359,14 @@ imap <right> <nop>
 " nnoremap <C-l> <C-w>l
 " provided by christoomey/vim-tmux-runner
 
-" zoom a vim pane, <C-w>= to re-balance
+" Zoom / rebalance splits
 nnoremap <leader>- :wincmd _<CR>:wincmd \|<CR>
 nnoremap <leader>= :wincmd =<CR>
+" Resize splits
+nnoremap <silent> <Leader><Up> :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader><Down> :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <Leader><Left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader><Right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 " Airline apperance
 " let g:airline_branch_prefix = ' sss '
