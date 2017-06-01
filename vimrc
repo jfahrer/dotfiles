@@ -82,7 +82,6 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'christoomey/vim-tmux-runner'
 
 " Snippets
-" Track the engine.
 Plugin 'SirVer/ultisnips'
 
 " All Plugins must be added before the following line
@@ -156,7 +155,6 @@ set foldmethod=indent    " Fold by indention by default
 set foldnestmax=10       " Limit to 10 nested folds
 " set nofoldenable       " Open all folds by default
 set foldlevelstart=7     " Open most folds by default
-" nnoremap <leader>. za            " Toogle folds with ,
 
 " Undo stuff
 set undofile                    " Save undo's after file closes
@@ -239,7 +237,6 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
   \ }
-"nnoremap <C-b> :CtrlPBuffer<CR>
 nnoremap <leader><leader> :CtrlPMixed<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>d :CtrlPFunky<CR> " Use CtrlP to navigate definitions in current buffer
@@ -341,17 +338,6 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
-" noremap <A-Up> <NOP>
-" noremap <A-Down> <NOP>
-" noremap <A-Left> <NOP>
-" noremap <A-Right> <NOP>
-
-" " provide hjkl movements in Insert
-" imap <C-h> <C-o>h
-" imap <C-j> <C-o>j
-" imap <C-k> <C-o>k
-" imap <C-l> <C-o>l
-
 " Use C-h/j/k/l to move between splits
 " nnoremap <C-j> <C-w>j
 " nnoremap <C-k> <C-w>k
@@ -367,9 +353,6 @@ nnoremap <silent> <Leader><Up> :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader><Down> :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <Leader><Left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
 nnoremap <silent> <Leader><Right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
-
-" Airline apperance
-" let g:airline_branch_prefix = ' sss '
 
 " Setup open compactcode/alternate.vim file (alternate)
 command! A Open(alternate#FindAlternate())
