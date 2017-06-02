@@ -1,0 +1,12 @@
+# Thanks to https://github.com/airblade/dotfiles/blob/master/railsrc-irb
+def show_log
+  change_log STDOUT
+end
+
+def hide_log
+  change_log nil
+end
+
+def change_log(stream)
+  ActiveRecord::Base.logger = Logger.new(stream)
+end
