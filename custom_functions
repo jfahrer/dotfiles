@@ -1,0 +1,13 @@
+# Thanks to upcase (https://thoughtbot.com/upcase/videos/intro-to-dotfiles)
+# No arguments: `git status`
+# With arguments: acts like `git`
+g() {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git status
+  fi
+}
+
+# Complete g like git
+__git_complete g _git
