@@ -15,18 +15,24 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" appearance
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'vim-airline/vim-airline'        " Better status line
+Plugin 'vim-airline/vim-airline-themes' " Better status line
+
 " Little helpers
-Plugin 'duggiefresh/vim-easydir'     " Easily create direcories and files
-Plugin 'tpope/vim-fugitive'          " Git wrapper
-Plugin 'tpope/vim-vinegar'           " Better file browser
-Plugin 'tpope/vim-commentary'        " Add comment via gcc and 9gcc or gloabl :g/PATTERN/Commentary
-Plugin 'tpope/vim-endwise'           " Add end tags to if, def, ...
-Plugin 'raimondi/delimitmate'        " Add pairs for brackets etc
-Plugin 'bling/vim-airline'           " Better status line
-Plugin 'tpope/vim-unimpaired'        " https://github.com/tpope/vim-unimpaired
-Plugin 'tpope/vim-surround'          " Use cs to change surroundings. For example cs{[
-Plugin 'tpope/vim-repeat'            " Make (some) Plugins work work with the . command
-Plugin 'christoomey/vim-system-copy' " Copy / paste from the system clipboard
+Plugin 'duggiefresh/vim-easydir'        " Easily create direcories and files
+Plugin 'tpope/vim-fugitive'             " Git wrapper
+Plugin 'tpope/vim-vinegar'              " Better file browser
+Plugin 'tpope/vim-commentary'           " Add comment via gcc and 9gcc or gloabl :g/PATTERN/Commentary
+Plugin 'tpope/vim-endwise'              " Add end tags to if, def, ...
+Plugin 'raimondi/delimitmate'           " Add pairs for brackets etc
+Plugin 'tpope/vim-unimpaired'           " https://github.com/tpope/vim-unimpaired
+Plugin 'tpope/vim-surround'             " Use cs to change surroundings. For example cs{[
+Plugin 'tpope/vim-repeat'               " Make (some) Plugins work work with the . command
+Plugin 'christoomey/vim-system-copy'    " Copy / paste from the system clipboard
+Plugin 'sk1418/Join'                    " Better joining of lines
+Plugin 'Valloric/ListToggle'            " Toggle the quickfix and location lists
 
 " Sublime / TextMate style Ctrl+P
 Plugin 'kien/ctrlp.vim'            " For files with <C-p>
@@ -133,9 +139,9 @@ syntax enable
 syntax sync fromstart  " http://vim.wikia.com/wiki/Fix_syntax_highlighting
 
 " Appereance
-" set background=dark
+set background=dark
 set t_Co=256 " 256 colors
-colorscheme molokai
+colorscheme solarized
 highlight ColorColumn ctermbg=235 " Make it more obviouser when lines are too long
 set list listchars=tab:»·,trail:· " Display extra whitespace
 
@@ -323,8 +329,14 @@ nnoremap <leader>rrM :VtrOpenRunner<CR>:VtrSendCommandToRunner rake db:migrate R
 " let g:VtrClearEmptyLines = 0
 " let g:VtrAppendNewline = 1
 
+" Other helpers
 " this should go in a ftplugin
 nnoremap <leader>rad $?^\s*task<CR>:nohlsearch<CR>Odesc ""<ESC>i
+nnoremap <leader>w :w<CR>
+
+" List toggles
+let g:lt_location_list_toggle_map = '<leader>Q'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
 
 " Disable Arrow keys
 map <up> <nop>
