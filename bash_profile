@@ -22,8 +22,10 @@ if [ -f $(brew --prefix)/etc/bash_completion  ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
-. ~/bash_it_profile
-PATH=./bin:~/.bin:$PATH
+. ~/.bash_it_profile
+. ~/.custom_functions
+
+PATH=~/.bin:./bin:$PATH
 export PATH
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
