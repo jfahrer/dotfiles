@@ -245,7 +245,7 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
   \ }
-nnoremap <leader><leader> :CtrlPMixed<CR>
+let g:ctrlp_map = '<leader><leader>'
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>d :CtrlPFunky<CR> " Use CtrlP to navigate definitions in current buffer
 nnoremap <leader>D :CtrlPTag<CR>   " Use CtrlP to navigate tags
