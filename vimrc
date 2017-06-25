@@ -84,6 +84,7 @@ Plugin 'mileszs/ack.vim'
 " Open alternative file with :A / :AV / :AH
 Plugin 'compactcode/open.vim'
 Plugin 'compactcode/alternate.vim'
+Plugin 'jfahrer/suggest-alternate.vim'
 
 " tmux integration
 Plugin 'christoomey/vim-tmux-navigator'
@@ -278,15 +279,6 @@ nnoremap <leader>f :TestFile<CR>
 nnoremap <leader>t :TestNearest<CR>
 nnoremap <leader>T :TestSuite<CR>
 nnoremap <leader>l :TestLast<CR>
-nnoremap <leader>c :call CreateSpec()<CR>
-
-function! CreateSpec()
-  let relpath = substitute(expand('%'), getcwd() . "/" , "", "")
-  let suggested_spec_name = 'spec/' . substitute(relpath, "app/", "", "")
-  let suggested_spec_name = substitute(suggested_spec_name, ".rb$", "_spec.rb", "")
-  let spec_name = input('Spec file name: ', suggested_spec_name, 'file')
-  exec ':e ' . spec_name
-endfunction
 
 function! DockerTransform(cmd) abort
   if filereadable("docker-compose.dev.yml")
@@ -384,6 +376,13 @@ nnoremap <silent> <Leader><Right> :exe "vertical resize " . (winwidth(0) * 2/3)<
 command! A Open(alternate#FindAlternate())
 command! AH OpenHorizontal(alternate#FindAlternate())
 command! AV OpenVertical(alternate#FindAlternate())
+command! CA Open(suggest_alternate#FileName())
+command! CAV OpenVertical(suggest_alternate#FileName())
+
+nnoremap <leader>O <C-w><C-o>
+nnoremap <leader>o <C-w><C-o>:AV<CR>
+nnoremap <leader>c :CAV<CR>
+nnoremap <leader>C :CA<CR>
 
 " Searching with ag/ack
 if executable('ag')
@@ -397,9 +396,6 @@ nnoremap <leader>/ :Ack!<SPACE>
 " This requires nmap. Otherwise the iskeyword is not interpreted properly
 nmap <leader>? :Ack! "<C-r><C-w>" -Q<CR>:cw<CR>
 nmap <leader>* :Ack! "<C-r><C-w>" % -Q<CR>:cw<CR>
-
-nnoremap <leader>O <C-w><C-o>
-nnoremap <leader>o <C-w><C-o>:AV<CR>
 
 " Setting up tags
 " Generate tags witch :tg (project) or :tgg (gems)
