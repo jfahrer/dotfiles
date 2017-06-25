@@ -391,11 +391,24 @@ if executable('ag')
 endif
 
 " Projetc wide search
+
+function! ExtractVisualSelectionForAck()
+    let old = @"
+    norm! gvy
+    let pattern = shellescape(substitute(@", '\n\+$', '', ''))
+    let @" = old
+    return pattern
+endfunction
+
 nnoremap <leader>/ :Ack!<SPACE>
-" Search current word in project / current file
 " This requires nmap. Otherwise the iskeyword is not interpreted properly
 nmap <leader>? :Ack! "<C-r><C-w>" -Q<CR>:cw<CR>
 nmap <leader>* :Ack! "<C-r><C-w>" % -Q<CR>:cw<CR>
+vnoremap <Leader>? :<C-u>execute "Ack! " . ExtractVisualSelectionForAck() . " -Q"<CR>:cw<CR>
+vnoremap <Leader>* :<C-u>execute "Ack! " . ExtractVisualSelectionForAck() . " -Q %"<CR>:cw<CR>
+
+nnoremap [c :colder<CR>
+nnoremap ]c :cnewer<CR>
 
 " Setting up tags
 " Generate tags witch :tg (project) or :tgg (gems)
