@@ -327,7 +327,19 @@ nnoremap <leader>rrM :VtrOpenRunner<CR>:VtrSendCommandToRunner rake db:migrate R
 " Other helpers
 " this should go in a ftplugin
 nnoremap <leader>rad $?^\s*task<CR>:nohlsearch<CR>Odesc ""<ESC>i
+
 nnoremap <leader>w :w<CR>
+nnoremap <leader>W ZZ
+nnoremap <leader>x :q<CR>
+
+nnoremap j gj
+nnoremap k gk
+
+nnoremap <leader>j <C-w>w
+
+" Tabs
+nnoremap gb gT
+nnoremap <leader>e :tabe<CR>
 
 " List toggles
 let g:lt_location_list_toggle_map = '<leader>Q'
@@ -474,7 +486,7 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-nnoremap <leader>n :call RenameFile()<CR>
+nnoremap <leader>N :call RenameFile()<CR>
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
