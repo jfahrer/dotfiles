@@ -130,7 +130,6 @@ set incsearch        " do incremental searching
 " set hlsearch         " Highlight the search
 set ignorecase       " Case insensitive search
 set smartcase        " Case sensitive search if the string contains captible letters
-nnoremap <leader>, :set hlsearch!<CR>
 
 " Turn pasting on / off
 nnoremap cop :setlocal paste!<CR>
