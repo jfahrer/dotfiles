@@ -14,7 +14,8 @@
 	branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
 	ci = commit -v
 	co = checkout
-	st = status
+	d = diff
+	dc = diff --cached
 	fixup = commit --amend -C HEAD
 	g = log --pretty=format:\"%h %an - %s\" --graph
 	lc = log ORIG_HEAD.. --stat --no-merges

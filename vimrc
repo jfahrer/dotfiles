@@ -451,6 +451,7 @@ nmap <leader>] g<C-]>
 " Git shortcuts
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gdc :Gdiff --cached<CR>
 nnoremap <leader>gca :Git add -A<CR>:Git commit<CR>
 nnoremap <leader>gcw :Git add -A<CR>:Git commit -m "WIP"<CR>
 nnoremap <leader>gci :Git commit<CR>
@@ -462,6 +463,7 @@ nnoremap <leader>gap :Git add -p -A -p<CR>:Gstatus<CR>
 nnoremap <leader>gps :Git push<CR>
 nnoremap <leader>gpl :Git pull<CR>
 nnoremap <leader>gpr :Git pull --rebase<CR>
+nnoremap <leader>gsp :Git stash<CR>:Git pull --rebase<CR>:Git stash pop<CR>
 nnoremap <leader>gpp :Git pull --rebase<CR>:Git push<CR>
 
 " Make C-c send Esc in insert mode

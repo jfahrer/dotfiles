@@ -17,7 +17,6 @@ alias pconsole="bundle exec cap production rails:console"
 
 #Git
 alias gpp="git pull --rebase && git push"
-alias gs="git status"
 alias gsp='git stash && git pull --rebase && git stash pop'
 
 # Pretty print the path
