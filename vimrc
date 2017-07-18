@@ -248,6 +248,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
   \ }
 let g:ctrlp_map = '<leader><leader>'
+let g:ctrlp_cmd = 'CtrlP'
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>d :CtrlPFunky<CR> " Use CtrlP to navigate definitions in current buffer
 nnoremap <leader>D :CtrlPTag<CR>   " Use CtrlP to navigate tags
@@ -267,7 +268,6 @@ nnoremap <leader>pv :CtrlP app/views/<CR>
 nnoremap <leader>po :CtrlP app/operations/<CR>
 nnoremap <leader>ps :CtrlP app/services/<CR>
 
-
 " vim-surround
 " Map it to gs (instead of ys)
 nmap gs <Plug>Ysurround
@@ -286,6 +286,7 @@ function! DockerTransform(cmd) abort
     return "docker-compose exec app " . a:cmd
   else
     return a:cmd
+
   endif
 endfunction
 
@@ -293,8 +294,8 @@ function! SimpleVtrStrategy(cmd) abort
   call VtrSendCommand(a:cmd)
 endfunction
 
-let g:test#custom_transformations = {'docker': function('DockerTransform')}
 let g:test#custom_strategies = {'simple_vtr': function('SimpleVtrStrategy')}
+let g:test#custom_transformations = {'docker': function('DockerTransform')}
 let g:test#transformation = 'docker'
 let test#strategy = "simple_vtr"
 
