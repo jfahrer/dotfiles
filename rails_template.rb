@@ -12,6 +12,7 @@ end
 
 gem_group :development, :test do
   gem 'irbtools', require: 'irbtools/binding'
+  gem 'awesome_print'
 end
 
 run("bundle install")
