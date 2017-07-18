@@ -19,6 +19,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'        " Better status line
 Plugin 'vim-airline/vim-airline-themes' " Better status line
+Plugin 'mkitt/tabline.vim'              " Show tab number in tabline
 
 " Little helpers
 Plugin 'duggiefresh/vim-easydir'        " Easily create direcories and files
@@ -339,7 +340,7 @@ nnoremap <leader>j <C-w>w
 
 " Tabs
 nnoremap gb gT
-nnoremap <leader>e :tabe<CR>
+nnoremap <leader>e :tabe<CR>:CtrlP<CR>
 
 " List toggles
 let g:lt_location_list_toggle_map = '<leader>Q'
