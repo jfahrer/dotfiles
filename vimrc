@@ -84,7 +84,7 @@ Plugin 'mileszs/ack.vim'
 " Open alternative file with :A / :AV / :AH
 Plugin 'compactcode/open.vim'
 Plugin 'compactcode/alternate.vim'
-Plugin 'jfahrer/suggest-alternate.vim'
+Plugin 'jfahrer/vim-suggest-alternate'
 
 " tmux integration
 Plugin 'christoomey/vim-tmux-navigator'
@@ -384,6 +384,7 @@ command! A Open(alternate#FindAlternate())
 command! AH OpenHorizontal(alternate#FindAlternate())
 command! AV OpenVertical(alternate#FindAlternate())
 command! CA Open(suggest_alternate#FileName())
+command! CAH OpenHorizontal(suggest_alternate#FileName())
 command! CAV OpenVertical(suggest_alternate#FileName())
 
 nnoremap <leader>O <C-w><C-o>
