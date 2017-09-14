@@ -19,7 +19,7 @@ end
 endsnippet
 
 snippet cont "RSpec context block"
-cont '${1:name}' do
+context '${1:name}' do
   $0
 end
 endsnippet
@@ -50,8 +50,8 @@ snippet fgc "FactoryGirl.create"
 FactoryGirl.create(:${1:factory})
 endsnippet
 
-snippet fgb "FactoryGirl.build"
-FactoryGirl.build(:${1:factory})
+snippet fgb "FactoryGirl.build_stubbed"
+FactoryGirl.build_stubbed(:${1:factory})
 endsnippet
 
 snippet fgcl "FactoryGirl.create_list"
