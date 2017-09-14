@@ -444,6 +444,7 @@ cnoreabbrev tu UpdateTags
 
 " List tags for the word under the curser
 nmap <leader>] g<C-]>
+nmap <leader>]  <C-w><C-]><C-w>T
 
 " Git shortcuts
 nnoremap <leader>gs :Gstatus<CR>
