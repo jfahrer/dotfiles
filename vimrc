@@ -373,11 +373,12 @@ imap <C-h> <C-o>h
 " Zoom / rebalance splits
 nnoremap <leader>- :wincmd _<CR>:wincmd \|<CR>
 nnoremap <leader>= :wincmd =<CR>
+
 " Resize splits
 nnoremap <silent> <Leader><Up> :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader><Down> :exe "resize " . (winheight(0) * 2/3)<CR>
-nnoremap <silent> <Leader><Left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
-nnoremap <silent> <Leader><Right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+nnoremap <silent> <Leader><Right> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader><Left> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 " Setup open compactcode/alternate.vim file (alternate)
 command! A Open(alternate#FindAlternate())
