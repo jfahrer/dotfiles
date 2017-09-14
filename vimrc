@@ -34,7 +34,6 @@ Plugin 'tpope/vim-repeat'               " Make (some) Plugins work work with the
 Plugin 'christoomey/vim-system-copy'    " Copy / paste from the system clipboard
 Plugin 'sk1418/Join'                    " Better joining of lines
 Plugin 'Valloric/ListToggle'            " Toggle the quickfix and location lists
-Plugin 'maxbrunsfeld/vim-yankstack'     " Cycle trhough past yanks with <leader>y / Y
 
 " Sublime / TextMate style Ctrl+P
 Plugin 'kien/ctrlp.vim'            " For files with <C-p>
@@ -345,11 +344,6 @@ nnoremap <leader>e :tabe<CR>:CtrlP<CR>
 " List toggles
 let g:lt_location_list_toggle_map = '<leader>Q'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
-
-" Yankstack
-let g:yankstack_map_keys = 0
-nmap <leader>y <Plug>yankstack_substitute_older_paste
-nmap <leader>Y <Plug>yankstack_substitute_newer_paste
 
 " Disable Arrow keys
 map <up> <nop>
