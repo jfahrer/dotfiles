@@ -11,3 +11,20 @@ g() {
 
 # Complete g like git
 __git_complete g _git
+
+dme() {
+  MACHINE=${1:-default}
+  echo "Configuring shell for $MACHINE..."
+  docker-machine env $MACHINE | grep -v ^#
+  eval $(docker-machine env $1)
+  echo ...done
+}
+
+dmo() {
+  PORT=${1:-default}
+  MACHINE=$(docker-machine active)
+  IP=$(docker-machine ip $MACHINE)
+  echo "Opening browser for $MACHINE with IP $IP on port $PORT..."
+  open "http://$IP:$PORT"
+  echo ...done
+}
