@@ -307,14 +307,14 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
 nnoremap <silent> <C-\> :VtrFocusRunner<CR>
 nnoremap <leader>ro :VtrOpenRunner<CR>
 nnoremap <leader>a :VtrAttachToPane<CR>
-nnoremap <leader>rf :VtrSendFile<CR>
-nnoremap <leader>rd :VtrSendCtrlD<CR>
-nnoremap <leader>rc :VtrClearRunner<CR>
+nnoremap <leader>F :VtrSendFile<CR>
+nnoremap <leader>D :VtrSendCtrlD<CR>
+nnoremap <leader>C :VtrClearRunner<CR>
 nnoremap <leader>s mm:VtrSendLinesToRunner<CR>`m
 vnoremap <leader>s mm:VtrSendLinesToRunner<CR>`m
 nnoremap <leader>S mmggVG:VtrSendLinesToRunner<CR>`m
 vnoremap <leader>S mm<C-c>ggVG:VtrSendLinesToRunner<CR>`m
-nnoremap <leader>rl :VtrOpenRunner<CR>:VtrSendCommandToRunner !!<CR>
+nnoremap <leader>L :VtrOpenRunner<CR>:VtrSendCommandToRunner !!<CR>
 nnoremap <leader>rri :VtrOpenRunner<CR>:VtrSendCommandToRunner irb<CR>
 nnoremap <leader>rrc :VtrOpenRunner<CR>:VtrSendCommandToRunner rails c<CR>
 nnoremap <leader>rrs :VtrOpenRunner<CR>:VtrSendCommandToRunner spring stop<CR>
