@@ -425,12 +425,14 @@ function! UpdateTags()
   let fullpath = expand("%:p")
   let cwd = getcwd()
   let tagfilename = cwd . "/tags"
-  let f = substitute(fullpath, cwd . "/", "", "")
-  let f = escape(f, './')
-  let cmd = 'sed -i.bkp "/' . f . '/d" "' . tagfilename . '"'
-  let resp = system(cmd)
-  let cmd = 'ctags -a -f ' . tagfilename . ' ' . f
-  let resp = system(cmd)
+  if filereadable(tagfilename)
+    let f = substitute(fullpath, cwd . "/", "", "")
+    let f = escape(f, './')
+    let cmd = 'sed -i.bkp "/' . f . '/d" "' . tagfilename . '"'
+    let resp = system(cmd)
+    let cmd = 'ctags -a -f ' . tagfilename . ' ' . f
+    let resp = system(cmd)
+  endif
 endfunction
 
 command! GenerateTags !ctags -R -f ./tags .
