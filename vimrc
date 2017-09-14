@@ -487,11 +487,12 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-nnoremap <leader>N :call RenameFile()<CR>
+nnoremap <leader>R :call RenameFile()<CR>
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
 
-nnoremap <leader>v :source ~/.vimrc<CR>
+nnoremap <leader>V :source ~/.vimrc<CR>
+
