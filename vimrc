@@ -34,6 +34,7 @@ Plugin 'tpope/vim-repeat'               " Make (some) Plugins work work with the
 Plugin 'christoomey/vim-system-copy'    " Copy / paste from the system clipboard
 Plugin 'sk1418/Join'                    " Better joining of lines
 Plugin 'Valloric/ListToggle'            " Toggle the quickfix and location lists
+Plugin 'skwp/greplace.vim'              " Search and replace across many files
 
 " Sublime / TextMate style Ctrl+P
 Plugin 'kien/ctrlp.vim'            " For files with <C-p>
