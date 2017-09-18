@@ -29,3 +29,12 @@ run "echo '# #{@app_name.titleize}' >> README.md"
 git :init
 git add: "."
 git commit: "-a -m initial"
+
+file 'Dockerfile', <<-CODE
+CODE
+
+file 'docker-compose.yml', <<-CODE
+CODE
+
+file 'docker-compose.dev.yml', <<-CODE
+CODE
