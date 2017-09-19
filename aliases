@@ -25,5 +25,9 @@ alias path='echo $PATH | tr -s ":" "\n"'
 # Docker
 alias dm='docker-machine'
 
+# VNC connections
+alias hoff='open vnc://192.168.151.110'
+alias ramm='open vnc://192.168.151.110'
+
 # Include custom aliases
 [[ -f ~/.aliases.local  ]] && source ~/.aliases.local
