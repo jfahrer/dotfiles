@@ -246,7 +246,7 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
   \ }
-let g:ctrlp_map = '<leader><leader>'
+let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>d :CtrlPFunky<CR> " Use CtrlP to navigate definitions in current buffer
@@ -266,6 +266,7 @@ nnoremap <leader>pc :CtrlP app/controllers/<CR>
 nnoremap <leader>pv :CtrlP app/views/<CR>
 nnoremap <leader>po :CtrlP app/operations/<CR>
 nnoremap <leader>ps :CtrlP app/services/<CR>
+nnoremap <leader><leader> :CtrlP<CR>
 
 " vim-surround
 " Map it to gs (instead of ys)
