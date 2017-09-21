@@ -22,7 +22,7 @@ fi
 . ~/.bash_it_profile
 . ~/.custom_functions
 
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
 PATH=~/.bin:./bin:$PATH
 export PATH
-
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
