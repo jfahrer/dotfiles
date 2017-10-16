@@ -278,7 +278,8 @@ vmap gS <Plug>VgSurround
 " Tests
 nnoremap <leader>f :TestFile<CR>
 nnoremap <leader>t :TestNearest<CR>
-nnoremap <leader>T :TestSuite<CR>
+nnoremap <leader>T :TestNearest -strategy=simple_vtr<CR>
+nnoremap <leader>A :TestSuite<CR>
 nnoremap <leader>l :TestLast<CR>
 
 function! DockerTransform(cmd) abort
@@ -297,7 +298,12 @@ endfunction
 let g:test#custom_strategies = {'simple_vtr': function('SimpleVtrStrategy')}
 let g:test#custom_transformations = {'docker': function('DockerTransform')}
 let g:test#transformation = 'docker'
-let test#strategy = "simple_vtr"
+let test#strategy = {
+  \ 'nearest': 'basic',
+  \ 'file':    'simple_vtr',
+  \ 'suite':   'simple_vtr',
+\}
+
 
 " tmux integration
 let g:tmux_navigator_no_mappings = 1
