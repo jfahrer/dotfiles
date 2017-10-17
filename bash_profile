@@ -7,7 +7,6 @@ if [ -f ~/.bashrc ]; then
 fi
 
 eval "$(rbenv init -)"
-(docker-machine ls | grep default > /dev/null) && eval $(docker-machine env)
 
 export WS=$HOME/workspace
 export LANG=en_US.UTF-8
@@ -21,6 +20,7 @@ fi
 
 . ~/.bash_it_profile
 . ~/.custom_functions
+. ~/.docker_helpers
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 

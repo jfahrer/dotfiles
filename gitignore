@@ -13,3 +13,4 @@ tmp/**/*
 !tmp/cache/.keep
 *.pyc
 .ctags
+.docker-machine
