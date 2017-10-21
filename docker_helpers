@@ -39,4 +39,4 @@ __docker_machine_open() {
   echo ...done
 }
 
-__docker_machine_eval
+#__docker_machine_eval
