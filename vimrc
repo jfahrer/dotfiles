@@ -348,6 +348,7 @@ nnoremap <leader>j <C-w>w
 " Tabs and editing
 nnoremap gb gT
 nnoremap <leader>E :tabe<CR>:e 
+let g:markdown_mapping_switch_status = '<leader>c'
 
 " List toggles
 let g:lt_location_list_toggle_map = '<leader>Q'
