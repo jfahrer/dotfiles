@@ -1,3 +1,5 @@
+export DOCKER_HIDE_LEGACY_COMMANDS=true
+
 alias d=docker
 alias dm=docker-machine
 alias dc=docker-compose
