@@ -402,6 +402,9 @@ nnoremap <leader>o <C-w><C-o>:AV<CR>
 nnoremap <leader>c :CAV<CR>
 nnoremap <leader>C :CA<CR>
 
+" Copying
+let g:system_copy#copy_command='reattach-to-user-namespace pbcopy'
+
 " Searching with ag/ack
 if executable('ag')
   let g:ackprg = 'ag --vimgrep --smart-case --path-to-ignore ~/.agignore'
