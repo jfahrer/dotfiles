@@ -27,6 +27,10 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 PATH=~/.bin:./bin:$PATH
 export PATH
 
+if [ -f ~/.bash_profile.local ]; then
+  . ~/.bash_profile.local
+fi
+
 if [ -f ./.env ]; then
   . ./.env
 fi
