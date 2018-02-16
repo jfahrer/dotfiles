@@ -24,6 +24,7 @@ alias path='echo $PATH | tr -s ":" "\n"'
 
 # VNC connections
 alias james='open vnc://192.168.1.150'
+alias jamess='ssh hjhart@192.168.1.150'
 
 # Include custom aliases
 [[ -f ~/.aliases.local  ]] && source ~/.aliases.local
