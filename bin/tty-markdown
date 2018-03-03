@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+require 'tty-markdown'
+
+
+Array(ARGV).each do |file|
+  parsed = TTY::Markdown.parse(File.read(file))
+  puts parsed
+end
