@@ -1,0 +1,80 @@
+" appearance
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'vim-airline/vim-airline'        " Better status line
+Plugin 'vim-airline/vim-airline-themes' " Better status line
+Plugin 'mkitt/tabline.vim'              " Show tab number in tabline
+
+" Little helpers
+Plugin 'duggiefresh/vim-easydir'        " Easily create direcories and files
+Plugin 'tpope/vim-fugitive'             " Git wrapper
+Plugin 'tpope/vim-vinegar'              " Better file browser
+Plugin 'tpope/vim-commentary'           " Add comment via gcc and 9gcc or gloabl :g/PATTERN/Commentary
+Plugin 'tpope/vim-endwise'              " Add end tags to if, def, ...
+Plugin 'raimondi/delimitmate'           " Add pairs for brackets etc
+Plugin 'tpope/vim-unimpaired'           " https://github.com/tpope/vim-unimpaired
+Plugin 'tpope/vim-surround'             " Use cs to change surroundings. For example cs{[
+Plugin 'tpope/vim-repeat'               " Make (some) Plugins work work with the . command
+Plugin 'christoomey/vim-system-copy'    " Copy / paste from the system clipboard
+Plugin 'sk1418/Join'                    " Better joining of lines
+Plugin 'Valloric/ListToggle'            " Toggle the quickfix and location lists
+Plugin 'skwp/greplace.vim'              " Search and replace across many files
+
+" Sublime / TextMate style Ctrl+P
+Plugin 'kien/ctrlp.vim'            " For files with <C-p>
+Plugin 'd11wtq/ctrlp_bdelete.vim'  " For buffers with <leader>b (Close with C-2 / Mark multiple with C-z)
+Plugin 'tacahiroy/ctrlp-funky'     " Fuzzy find definitions in current buffer with <leader>fu
+
+" Sublime styile multiple cursors
+Plugin 'terryma/vim-multiple-cursors' " Use <C-n> to set new cursors in visual in insert mode
+
+" Autocomplete
+" Needs to be recompiled after an upgrade:
+" cd ~/.vim/bundle/youcompleteme
+" ./install.py
+" Plugin 'valloric/youcompleteme'
+
+" Testing
+Plugin 'janko-m/vim-test'
+
+" Ruby and Rails helpers
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rake'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-rails'              " Rails integration
+Plugin 'ecomba/vim-ruby-refactoring'  " Handy helpers to refactor ruby code.
+Plugin 'rorymckinley/vim-rubyhash'    " Change ruby hash syntax with <leader>rr / <leader>rs / <leader>rt
+
+" More VIm  text objects
+Plugin 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-entire'
+Plugin 'kana/vim-textobj-indent'
+Plugin 'kana/vim-textobj-line'
+Plugin 'nelstrom/vim-textobj-rubyblock' " Provides ruby movements for inner / around block and methods: ar, ir, am, im
+
+" Syntax extensions
+Plugin 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-haml'
+Plugin 'avakhov/vim-yaml'
+Plugin 'pearofducks/ansible-vim'
+Plugin 'moll/vim-node'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'gabrielelana/vim-markdown'
+
+" Searching
+Plugin 'mileszs/ack.vim'
+
+" Open alternative file with :A / :AV / :AH
+Plugin 'compactcode/open.vim'
+Plugin 'compactcode/alternate.vim'
+Plugin 'jfahrer/vim-suggest-alternate'
+
+" tmux integration
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-runner'
+
+" Snippets
+Plugin 'SirVer/ultisnips'
+
+
