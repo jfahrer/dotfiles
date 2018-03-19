@@ -64,6 +64,11 @@ filetype indent on
 syntax enable
 syntax sync fromstart  " http://vim.wikia.com/wiki/Fix_syntax_highlighting
 
+" Encoding
+set fileencoding=utf-8
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,gb2312,cp936
+
 " Appereance
 set background=dark
 set t_Co=256 " 256 colors
@@ -137,11 +142,6 @@ augroup myfiletypes
   " automatically rebalance windows on vim resize
   autocmd VimResized * :wincmd =
 augroup END
-
-" Encoding
-set fileencoding=utf-8
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,gb2312,cp936
 
 " Ignored files
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem          " Disable output and VCS files
