@@ -206,7 +206,7 @@ nnoremap <leader>A :TestSuite<CR>
 nnoremap <leader>l :TestLast<CR>
 
 function! DockerTransform(cmd) abort
-  if filereadable("docker-compose.dev.yml")
+  if filereadable("docker-compose.yml")
     return "docker-compose exec app " . a:cmd
   else
     return a:cmd
