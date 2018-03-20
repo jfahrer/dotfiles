@@ -8,17 +8,9 @@ let mapleader = ' '
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" Set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-  " let Vundle manage Vundle, required
-  Plugin 'VundleVim/Vundle.vim'
-
-  if filereadable($HOME . "/.vim/plugins")
-    source ~/.vim/plugins
-  endif
-" All Plugins must be added before the following line
-call vundle#end()
+if filereadable($HOME . "/.vim/plug")
+  source ~/.vim/plug
+endif
 
 runtime macros/matchit.vim
 
