@@ -1,0 +1,15 @@
+# Path to bash-it
+export BASH_IT="$HOME/.bash-it"
+
+# Lock and Load a custom theme file
+export BASH_IT_THEME="wanelo"
+
+# Load Bash It
+if [ -f $BASH_IT/bash_it.sh ]; then
+  source $BASH_IT/bash_it.sh
+fi
+
+# Set this to false to turn off version control status checking within the prompt for all themes
+export SCM_CHECK=true
+export SCM_GIT_SHOW_CURRENT_USER=true
+export SCM_THEME_CURRENT_USER_PREFFIX=' '
