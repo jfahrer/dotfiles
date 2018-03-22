@@ -4,6 +4,7 @@ alias lt="ls -altr"
 alias e="$EDITOR"
 alias ..="cd .."
 alias ws="cd ~/workspace"
+alias cls="clear"
 
 alias tmux='TERM=screen-256color-bce tmux'
 
