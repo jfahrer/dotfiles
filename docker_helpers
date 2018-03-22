@@ -3,13 +3,11 @@ export DOCKER_HIDE_LEGACY_COMMANDS=true
 alias d=docker
 alias dm=docker-machine
 alias dc=docker-compose
-alias dcd='docker-compose -f docker-compose.yml -f docker-compose.dev.yml'
 alias dmo=__docker_machine_open
 alias dme=__docker_machine_eval
 
 complete -F _docker d
 complete -F _docker_compose dc
-complete -F _docker_compose dcd
 complete -F _docker_machine dm
 
 __docker_machine_name() {
