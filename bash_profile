@@ -1,6 +1,9 @@
 export EDITOR=vim
 
 . ~/.aliases
+if [ -f ~/.aliases.local ]; then
+  . ~/.aliases.local
+fi
 
 if [ -f ~/.bashrc ]; then
   . ~/.bashrc
