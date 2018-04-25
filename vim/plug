@@ -46,6 +46,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-rails'              " Rails integration
   Plug 'ecomba/vim-ruby-refactoring'  " Handy helpers to refactor ruby code.
 
+  " Elixir
+  Plug 'elixir-editors/vim-elixir'
+
   " More VIm  text objects
   Plug 'kana/vim-textobj-user'
   Plug 'kana/vim-textobj-entire'
