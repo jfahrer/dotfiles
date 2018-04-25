@@ -10,3 +10,4 @@
 /.svn/
 /.hg/
 /public/assets/
+node_modules

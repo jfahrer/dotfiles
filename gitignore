@@ -14,3 +14,4 @@ tmp/**/*
 *.pyc
 .ctags
 .docker-machine
+node_modules/
