@@ -15,6 +15,7 @@ alias sshr="ssh -l root"
 alias b="bundle"
 alias be="bundle exec"
 alias pconsole="bundle exec cap production rails:console"
+alias r="rails"
 
 #Git
 alias gpp="git pull --rebase && git push"
