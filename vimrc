@@ -190,6 +190,16 @@ nmap gS <Plug>Yssurround
 vmap gs <Plug>VSurround
 vmap gS <Plug>VgSurround
 
+" Transform shell commands to use docker-compose if applicable
+function! TransformCommandToUseDockerCompose(cmd) abort
+  if filereadable(".test_with_compose")
+    " return "docker-compose run --rm app " . a:cmd
+    return "docker-compose exec app " . a:cmd
+  else
+    return a:cmd
+  endif
+endfunction
+
 " Tests
 nnoremap <leader>f :TestFile<CR>
 nnoremap <leader>t :TestNearest<CR>
@@ -197,26 +207,23 @@ nnoremap <leader>T :TestNearest -strategy=simple_vtr<CR>
 nnoremap <leader>A :TestSuite<CR>
 nnoremap <leader>l :TestLast<CR>
 
-function! DockerTransform(cmd) abort
-  if filereadable(".test_with_compose")
-    return "docker-compose run --rm app " . a:cmd
-  else
-    return a:cmd
-  endif
-endfunction
-
 function! SimpleVtrStrategy(cmd) abort
   call VtrSendCommand(a:cmd)
 endfunction
 
 let g:test#custom_strategies = {'simple_vtr': function('SimpleVtrStrategy')}
-let g:test#custom_transformations = {'docker': function('DockerTransform')}
-let g:test#transformation = 'docker'
+let g:test#custom_transformations = {'docker_compose': function('TransformCommandToUseDockerCompose')}
+let g:test#transformation = 'docker_compose'
 let test#strategy = {
   \ 'nearest': 'basic',
   \ 'file':    'simple_vtr',
   \ 'suite':   'simple_vtr',
 \}
+
+function! RunInVtr(cmd) abort
+  execute ":VtrOpenRunner"
+  call VtrSendCommand(TransformCommandToUseDockerCompose(a:cmd))
+endfunction
 
 
 " tmux integration
@@ -237,10 +244,10 @@ vnoremap <leader>s mm:VtrSendLinesToRunner<CR>`m
 nnoremap <leader>S mmggVG:VtrSendLinesToRunner<CR>`m
 vnoremap <leader>S mm<C-c>ggVG:VtrSendLinesToRunner<CR>`m
 nnoremap <leader>L :VtrOpenRunner<CR>:VtrSendCommandToRunner !!<CR>
-nnoremap <leader>rri :VtrOpenRunner<CR>:VtrSendCommandToRunner irb<CR>
-nnoremap <leader>rrc :VtrOpenRunner<CR>:VtrSendCommandToRunner rails c<CR>
-nnoremap <leader>rrs :VtrOpenRunner<CR>:VtrSendCommandToRunner spring stop<CR>
-nnoremap <leader>rrm :VtrOpenRunner<CR>:VtrSendCommandToRunner rake db:migrate db:test:prepare<CR>
+nnoremap <leader>rri :call RunInVtr('irb')
+nnoremap <leader>rrc :call RunInVtr('rails c')<CR>
+nnoremap <leader>rrs :call RunInVtr('spring stop')<CR>
+nnoremap <leader>rrm :call RunInVtr('rake db:migrate db:test:prepare')<CR>
 " let g:VtrStripLeadingWhitespace = 0
 " let g:VtrClearEmptyLines = 0
 " let g:VtrAppendNewline = 1
