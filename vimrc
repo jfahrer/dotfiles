@@ -253,6 +253,7 @@ nnoremap <leader>rrm :call RunInVtr('rake db:migrate db:test:prepare')<CR>
 " let g:VtrAppendNewline = 1
 
 " Other helpers
+" Add a shortcut to add a description to Rake tasks
 " this should go in a ftplugin
 nnoremap <leader>rad $?^\s*task<CR>:nohlsearch<CR>Odesc ""<ESC>i
 
