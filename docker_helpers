@@ -3,6 +3,7 @@ export DOCKER_HIDE_LEGACY_COMMANDS=true
 alias d=docker
 alias dm=docker-machine
 alias dc=docker-compose
+alias de="docker-compose exec app"
 alias dmo=__docker_machine_open
 alias dme=__docker_machine_eval
 
