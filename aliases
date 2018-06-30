@@ -24,9 +24,9 @@ alias gsp='git stash && git pull --rebase && git stash pop'
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 
-# VNC connections
-alias james='open vnc://james'
-alias jamess='ssh hjhart@james'
+# Pairing with James
+alias james='ssh hjhart.ddns.net -p 22022 -l hjhart -L 5900:192.168.1.55:5900'
+alias jamesv='open vnc://localhost'
 
 # Include custom aliases
 [[ -f ~/.aliases.local  ]] && source ~/.aliases.local
