@@ -176,7 +176,7 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 nnoremap <leader>pm :CtrlP app/models/<CR>
-nnoremap <leader>pf :CtrlP spec/support/factories/<CR>
+nnoremap <leader>pf :CtrlP spec/factories/<CR>
 nnoremap <leader>pc :CtrlP app/controllers/<CR>
 nnoremap <leader>pv :CtrlP app/views/<CR>
 nnoremap <leader>po :CtrlP app/operations/<CR>
