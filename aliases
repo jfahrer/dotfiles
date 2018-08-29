@@ -28,5 +28,8 @@ alias path='echo $PATH | tr -s ":" "\n"'
 alias james='ssh hjhart.ddns.net -p 22022 -l hjhart -L 5900:192.168.1.55:5900'
 alias jamesv='open vnc://localhost'
 
+# Helpers
+alias myip='curl ifconfig.io'
+
 # Include custom aliases
 [[ -f ~/.aliases.local  ]] && source ~/.aliases.local
