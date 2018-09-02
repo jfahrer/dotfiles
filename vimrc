@@ -190,6 +190,12 @@ nmap gS <Plug>Yssurround
 vmap gs <Plug>VSurround
 vmap gS <Plug>VgSurround
 
+" vim-ruby-hash
+let g:rubyhash_map_keys = 0
+nnoremap <leader>rhs :call ToSymbolKeysLinewise()<CR>
+nnoremap <leader>rht :call ToStringKeysLinewise()<CR>
+nnoremap <leader>rhr :call To19KeysLinewise()<CR>
+
 " Transform shell commands to use docker-compose if applicable
 function! TransformCommandToUseDockerCompose(cmd) abort
   if filereadable(".test_with_compose")
