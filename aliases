@@ -31,6 +31,7 @@ alias jamesv='open vnc://localhost'
 # Helpers
 alias myip='curl ifconfig.io'
 alias j="vim +'normal Go##' +'r!date' +'normal kJo' \"/Volumes/GoogleDrive/My Drive/journal/journal_`date +%Y-%m.md`\""
+alias cat="bat"
 
 # Include custom aliases
 [[ -f ~/.aliases.local  ]] && source ~/.aliases.local
