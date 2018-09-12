@@ -309,6 +309,7 @@ imap <C-h> <C-o>h
 " Zoom / rebalance splits
 nnoremap <leader>- :wincmd _<CR>:wincmd \|<CR>
 nnoremap <leader>= :wincmd =<CR>
+cnoreabbrev rr redraw!
 
 " Resize splits
 nnoremap <silent> <Leader><Up> :exe "resize " . (winheight(0) * 3/2)<CR>
