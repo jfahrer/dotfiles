@@ -15,4 +15,4 @@ tmp/**/*
 .ctags
 .docker-machine
 node_modules/
-.test_with_compose
+.run_with_compose

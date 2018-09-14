@@ -198,7 +198,7 @@ nnoremap <leader>rhr :call To19KeysLinewise()<CR>
 
 " Transform shell commands to use docker-compose if applicable
 function! TransformCommandToUseDockerCompose(cmd) abort
-  if filereadable(".test_with_compose")
+  if filereadable(".run_with_compose")
     " return "docker-compose run --rm app " . a:cmd
     return "docker-compose exec app " . a:cmd
   else

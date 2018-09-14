@@ -151,7 +151,7 @@ production:
 CODE
 
 # Make sure commands run with Compose
-file '.test_with_compose', ''
+file '.run_with_compose', ''
 
 run("docker-compose -f docker-compose.gems.yml build")
 run("docker-compose -f docker-compose.yml build")
