@@ -24,10 +24,6 @@ alias gsp='git stash && git pull --rebase && git stash pop'
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 
-# Pairing with James
-alias james='ssh hjhart.ddns.net -p 22022 -l hjhart -L 5900:192.168.1.55:5900'
-alias jamesv='open vnc://localhost'
-
 # Helpers
 alias myip='curl ifconfig.io'
 alias j="vim +'normal G] Go##' +'r!date' +'normal kJo' \"/Volumes/GoogleDrive/My Drive/journal/journal_`date +%Y-%m.md`\""
