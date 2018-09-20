@@ -27,7 +27,7 @@ alias path='echo $PATH | tr -s ":" "\n"'
 # Helpers
 alias myip='curl ifconfig.io'
 alias j="vim +'normal G] Go##' +'r!date' +'normal kJo' \"/Volumes/GoogleDrive/My Drive/journal/journal_`date +%Y-%m.md`\""
-alias cat="bat"
+alias more="bat"
 
 # Include custom aliases
 [[ -f ~/.aliases.local  ]] && source ~/.aliases.local
