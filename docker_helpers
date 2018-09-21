@@ -8,6 +8,13 @@ alias dmo=__docker_machine_open
 alias dme=__docker_machine_eval
 alias ecr-login='$(aws ecr get-login --no-include-email --region us-east-1)'
 
+alias rails="__run_with_compose rails"
+alias bundle="__run_with_compose bundle"
+alias rake="__run_with_compose rake"
+alias irb="__run_with_compose irb"
+alias yarn="__run_with_compose yarn"
+alias rubocop="__run_with_compose rubocop"
+
 complete -F _docker d
 complete -F _docker_compose dc
 complete -F _docker_machine dm
@@ -41,4 +48,13 @@ __docker_machine_open() {
   echo ...done
 }
 
-#__docker_machine_eval
+__run_with_compose() {
+  COMMAND=$1
+  shift
+  if [ -e .run_with_compose ]
+  then
+    de $COMMAND "$@"
+  else
+    $(which $COMMAND) "$@"
+  fi
+}
