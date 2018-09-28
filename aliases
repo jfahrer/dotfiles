@@ -16,6 +16,8 @@ alias b="bundle"
 alias be="bundle exec"
 alias pconsole="bundle exec cap production rails:console"
 alias r="rails"
+alias rubochanges="rubocop $(git status --porcelain | grep .*.rb | grep -v schema.rb | sed s/^...// | xargs echo)"
+alias rubodiff="rubocop $(git diff --name-status master | cut -f 2 | grep .*.rb | grep -v schema.rb | xargs echo)"
 
 #Git
 alias gpp="git pull --rebase && git push"
