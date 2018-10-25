@@ -2,6 +2,7 @@ gems.tags
 tags
 tags.bkp
 bundle/*
+log/*
 public/assets/
 node_modules/
 tmp/

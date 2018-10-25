@@ -170,7 +170,7 @@ call ctrlp_bdelete#init()
 let g:ctrlp_max_files=0
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag --path-to-ignore ~/.vim/ctrlp_ignore %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag --skip-vcs-ignores --path-to-ignore ~/.vim/ctrlp_ignore %s -l --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
