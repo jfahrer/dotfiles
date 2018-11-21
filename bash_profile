@@ -13,6 +13,11 @@ if [ ! -z $(which rbenv) ]; then
   eval "$(rbenv init -)"
 fi
 
+if [ -e /usr/local/opt/nvm/nvm.sh ]; then
+  export NVM_DIR="$HOME/.nvm"
+  . "/usr/local/opt/nvm/nvm.sh"
+fi
+
 
 export WS=$HOME/workspace
 export LANG=en_US.UTF-8
