@@ -12,6 +12,7 @@ alias ecr-login='$(aws ecr get-login --no-include-email --region us-east-1)'
 alias rails="__run_with_compose rails"
 alias bundle="__run_with_compose bundle"
 alias rake="__run_with_compose rake"
+alias rspec="__run_with_compose rspec"
 alias irb="__run_with_compose irb"
 alias yarn="__run_with_compose yarn"
 alias rubocop="__run_with_compose rubocop"
