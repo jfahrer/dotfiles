@@ -8,3 +8,5 @@ public/packs/
 public/packs-test/
 node_modules/
 tmp/
+dist/
+bower_components/
