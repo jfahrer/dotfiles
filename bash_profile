@@ -18,6 +18,9 @@ if [ -e /usr/local/opt/nvm/nvm.sh ]; then
   . "/usr/local/opt/nvm/nvm.sh"
 fi
 
+if [ ! -z $(which thefuck) ]; then
+  eval $(thefuck --alias f)
+fi
 
 export WS=$HOME/workspace
 export LANG=en_US.UTF-8
