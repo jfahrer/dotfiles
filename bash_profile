@@ -22,7 +22,11 @@ if [ ! -z $(which thefuck) ]; then
   eval $(thefuck --alias f)
 fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ -f ~/.fzf.bash ]; then
+  source ~/.fzf.bash
+  export FZF_DEFAULT_COMMAND='ag --skip-vcs-ignores --path-to-ignore ~/.agignore -l --nocolor -g ""'
+  bind -x '"\C-p": vim $(fzf);'
+fi
 
 export WS=$HOME/workspace
 export LANG=en_US.UTF-8
