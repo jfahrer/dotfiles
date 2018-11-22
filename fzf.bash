@@ -12,3 +12,4 @@ fi
 # ------------
 source "$(brew --prefix)/opt/fzf/shell/key-bindings.bash"
 
+bind -x '"\C-p": vim $(fzf);'
