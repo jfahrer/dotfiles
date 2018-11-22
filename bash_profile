@@ -25,7 +25,10 @@ fi
 if [ -f ~/.fzf.bash ]; then
   source ~/.fzf.bash
   export FZF_DEFAULT_COMMAND='ag --skip-vcs-ignores --path-to-ignore ~/.agignore -l --nocolor -g ""'
+  bind "$(bind -s | grep __fzf_cd__ | sed 's/\\ec/\\C-g/')"
+  bind "$(bind -s | grep __fzf_select | sed 's/\\C-t/\\C-n/')"
   bind -x '"\C-p": vim $(fzf);'
+  bind '"\C-t": transpose-chars'
 fi
 
 export WS=$HOME/workspace
