@@ -22,6 +22,8 @@ if [ ! -z $(which thefuck) ]; then
   eval $(thefuck --alias f)
 fi
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 export WS=$HOME/workspace
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
