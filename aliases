@@ -1,8 +1,19 @@
 # Unix
+if ls --color -d . &> /dev/null
+then
+  alias ls="ls --color=auto"
+elif ls -G -d . &> /dev/null
+then
+  alias ls='ls -G'        # Compact view, show colors
+fi
 alias ll="ls -al"
 alias lt="ls -altr"
 alias e="$EDITOR"
-alias ..="cd .."
+alias cd..='cd ..'
+alias ..='cd ..'         # Go up one directory
+alias ...='cd ../..'     # Go up two directories
+alias ....='cd ../../..' # Go up three directories
+alias -- -='cd -'
 alias ws="cd ~/workspace"
 alias cls="clear"
 
