@@ -338,6 +338,9 @@ function! ExtractVisualSelectionForAck()
 endfunction
 
 nnoremap <leader>/ :Ack!<SPACE>
+nnoremap <leader>. :Ag<SPACE>
+nnoremap <leader>> :Ag <C-r><C-w><CR>
+nnoremap <leader>,  :Lines<CR>
 " This requires nmap. Otherwise the iskeyword is not interpreted properly
 nmap <leader>? :Ack! "<C-r><C-w>" -Q<CR>:cw<CR>
 nmap <leader>* :Ack! "<C-r><C-w>" % -Q<CR>:cw<CR>
@@ -391,6 +394,8 @@ nnoremap <leader>gpl :Git pull<CR>
 nnoremap <leader>gpr :Git pull --rebase<CR>
 nnoremap <leader>gsp :Git stash<CR>:Git pull --rebase<CR>:Git stash pop<CR>
 nnoremap <leader>gpp :Git pull --rebase<CR>:Git push<CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gB :BCommits<CR>
 
 " Make C-c send Esc in insert mode
 inoremap <C-c> <Esc>
