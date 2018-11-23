@@ -237,8 +237,11 @@ nnoremap <leader>rri :call RunInVtr('irb')
 nnoremap <leader>rrc :call RunInVtr('rails c')<CR>
 nnoremap <leader>rrs :call RunInVtr('spring stop')<CR>
 nnoremap <leader>rrm :call RunInVtr('rake db:migrate db:test:prepare')<CR>
-nnoremap <leader>rrr :call RunInVtr('rubocop')<CR>
-nnoremap <leader>rrR :call RunInVtr('rubocop -a')<CR>
+nnoremap <leader>rrr :call RunInVtr('rubocop %')<CR>
+nnoremap <leader>rRR :call RunInVtr('rubocop % -a')<CR>
+nnoremap <leader>rrR :call RunInVtr('rubocop % -a')<CR>
+nnoremap <leader>rrd :call RunInVtr('rubodiff' )<CR>
+nnoremap <leader>rrD :call RunInVtr('rubodiff -a' )<CR>
 " let g:VtrStripLeadingWhitespace = 0
 " let g:VtrClearEmptyLines = 0
 " let g:VtrAppendNewline = 1
