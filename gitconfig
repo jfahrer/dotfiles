@@ -15,6 +15,7 @@
 	branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
 	ci = commit -v
 	co = checkout
+	cob = !git recent | fzf | ifne xargs git checkout
 	d = diff
 	dc = diff --cached
 	fixup = commit --amend -C HEAD
@@ -22,6 +23,7 @@
 	lc = log ORIG_HEAD.. --stat --no-merges
 	lgo = log --oneline
 	ol = log --format=\"%C(yellow)%h%Creset %C(cyan)%aN%Creset\t%s\"
+	recent = !git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/ | head -n 100
 	t = track-branch
 	w = whatchanged
 	uncommit = reset --soft HEAD^
