@@ -27,7 +27,7 @@ if [ -f ~/.fzf.bash ]; then
   export FZF_DEFAULT_COMMAND='ag --skip-vcs-ignores --path-to-ignore ~/.agignore -l --nocolor -g ""'
   bind "$(bind -s | grep __fzf_cd__ | sed 's/\\ec/\\C-g/')"
   bind "$(bind -s | grep __fzf_select | sed 's/\\C-t/\\C-n/')"
-  bind -x '"\C-p": vim $(fzf);'
+  bind -x '"\C-p": $(fzf | ifne xargs echo vim);'
   bind '"\C-t": transpose-chars'
 fi
 
