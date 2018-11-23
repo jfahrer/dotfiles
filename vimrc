@@ -416,14 +416,3 @@ if filereadable($HOME . "/.vimrc.local")
 endif
 
 nnoremap <leader>V :source ~/.vimrc<CR>
-
-let g:rails_projections = {
-      \ "app/operations/*.rb": {
-      \   "command": "operation",
-      \   "template":
-      \     ["class {camelcase|capitalize|colons}", "  include Callable", "end"],
-      \   "test": [
-      \     "test/operations/{}_test.rb",
-      \     "spec/operations/{}_spec.rb"
-      \   ]
-      \ }}
