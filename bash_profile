@@ -55,5 +55,5 @@ if [ -f ~/.bash_profile.local ]; then
 fi
 
 if [ -f ./.env ]; then
-  . ./.env
+  export $(grep -v '^#' .env | xargs -0)
 fi
