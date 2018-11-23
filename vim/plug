@@ -25,10 +25,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'Valloric/ListToggle'            " Toggle the quickfix and location lists
   Plug 'skwp/greplace.vim'              " Search and replace across many files
 
-  " Sublime / TextMate style Ctrl+P
-  Plug 'kien/ctrlp.vim'            " For files with <C-p>
-  Plug 'd11wtq/ctrlp_bdelete.vim'  " For buffers with <leader>b (Close with C-2 / Mark multiple with C-z)
-  Plug 'tacahiroy/ctrlp-funky'     " Fuzzy find definitions in current buffer with <leader>fu
+  " Fuzzy finding files, buffers, tags and more
+  Plug '/usr/local/opt/fzf'
+  Plug 'junegunn/fzf.vim'
 
   " Sublime styile multiple cursors
   Plug 'terryma/vim-multiple-cursors' " Use <C-n> to set new cursors in visual in insert mode

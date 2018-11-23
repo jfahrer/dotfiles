@@ -152,36 +152,19 @@ let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" CtrlP Settings
-let g:ctrlp_mruf_max = 250
-let g:ctrlp_mruf_relative = 1
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:25,results:25'
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
-  \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
-  \ }
-let g:ctrlp_map = '<C-p>'
-let g:ctrlp_cmd = 'CtrlP'
-nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>d :CtrlPFunky<CR> " Use CtrlP to navigate definitions in current buffer
-nnoremap <leader>D :CtrlPTag<CR>   " Use CtrlP to navigate tags
-call ctrlp_bdelete#init()
-let g:ctrlp_max_files=0
-if executable('ag')
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag --skip-vcs-ignores --path-to-ignore ~/.vim/ctrlp_ignore %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-nnoremap <leader>pm :CtrlP app/models/<CR>
-nnoremap <leader>pf :CtrlP spec/factories/<CR>
-nnoremap <leader>pc :CtrlP app/controllers/<CR>
-nnoremap <leader>pv :CtrlP app/views/<CR>
-nnoremap <leader>po :CtrlP app/operations/<CR>
-nnoremap <leader>ps :CtrlP app/services/<CR>
-nnoremap <leader><leader> :CtrlP<CR>
+" FZF Settings
+let $FZF_DEFAULT_COMMAND='ag --skip-vcs-ignores --path-to-ignore ~/.vim/fzf_files_ignore -l --nocolor -g ""'
+let g:fzf_tags_command = 'ctags -R -f ./tags .'
+nnoremap <leader>b :Buffers<CR> " Navigate buffers
+nnoremap <leader>d :BTags<CR>   " Use FZF to navigate definitions in current buffer
+nnoremap <leader>D :Tags<CR>    " Use FZF to navigate tags
+nnoremap <leader>pm :Files app/models/<CR>
+nnoremap <leader>pf :Files spec/factories/<CR>
+nnoremap <leader>pc :Files app/controllers/<CR>
+nnoremap <leader>pv :Files app/views/<CR>
+nnoremap <leader>po :Files app/operations/<CR>
+nnoremap <leader>ps :Files app/services/<CR>
+nnoremap <leader><leader> :Files<CR>
 
 " vim-surround
 " Map it to gs (instead of ys)
@@ -243,8 +226,8 @@ nnoremap <silent> <C-\> :VtrFocusRunner<CR>
 nnoremap <leader>ro :VtrOpenRunner<CR>
 nnoremap <leader>a :VtrAttachToPane<CR>
 nnoremap <leader>F :VtrSendFile<CR>
-nnoremap <leader>D :VtrSendCtrlD<CR>
-nnoremap <leader>C :VtrClearRunner<CR>
+nnoremap <leader>CD :VtrSendCtrlD<CR>
+nnoremap <leader>CD :VtrClearRunner<CR>
 nnoremap <leader>s mm:VtrSendLinesToRunner<CR>`m
 vnoremap <leader>s mm:VtrSendLinesToRunner<CR>`m
 nnoremap <leader>S mmggVG:VtrSendLinesToRunner<CR>`m
