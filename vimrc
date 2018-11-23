@@ -380,24 +380,11 @@ nmap <leader><C-]> <C-w><C-]><C-w>T
 " Git shortcuts
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gdc :Gdiff --cached<CR>
-nnoremap <leader>gca :Git add -A<CR>:Git commit<CR>
-nnoremap <leader>gcw :Git add -A<CR>:Git commit -m "WIP"<CR>
-nnoremap <leader>gci :Git commit<CR>
-nnoremap <leader>gc% :Git add %<CR>:Git commit %<CR>
-nnoremap <leader>ga. :Git add -p .<CR>:Gstatus<CR>
-nnoremap <leader>ga% :Git add -p %<CR>:Gstatus<CR>
-nnoremap <leader>gaa :Git add -A<CR>:Gstatus<CR>
-nnoremap <leader>gap :Git add -p -A -p<CR>:Gstatus<CR>
-nnoremap <leader>gps :Git push<CR>
-nnoremap <leader>gpl :Git pull<CR>
-nnoremap <leader>gpr :Git pull --rebase<CR>
-nnoremap <leader>gsp :Git stash<CR>:Git pull --rebase<CR>:Git stash pop<CR>
-nnoremap <leader>gpp :Git pull --rebase<CR>:Git push<CR>
+nnoremap <leader>gD :Git diff --cached %<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gB :BCommits<CR>
 
-" Make C-c send Esc in insert mode
+" Make C-c and jk send Esc in insert mode
 inoremap <C-c> <Esc>
 inoremap jk <Esc>
 
