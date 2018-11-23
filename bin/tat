@@ -1,6 +1,8 @@
 #!/bin/sh
 #
-# Attach or create tmux session named the same as current directory.
+# Attach or create tmux session named the same as current/passed in directory.
+
+[ -n "$1" ] && cd $1
 
 session_name="$(basename "$PWD" | tr . -)"
 
