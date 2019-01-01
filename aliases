@@ -16,6 +16,7 @@ alias ....='cd ../../..' # Go up three directories
 alias -- -='cd -'
 alias ws="cd ~/workspace"
 alias cls="clear"
+alias h="history"
 
 alias tmux='TERM=screen-256color-bce tmux'
 
