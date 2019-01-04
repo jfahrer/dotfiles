@@ -16,3 +16,4 @@ tmp/**/*
 .docker-machine
 node_modules/
 .run_with_compose
+.bash_history

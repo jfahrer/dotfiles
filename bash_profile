@@ -58,3 +58,13 @@ fi
 if [ -f ./.env ] && [ -n "$TMUX" ]; then
   export $(grep -v '^#' .env | xargs -0)
 fi
+
+# For some projects it is useful to keep a seperate bash history file
+# So if one exists in the local directory, we use it
+PROJECT_HIST_FILE=$(pwd)/.bash_history
+if [ -f $PROJECT_HIST_FILE ] && [ -n "$TMUX" ]; then
+  export HISTFILE=$PROJECT_HIST_FILE
+fi
+export HISTCONTROL=ignoreboth
+export HISTSIZE=10000
+export HISTIGNORE="h:history"
