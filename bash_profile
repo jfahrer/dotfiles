@@ -55,6 +55,6 @@ if [ -f ~/.bash_profile.local ]; then
   . ~/.bash_profile.local
 fi
 
-if [ -f ./.env ]; then
+if [ -f ./.env ] && [ -n "$TMUX" ]; then
   export $(grep -v '^#' .env | xargs -0)
 fi
