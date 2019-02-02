@@ -13,15 +13,11 @@ alias cd..='cd ..'
 alias ..='cd ..'         # Go up one directory
 alias ...='cd ../..'     # Go up two directories
 alias ....='cd ../../..' # Go up three directories
-alias -- -='cd -'
 alias ws="cd ~/workspace"
 alias cls="clear"
 alias h="history"
 
 alias tmux='TERM=screen-256color-bce tmux'
-
-# SSH
-alias sshr="ssh -l root"
 
 # Bundler / rails
 alias b="bundle"
@@ -30,10 +26,6 @@ alias pconsole="bundle exec cap production rails:console"
 alias r="rails"
 alias rubochanges="rubocop \$(git status --porcelain | grep .*.rb | grep -v schema.rb | sed s/^...// | xargs echo)"
 alias rubodiff="rubocop \$(git diff --name-status master | grep -v '^D' | cut -f 2 | grep .*.rb | grep -v schema.rb | xargs echo)"
-
-#Git
-alias gpp="git pull --rebase && git push"
-alias gsp='git stash && git pull --rebase && git stash pop'
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
