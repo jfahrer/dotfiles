@@ -31,6 +31,7 @@
 	rma = rebase master
 	ra = rebase --abort
 	rc = rebase --continue
+	cb = rev-parse --abbrev-ref HEAD
 [include]
 	path = ~/.gitconfig.local
 [hub]
