@@ -34,6 +34,7 @@ alias path='echo $PATH | tr -s ":" "\n"'
 alias unset-all="unset \$(grep -v '^#' .env | sed -E 's/(.*)=.*/\1/' | xargs)"
 alias myip='curl ifconfig.io'
 alias j="vim +'normal G] Go##' +'r!date' +'normal kJo' \"/Volumes/GoogleDrive/My Drive/journal/journal_`date +%Y-%m.md`\""
+alias jw="vim +'normal G] Go##' +'r!date' +'normal kJo' \"/Volumes/GoogleDrive/My Drive/journal/workout_journal_`date +%Y-%m.md`\""
 alias more="bat"
 
 # Include custom aliases
