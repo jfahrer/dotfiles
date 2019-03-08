@@ -61,8 +61,8 @@ set fileencoding=utf-8
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,gb2312,cp936
 
-" Appereance
-set background=dark
+" Appearance
+set background=dark " set to `light` for solarized light
 set t_Co=256 " 256 colors
 colorscheme solarized
 highlight ColorColumn ctermbg=235 " Make it more obviouser when lines are too long
