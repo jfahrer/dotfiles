@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
   " Little helpers
   Plug 'duggiefresh/vim-easydir'        " Easily create direcories and files
   Plug 'tpope/vim-fugitive'             " Git wrapper
+  Plug 'tpope/vim-rhubarb'              " GBrowse for github projects
   Plug 'tpope/vim-vinegar'              " Better file browser
   Plug 'tpope/vim-commentary'           " Add comment via gcc and 9gcc or gloabl :g/PATTERN/Commentary
   Plug 'tpope/vim-endwise'              " Add end tags to if, def, ...

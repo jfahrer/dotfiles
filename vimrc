@@ -384,6 +384,17 @@ nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gD :Git diff --cached %<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gB :BCommits<CR>
+nnoremap <leader>gci :Git commit<CR>
+nnoremap <leader>gca :Git add -A<CR>:Git commit<CR>
+nnoremap <leader>gcw :Git commit -a -m "WIP"<CR>
+nnoremap <leader>gcW :Git commit -a -m "WIP"<CR>:Git push<CR>
+nnoremap <leader>gps :Git push<CR>
+" nnoremap <leader>gc% :Git add %<CR>:Git commit %<CR>
+" nnoremap <leader>ga. :Git add -p .<CR>:Gstatus<CR>
+" nnoremap <leader>ga% :Git add -p %<CR>:Gstatus<CR>
+" nnoremap <leader>gaa :Git add -A<CR>:Gstatus<CR>
+" nnoremap <leader>gap :Git add -p -A<CR>:Gstatus<CR>
+" nnoremap <leader>gpl :Git pull<CR>
 
 " Make C-c and jk send Esc in insert mode
 inoremap <C-c> <Esc>
