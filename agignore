@@ -10,3 +10,4 @@ dist/
 tags
 tags.bkp
 gems.tags
+coverage/

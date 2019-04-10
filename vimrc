@@ -324,7 +324,8 @@ let g:system_copy#copy_command='reattach-to-user-namespace pbcopy'
 " Searching with ag/ack
 if executable('ag')
   let g:ackprg = 'ag --skip-vcs-ignores --vimgrep --smart-case --path-to-ignore ~/.agignore'
-  set grepprg=ag\ --skip-vcs-ignores\ --nogroup\ --nocolor\ --path-to-ignore\ ~/.agignore
+  set grepprg=ag
+  let g:grep_cmd_opts = '--skip-vcs-ignores --nogroup --nocolor --path-to-ignore ~/.agignore'
 endif
 
 " Projetc wide search
