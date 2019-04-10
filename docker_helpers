@@ -5,6 +5,7 @@ alias dm=docker-machine
 alias dc=docker-compose
 alias de="docker-compose exec app"
 alias dr="docker-compose run --rm app"
+alias dl="docker-compose logs --tail 50 -f"
 alias dcr="docker-compose run --rm"
 alias dce="docker-compose exec"
 alias dmo=__docker_machine_open
