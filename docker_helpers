@@ -10,7 +10,6 @@ alias dcr="docker-compose run --rm"
 alias dce="docker-compose exec"
 alias dmo=__docker_machine_open
 alias dme=__docker_machine_eval
-alias ecr-login='$(aws ecr get-login --no-include-email --region us-east-1)'
 
 alias rails="__run_with_compose rails"
 alias bundle="__run_with_compose bundle"
