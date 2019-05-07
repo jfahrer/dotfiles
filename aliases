@@ -8,6 +8,7 @@ then
 fi
 alias ll="ls -al"
 alias lt="ls -altr"
+alias l="ll"
 alias e="$EDITOR"
 alias cd..='cd ..'
 alias ..='cd ..'         # Go up one directory
