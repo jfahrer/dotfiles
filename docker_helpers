@@ -1,5 +1,6 @@
 export DOCKER_HIDE_LEGACY_COMMANDS=true
 
+# Docker / Compose
 alias d=docker
 alias dm=docker-machine
 alias dc=docker-compose
@@ -11,6 +12,12 @@ alias dce="docker-compose exec"
 alias dmo=__docker_machine_open
 alias dme=__docker_machine_eval
 
+complete -F _docker d
+complete -F _docker_compose dc
+complete -F _docker_machine dm
+
+
+# Ruby helpers
 alias rails="__run_with_compose rails"
 alias bundle="__run_with_compose bundle"
 alias rake="__run_with_compose rake"
@@ -19,10 +26,15 @@ alias irb="__run_with_compose irb"
 alias yarn="__run_with_compose yarn"
 alias rubocop="__run_with_compose rubocop"
 
-complete -F _docker d
-complete -F _docker_compose dc
-complete -F _docker_machine dm
+# Kubernetes
+alias ak="aws-vault exec app -- kubectl"
+alias k="kubectl"
 
+complete -F __start_kubectl ak
+complete -F __start_kubectl k
+
+
+# Helper functions
 __docker_machine_name() {
   if [ -e .docker-machine ]
   then
