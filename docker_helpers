@@ -2,6 +2,7 @@ export DOCKER_HIDE_LEGACY_COMMANDS=true
 
 # Docker / Compose
 alias d=docker
+alias ds="docker stats"
 alias dm=docker-machine
 alias dc=docker-compose
 alias de="docker-compose exec app"
