@@ -55,8 +55,11 @@ if [ -f ~/.bash_profile.local ]; then
   . ~/.bash_profile.local
 fi
 
-if [ -f ./.env ] && [ -n "$TMUX" ]; then
-  export $(grep -v '^#' .env | xargs -0)
+if [ -n "$TMUX" ]; then
+  DOTENV_FILES=($(while [[ $PWD != / ]] ; do find "$PWD" -maxdepth 1 -name .env; cd ..; done))
+  for ((i=${#DOTENV_FILES[@]}-1; i>=0; i--)); do
+    export $(grep -v '^#' ${DOTENV_FILES[$i]} | xargs -0)
+  done
 fi
 
 # For some projects it is useful to keep a seperate bash history file
