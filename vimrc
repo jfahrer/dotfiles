@@ -103,6 +103,10 @@ set omnifunc=syntaxcomplete#Complete
 " Inserts the longest common text of all matches; and the menu will come up even if there's only one match
 set completeopt=longest,menuone
 
+" Go settings
+let g:go_fmt_autosave = 1
+let g:go_list_type = "quickfix"
+
 " Filetype specific settings
 augroup myfiletypes
   " Clear old autocmds in group
@@ -126,6 +130,11 @@ augroup myfiletypes
   autocmd FileType ruby let g:rubycomplete_buffer_loading=1
   autocmd FileType ruby let g:rubycomplete_classes_in_global=1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+
+  " Mappings for Go
+  autocmd FileType go nmap <leader>B  <Plug>(go-build)
+  autocmd FileType go nmap <leader>F  <Plug>(go-run)
 
   autocmd FileType git set foldlevel=0
 
