@@ -50,6 +50,9 @@ call plug#begin('~/.vim/plugged')
   " Elixir
   Plug 'elixir-editors/vim-elixir'
 
+  " Golang
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
   " More VIm  text objects
   Plug 'kana/vim-textobj-user'
   Plug 'kana/vim-textobj-entire'
