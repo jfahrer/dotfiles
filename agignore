@@ -10,4 +10,5 @@ dist/
 tags
 tags.bkp
 gems.tags
+*.log
 coverage/
