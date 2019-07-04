@@ -140,6 +140,8 @@ augroup myfiletypes
 
   autocmd BufWritePost *.rb,*.coffee,*.js exe ":UpdateTags"
 
+  autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
   " automatically rebalance windows on vim resize
   autocmd VimResized * :wincmd =
 augroup END
