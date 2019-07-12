@@ -58,7 +58,7 @@ fi
 if [ -n "$TMUX" ]; then
   DOTENV_FILES=($(while [[ $PWD != / ]] ; do find "$PWD" -maxdepth 1 -name .env; cd ..; done))
   for ((i=${#DOTENV_FILES[@]}-1; i>=0; i--)); do
-    export $(grep -v '^#' ${DOTENV_FILES[$i]} | xargs -0)
+    export $(grep -v '^#' ${DOTENV_FILES[$i]} | xargs -0) > /dev/null
   done
 fi
 
