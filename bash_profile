@@ -55,13 +55,6 @@ if [ -f ~/.bash_profile.local ]; then
   . ~/.bash_profile.local
 fi
 
-if [ -n "$TMUX" ]; then
-  DOTENV_FILES=($(while [[ $PWD != / ]] ; do find "$PWD" -maxdepth 1 -name .env; cd ..; done))
-  for ((i=${#DOTENV_FILES[@]}-1; i>=0; i--)); do
-    export $(grep -v '^#' ${DOTENV_FILES[$i]} | xargs -0) > /dev/null
-  done
-fi
-
 # For some projects it is useful to keep a seperate bash history file
 # So if one exists in the local directory, we use it
 PROJECT_HIST_FILE=$(pwd)/.bash_history
