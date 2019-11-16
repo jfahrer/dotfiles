@@ -2,11 +2,10 @@ export DOCKER_HIDE_LEGACY_COMMANDS=true
 
 # Docker / Compose
 alias d=docker
+alias dr="donner run"
 alias ds="docker stats"
 alias dm=docker-machine
 alias dc=docker-compose
-alias de="docker-compose exec app"
-alias dr="docker-compose run --rm app"
 alias dl="docker-compose logs --tail 50 -f"
 alias dla="docker-compose logs"
 alias dcr="docker-compose run --rm"
@@ -19,17 +18,13 @@ complete -F _docker_compose dc
 complete -F _docker_machine dm
 
 
-# Ruby helpers
-alias rails="__run_with_compose rails"
-alias bundle="__run_with_compose bundle"
-alias rake="__run_with_compose rake"
-alias rspec="__run_with_compose rspec"
-alias irb="__run_with_compose irb"
-alias yarn="__run_with_compose yarn"
-alias rubocop="__run_with_compose rubocop"
+# Initialize Donner
+if [ -e .donner.yml ]
+then
+  eval $(donner aliases --strict --fallback)
+fi
 
 # Kubernetes
-alias ak="aws-vault exec app -- kubectl"
 alias k="kubectl"
 
 complete -F __start_kubectl ak
@@ -64,15 +59,4 @@ __docker_machine_open() {
   echo "Opening browser for $MACHINE with IP $IP on port $PORT..."
   open "http://$IP:$PORT"
   echo ...done
-}
-
-__run_with_compose() {
-  COMMAND=$1
-  shift
-  if [ -e .run_with_compose ]
-  then
-    de $COMMAND "$@"
-  else
-    $(which $COMMAND) "$@"
-  fi
 }

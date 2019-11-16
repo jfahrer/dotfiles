@@ -191,10 +191,9 @@ nnoremap <leader>rht :call ToStringKeysLinewise()<CR>
 nnoremap <leader>rhr :call To19KeysLinewise()<CR>
 
 " Transform shell commands to use docker-compose if applicable
-function! TransformCommandToUseDockerCompose(cmd) abort
-  if filereadable(".run_with_compose")
-    " return "docker-compose run --rm app " . a:cmd
-    return "docker-compose exec app " . a:cmd
+function! TransformCommandToUseDonner(cmd) abort
+  if filereadable(".donner.yml")
+    return "donner run -s -f " . a:cmd
   else
     return a:cmd
   endif
@@ -212,8 +211,8 @@ function! SimpleVtrStrategy(cmd) abort
 endfunction
 
 let g:test#custom_strategies = {'simple_vtr': function('SimpleVtrStrategy')}
-let g:test#custom_transformations = {'docker_compose': function('TransformCommandToUseDockerCompose')}
-let g:test#transformation = 'docker_compose'
+let g:test#custom_transformations = {'donner': function('TransformCommandToUseDonner')}
+let g:test#transformation = 'donner'
 let test#strategy = {
   \ 'nearest': 'basic',
   \ 'file':    'simple_vtr',
@@ -222,7 +221,7 @@ let test#strategy = {
 
 function! RunInVtr(cmd) abort
   execute ":VtrOpenRunner"
-  call VtrSendCommand(TransformCommandToUseDockerCompose(a:cmd))
+  call VtrSendCommand(TransformCommandToUseDonner(a:cmd))
 endfunction
 
 
