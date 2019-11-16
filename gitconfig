@@ -19,6 +19,7 @@
 	d = diff
 	dc = diff --cached
 	fixup = commit --amend -C HEAD
+	fp = push --force-with-lease
 	g = log --pretty=format:\"%h %an - %s\" --graph
 	lc = log ORIG_HEAD.. --stat --no-merges
 	lgo = log --oneline
