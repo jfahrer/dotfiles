@@ -1,4 +1,3 @@
---skip-bundle
 --skip-test
 --database=postgresql
 --template=~/.rails_template.rb
