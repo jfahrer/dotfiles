@@ -1,10 +1,5 @@
 .DS_Store
 *.sw[nop]
-.bundle
-.byebug_history
-.env
-db/*.sqlite3
-log/*.log
 rerun.txt
 tags
 tags.bkp
@@ -14,6 +9,5 @@ tmp/**/*
 *.pyc
 .ctags
 .docker-machine
-node_modules/
 .run_with_compose
 .bash_history
