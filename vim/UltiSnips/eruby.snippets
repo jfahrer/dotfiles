@@ -1,0 +1,57 @@
+snippet = "<%= %>(ERB)"
+<%= ${1:expression} %>
+endsnippet
+
+snippet % "<% %>(ERB)"
+<% ${1:expression} %>
+endsnippet
+
+snippet re "render partial"
+<%= render "${1:partial}"$2 %>
+endsnippet
+
+snippet if "if (ERB)"
+<% if ${1:true} %>
+  $0
+<% end %>
+endsnippet
+
+snippet else "else (ERB)"
+<% else %>
+$0
+endsnippet
+
+snippet end "end (ERB)"
+<% end %>
+$0
+endsnippet
+
+snippet each "each (ERB)"
+<% ${1:var}.${2:each} do |${name}| %>
+  $0
+<% end %>
+endsnippet
+
+snippet bt "button tag"
+<%= button_tag "${1:Text}", type: "${2:submit}" %>
+endsnippet
+
+snippet btv "button tag with value"
+<%= button_tag "${1:Text}", type: "${2:submit}, name: "${3:name}", value: ${4:value} %>
+endsnippet
+
+snippet fs "f.submit"
+<%= f.submit "${1:Send}" %>
+endsnippet
+
+snippet fb "f.button"
+<%= f.button "${1:Send}", type: "${2:submit}" %>
+endsnippet
+
+snippet fbv "f.button"
+<%= f.button "${1:Send}", type: "${2:submit}" name: ${3:name}, value: ${4:value} %>
+endsnippet
+
+snippet hft "hidden_field_tag"
+<%= hidden_field_tag :${1:name}, ${2:value} %>
+endsnippet
