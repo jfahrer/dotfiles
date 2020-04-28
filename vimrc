@@ -378,7 +378,7 @@ function! UpdateTags()
 endfunction
 
 command! GenerateTags !ctags -R -f ./tags .
-command! GenerateGemTags !rbenv ctags && gem ctags
+command! GenerateGemTags gem ctags
 command! UpdateTags call UpdateTags()
 cnoreabbrev tg GenerateTags
 cnoreabbrev tgg GenerateGemTags

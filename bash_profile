@@ -9,17 +9,8 @@ if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
 
-if [ ! -z $(which rbenv) ]; then
-  eval "$(rbenv init -)"
-fi
-
-if [ -e /usr/local/opt/nvm/nvm.sh ]; then
-  export NVM_DIR="$HOME/.nvm"
-  . "/usr/local/opt/nvm/nvm.sh"
-fi
-
-if [ ! -z $(which thefuck) ]; then
-  eval $(thefuck --alias f)
+if [ ! -z $(which asdf) ]; then
+  . $(brew --prefix asdf)/asdf.sh
 fi
 
 if [ -f ~/.fzf.bash ]; then
