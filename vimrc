@@ -432,6 +432,8 @@ let g:ale_fixers = {
 
 let g:ale_linters = {
       \   'ruby': ['standardrb'],
+      \   'typescript': ['tsserver'],
+      \   'typescriptreact': ['tsserver'],
       \}
 let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
