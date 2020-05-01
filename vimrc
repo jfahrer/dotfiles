@@ -272,7 +272,7 @@ nnoremap <leader>j <C-w>w
 
 " Tabs and editing
 nnoremap gb gT
-nnoremap <leader>E :tabe<CR>:e 
+nnoremap <leader>E :tabe<CR>:e
 let g:markdown_mapping_switch_status = '<leader>c'
 
 " List toggles
@@ -417,6 +417,26 @@ let g:ansible_extra_keywords_highlight = 1
 
 " Setup vim-vinegar (netrw) to display line numbers
 let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
+
+" Linting
+let g:ale_fixers = {
+      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \   'javascript': ['prettier'],
+      \   'javascriptreact': ['prettier'],
+      \   'typescript': ['prettier'],
+      \   'typescriptreact': ['prettier'],
+      \   'css': ['prettier'],
+      \   'scss': ['prettier'],
+      \   'ruby': ['standardrb'],
+      \}
+
+let g:ale_linters = {
+      \   'ruby': ['standardrb'],
+      \}
+let g:ale_linters_explicit = 1
+let g:ale_fix_on_save = 1
+let g:ale_open_list = 1
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE (thanks Gary Bernhardt)
