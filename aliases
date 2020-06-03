@@ -17,6 +17,7 @@ alias ....='cd ../../..' # Go up three directories
 alias ws="cd ~/workspace"
 alias cls="clear"
 alias h="history"
+alias ci="hub ci-status --verbose"
 
 alias tmux='TERM=screen-256color-bce tmux'
 
