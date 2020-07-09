@@ -34,7 +34,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'terryma/vim-multiple-cursors' " Use <C-n> to set new cursors in visual in insert mode
 
   " Autocomplete
-  Plug 'valloric/youcompleteme', { 'do': './install.py' }
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   " Testing
   Plug 'janko-m/vim-test'

@@ -163,6 +163,10 @@ let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+" coc.vim
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 " FZF Settings
 let $FZF_DEFAULT_COMMAND='ag --skip-vcs-ignores --path-to-ignore ~/.vim/fzf_files_ignore -l --nocolor -g ""'
 let g:fzf_tags_command = 'ctags -R -f ./tags .'
@@ -437,7 +441,8 @@ let g:ale_linters = {
       \}
 let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
-let g:ale_open_list = 1
+let g:ale_open_list = 0
+let g:airline#extensions#ale#enabled = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
