@@ -65,7 +65,7 @@ set fileencodings=ucs-bom,utf-8,gb2312,cp936
 set background=dark " set to `light` for solarized light
 set t_Co=256 " 256 colors
 colorscheme solarized
-highlight ColorColumn ctermbg=235 " Make it more obviouser when lines are too long
+highlight ColorColumn ctermbg=235 " Make it more obvious when lines are too long
 set list listchars=tab:»·,trail:· " Display extra whitespace
 
 nnoremap <leader>y :set background=light<CR>
