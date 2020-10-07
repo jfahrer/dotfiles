@@ -68,6 +68,9 @@ colorscheme solarized
 highlight ColorColumn ctermbg=235 " Make it more obviouser when lines are too long
 set list listchars=tab:»·,trail:· " Display extra whitespace
 
+nnoremap <leader>y :set background=light<CR>
+nnoremap <leader>Y :set background=dark<CR>
+
 " Improve vim's scrolling speed
 set ttyfast
 set ttyscroll=3
