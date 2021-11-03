@@ -173,9 +173,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " FZF Settings
 let $FZF_DEFAULT_COMMAND='ag --skip-vcs-ignores --path-to-ignore ~/.vim/fzf_files_ignore -l --nocolor -g ""'
 let g:fzf_tags_command = 'ctags -R -f ./tags .'
-nnoremap <leader>b :Buffers<CR> " Navigate buffers
-nnoremap <leader>d :BTags<CR>   " Use FZF to navigate definitions in current buffer
-nnoremap <leader>D :Tags<CR>    " Use FZF to navigate tags
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>d :BTags<CR>
+nnoremap <leader>D :Tags<CR>
 nnoremap <leader>pm :Files app/models/<CR>
 nnoremap <leader>pf :Files spec/factories/<CR>
 nnoremap <leader>pc :Files app/controllers/<CR>
@@ -209,7 +209,7 @@ endfunction
 " Tests
 nnoremap <leader>f :TestFile<CR>
 nnoremap <leader>t :TestNearest<CR>
-nnoremap <leader>T :TestNearest -strategy=simple_vtr<CR>
+nnoremap <leader>T :TestNearest -strategy=basic<CR>
 nnoremap <leader>A :TestSuite<CR>
 nnoremap <leader>l :TestLast<CR>
 
@@ -221,7 +221,7 @@ let g:test#custom_strategies = {'simple_vtr': function('SimpleVtrStrategy')}
 let g:test#custom_transformations = {'donner': function('TransformCommandToUseDonner')}
 let g:test#transformation = 'donner'
 let test#strategy = {
-  \ 'nearest': 'basic',
+  \ 'nearest': 'simple_vtr',
   \ 'file':    'simple_vtr',
   \ 'suite':   'simple_vtr',
 \}
@@ -434,11 +434,11 @@ let g:ale_fixers = {
       \   'typescriptreact': ['prettier'],
       \   'css': ['prettier'],
       \   'scss': ['prettier'],
-      \   'ruby': ['standardrb'],
+      \   'ruby': ['rubocop'],
       \}
 
 let g:ale_linters = {
-      \   'ruby': ['standardrb'],
+      \   'ruby': ['rubocop'],
       \   'typescript': ['tsserver'],
       \   'typescriptreact': ['tsserver'],
       \}
