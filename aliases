@@ -18,6 +18,7 @@ alias ws="cd ~/workspace"
 alias cls="clear"
 alias h="history"
 alias ci="hub ci-status --verbose"
+alias pr="hub pull-request -b main --draft"
 
 alias tmux='TERM=screen-256color-bce tmux'
 
@@ -28,6 +29,7 @@ alias pconsole="bundle exec cap production rails:console"
 alias r="rails"
 alias rubochanges="rubocop \$(git status --porcelain | grep .*.rb | grep -v schema.rb | sed s/^...// | xargs echo)"
 alias rubodiff="rubocop \$(git diff --name-status master | grep -v '^D' | cut -f 2 | grep .*.rb | grep -v schema.rb | xargs echo)"
+alias ss="spring stop"
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
