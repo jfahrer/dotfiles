@@ -54,3 +54,5 @@
 	ui = true
 [pull]
 	default = current
+[credentials]
+	helper = osxkeychain
