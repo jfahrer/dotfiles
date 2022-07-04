@@ -110,6 +110,9 @@ set completeopt=longest,menuone
 let g:go_fmt_autosave = 1
 let g:go_list_type = "quickfix"
 
+" Save readonly files via sudo
+cmap w!! w !sudo tee % >/dev/null
+
 " Filetype specific settings
 augroup myfiletypes
   " Clear old autocmds in group
