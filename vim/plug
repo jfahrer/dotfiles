@@ -80,7 +80,7 @@ call plug#begin('~/.vim/plugged')
 
   " Open alternative file with :A / :AV / :AH
   Plug 'compactcode/open.vim'
-  Plug 'compactcode/alternate.vim'
+  Plug 'jfahrer/alternate.vim'
   Plug 'jfahrer/vim-suggest-alternate'
 
   " tmux integration
