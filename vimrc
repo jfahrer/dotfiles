@@ -141,6 +141,11 @@ augroup myfiletypes
   " Mappings for Go
   autocmd FileType go nmap <leader>B  <Plug>(go-build)
   autocmd FileType go nmap <leader>F  <Plug>(go-run)
+  autocmd FileType go nnoremap <leader>f :GoTest! %<CR>
+  autocmd FileType go nnoremap <leader>t :GoTestFunc!<CR>
+  autocmd FileType go nnoremap <leader>t :GoTestLast<CR>
+  autocmd FileType go nnoremap <leader>T :GoTest!<CR>
+  autocmd FileType go nnoremap <leader>A :GoTest!<CR>
 
   autocmd FileType git set foldlevel=0
 
@@ -170,6 +175,7 @@ let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 let g:UltiSnipsEditSplit="vertical"
 
 " coc.vim
+let g:coc_global_extensions = ['coc-tabnine', 'coc-go', 'coc-solargraph', 'coc-tailwindcss', 'coc-json', 'coc-yaml']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
