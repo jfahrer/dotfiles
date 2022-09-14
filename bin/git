@@ -1,8 +1,0 @@
-#!/bin/bash
-GIT=$(PATH=/usr/local/bin:/usr/bin:/bin which git)
-if [[ "$1" == "commit" || "$1" == "ci"  ]]; then
-  shift
-  $GIT duet-commit "$@"
-  exit $?
-fi
-$GIT "$@"

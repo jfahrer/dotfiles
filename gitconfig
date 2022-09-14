@@ -56,3 +56,5 @@
 	default = current
 [credentials]
 	helper = osxkeychain
+[init]
+	defaultBranch = main
