@@ -272,14 +272,9 @@ nnoremap <leader>rrD :call RunInVtr('rubodiff -a' )<CR>
 " let g:VtrClearEmptyLines = 0
 " let g:VtrAppendNewline = 1
 
-" Other helpers
-" Add a shortcut to add a description to Rake tasks
-" this should go in a ftplugin
-nnoremap <leader>rad $?^\s*task<CR>:nohlsearch<CR>Odesc ""<ESC>i
 
-nnoremap <leader>w :w<CR>
-nnoremap <leader>W ZZ
-nnoremap <leader>x :q<CR>
+nnoremap s :w<CR>
+nnoremap q :q<CR>
 
 nnoremap j gj
 nnoremap k gk
