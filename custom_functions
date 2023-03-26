@@ -10,4 +10,4 @@ g() {
 }
 
 # Complete g like git
-__git_complete g _git
+__git_complete g __git_main
