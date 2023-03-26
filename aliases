@@ -14,7 +14,7 @@ alias cd..='cd ..'
 alias ..='cd ..'         # Go up one directory
 alias ...='cd ../..'     # Go up two directories
 alias ....='cd ../../..' # Go up three directories
-alias ws="cd ~/workspace"
+alias ws="cd $WS"
 alias cls="clear"
 alias h="history"
 alias ci="hub ci-status --verbose"
@@ -25,21 +25,12 @@ alias tmux='TERM=screen-256color-bce tmux'
 # Bundler / rails
 alias b="bundle"
 alias be="bundle exec"
-alias pconsole="bundle exec cap production rails:console"
 alias r="rails"
-alias rubochanges="rubocop \$(git status --porcelain | grep .*.rb | grep -v schema.rb | sed s/^...// | xargs echo)"
-alias rubodiff="rubocop \$(git diff --name-status master | grep -v '^D' | cut -f 2 | grep .*.rb | grep -v schema.rb | xargs echo)"
 alias ss="spring stop"
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 
 # Helpers
-alias unset-all="unset \$(grep -v '^#' .env | sed -E 's/(.*)=.*/\1/' | xargs)"
+alias unset-dotenv="unset \$(grep -v '^#' .env | sed -E 's/(.*)=.*/\1/' | xargs)"
 alias myip='curl ifconfig.io'
-alias j="vim +'normal G] Go##' +'r!date' +'normal kJo' \"/Volumes/GoogleDrive/My Drive/journal/journal_`date +%Y-%m.md`\""
-alias jw="vim +'normal G] Go##' +'r!date' +'normal kJo' \"/Volumes/GoogleDrive/My Drive/journal/workout_journal_`date +%Y-%m.md`\""
-alias more="bat"
-
-# Include custom aliases
-[[ -f ~/.aliases.local  ]] && source ~/.aliases.local
