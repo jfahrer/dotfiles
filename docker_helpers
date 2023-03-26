@@ -5,18 +5,14 @@ alias d=docker
 alias dr="donner run"
 alias da='eval $(donner aliases)'
 alias ds="docker stats"
-alias dm=docker-machine
 alias dc=docker-compose
 alias dl="docker-compose logs --tail 50 -f"
 alias dla="docker-compose logs"
 alias dcr="docker-compose run --rm"
 alias dce="docker-compose exec"
-alias dmo=__docker_machine_open
-alias dme=__docker_machine_eval
 
 complete -F _docker d
 complete -F _docker_compose dc
-complete -F _docker_machine dm
 
 
 # Initialize Donner
@@ -30,34 +26,3 @@ alias k="kubectl"
 
 complete -F __start_kubectl ak
 complete -F __start_kubectl k
-
-
-# Helper functions
-__docker_machine_name() {
-  if [ -e .docker-machine ]
-  then
-    cat .docker-machine
-  else
-    echo "default"
-  fi
-}
-
-__docker_machine_eval() {
-  MACHINE=${1:-$(__docker_machine_name)}
-  (docker-machine ls | grep $MACHINE > /dev/null)
-  if [ $? -eq 0 ]
-  then
-    eval $(docker-machine env $1)
-  else
-    echo "Could not finde docker machine $MACHINE" >&2
-  fi
-}
-
-__docker_machine_open() {
-  PORT=${1:-80}
-  MACHINE=$(docker-machine active)
-  IP=$(docker-machine ip $MACHINE)
-  echo "Opening browser for $MACHINE with IP $IP on port $PORT..."
-  open "http://$IP:$PORT"
-  echo ...done
-}
