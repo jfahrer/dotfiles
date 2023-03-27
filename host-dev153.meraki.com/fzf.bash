@@ -10,4 +10,4 @@ fi
 
 # Key bindings
 # ------------
-source "~/.fzf/shell/key-bindings.bash"
+source ~/.fzf/shell/key-bindings.bash
