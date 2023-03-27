@@ -12,3 +12,4 @@ tags.bkp
 gems.tags
 *.log
 coverage/
+.git/
