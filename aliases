@@ -9,7 +9,8 @@ fi
 alias ll="ls -al"
 alias lt="ls -altr"
 alias l="ll"
-alias e="$EDITOR"
+alias e=nvim
+alias vim=nvim
 alias cd..='cd ..'
 alias ..='cd ..'         # Go up one directory
 alias ...='cd ../..'     # Go up two directories
