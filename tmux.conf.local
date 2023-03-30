@@ -1,0 +1,1 @@
+# Host specific tmux settings can be defined in ~/.dotfiles/host-$(hostname)/tmux.conf.local
