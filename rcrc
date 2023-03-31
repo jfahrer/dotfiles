@@ -1,2 +1,3 @@
 EXCLUDES="README.md LICENSE script/setup"
+DOTFILES_DIRS="~/.dotfiles"
 UNDOTTED=bin

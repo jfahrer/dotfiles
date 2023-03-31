@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+DOTFILES_DIRS="$(cat ~/.rcrc | grep DOTFILES_DIRS | tr -d "DOTFILES_DIRS=" | tr -d '"')"
+
+for dir in $DOTFILES_DIRS; do
+  dir="${dir/#\~/$HOME}"
+  echo "Pullling updates in [$dir]"
+  cd "$dir"
+  if [ $(git status --porcelain | wc -l) != "0" ]; then
+    echo "ERROR: Found uncommited local changes"
+    exit 1
+  fi
+  git pull
+done
+
+echo "Linking dotfiles"
+rcup -v
