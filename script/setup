@@ -3,7 +3,6 @@ set +ex
 
 cd "$(dirname $0)/.." > /dev/null
 
-rm ~/.rcrc || true
-cp rcrc ~/.rcrc
+export RCRC=$(pwd)/rcrc
 
 rcup -vf
