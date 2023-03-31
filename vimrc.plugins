@@ -1,7 +1,0 @@
-" This file can be used to install plugins via the cli
-" vim -u ~/.vimrc.plugins +PlugInstall +qall
-set nocompatible
-
-if filereadable($HOME . "/.vim/plug")
-  source ~/.vim/plug
-endif
