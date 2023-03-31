@@ -1,0 +1,9 @@
+#!/bin/bash
+set +ex
+
+cd "$(dirname $0)/.." > /dev/null
+
+rm ~/.rcrc || true
+cp rcrc ~/.rcrc
+
+rcup -vf

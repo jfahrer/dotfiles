@@ -6,6 +6,6 @@ Prerequisites:
 * [rcm](https://thoughtbot.github.io/rcm/)
 
 ```bash
-git clone https://github/jfahrer/dotfiles ~/.dotfiles
-~/.dotfiles-meraki/bin/setup
+git clone git@github.com:jfahrer/dotfiles ~/.dotfiles
+~/.dotfiles/script/setup
 ```
