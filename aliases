@@ -18,8 +18,8 @@ alias ....='cd ../../..' # Go up three directories
 alias ws="cd $WS"
 alias cls="clear"
 alias h="history"
-alias ci="hub ci-status --verbose"
-alias pr="hub pull-request -b main --draft"
+alias ci="gh pr checks"
+alias pr="gh pr create -B main --draft"
 
 alias tmux='TERM=screen-256color-bce tmux'
 
