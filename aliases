@@ -8,7 +8,7 @@ then
 fi
 alias ll="ls -al"
 alias lt="ls -altr"
-alias l="ll"
+alias l="ls -l"
 alias e=nvim
 alias vim=nvim
 alias cd..='cd ..'
