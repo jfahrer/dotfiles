@@ -1,7 +1,9 @@
 activesupport
 awesome_print
 bundler
-gem-ctags
+erb_lint
 irbtools
 pry
+solargraph
+standard
 tty-markdown
