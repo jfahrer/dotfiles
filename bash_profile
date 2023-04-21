@@ -9,7 +9,7 @@ if [ -f "/opt/homebrew/bin/brew" ] && [ -z "$HOMEBREW_PRESENT" ]; then
   export HOMEBREW_PRESENT=true
 fi
 
-export EDITOR=vim
+export EDITOR=nvim
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export WS=$HOME/workspace
 export HISTCONTROL=ignoreboth
