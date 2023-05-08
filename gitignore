@@ -11,3 +11,4 @@ tmp/**/*
 .docker-machine
 .run_with_compose
 .bash_history
+.bash_env.local

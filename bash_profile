@@ -57,6 +57,12 @@ fi
 
 _source_if_exists ~/.bash_profile.local
 
+# For some projects it can be helpful to set env vars.
+# This behavior is restricted to TMUX sessions
+if [ -n "$TMUX" ]; then
+  _source_if_exists .bash_env.local
+fi
+
 if [[ ! "$PATH" == *$HOME/bin* ]]; then
   export PATH=$HOME/bin:$PATH
 fi
