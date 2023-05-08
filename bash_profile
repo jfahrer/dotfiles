@@ -46,6 +46,7 @@ _source_if_exists ~/.custom_functions
 _source_if_exists ~/.docker_helpers
 _source_if_exists ~/.config/op/plugins.sh
 _source_if_exists ~/.iterm2_shell_integration.bash
+_source_if_exists ~/.coursier.bash
 
 # For some projects it is useful to keep a seperate bash history file
 # So if one exists in the local directory, we use it
