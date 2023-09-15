@@ -11,6 +11,7 @@ alias lt="ls -altr"
 alias l="ls -l"
 alias e=nvim
 alias vim=nvim
+alias vc='cd ~/.config/nvim/lua/custom/'
 alias cd..='cd ..'
 alias ..='cd ..'         # Go up one directory
 alias ...='cd ../..'     # Go up two directories
