@@ -48,6 +48,8 @@ _source_if_exists ~/.config/op/plugins.sh
 _source_if_exists ~/.iterm2_shell_integration.bash
 _source_if_exists ~/.coursier.bash
 
+export GOPATH=$HOME/go
+
 # For some projects it is useful to keep a seperate bash history file
 # So if one exists in the local directory, we use it
 PROJECT_HIST_FILE=$(pwd)/.bash_history
@@ -63,6 +65,9 @@ if [ -n "$TMUX" ]; then
   _source_if_exists .bash_env.local
 fi
 
+if [[ ! "$PATH" == *$HOME/go/bin* ]]; then
+  export PATH=$HOME/go/bin:$PATH
+fi
 if [[ ! "$PATH" == *$HOME/bin* ]]; then
   export PATH=$HOME/bin:$PATH
 fi
