@@ -36,6 +36,7 @@
 	ra = rebase --abort
 	rc = rebase --continue
 	cb = rev-parse --abbrev-ref HEAD
+  slist = !git stash list | cut -f 1 -d ':' | fzf --preview 'git stash show -p {}' | ifne xargs git stash pop
 [include]
 	path = ~/.gitconfig.local
 [hub]
