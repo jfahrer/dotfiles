@@ -59,3 +59,5 @@
 	helper = osxkeychain
 [init]
 	defaultBranch = main
+[diff]
+  colorMoved = zebra
