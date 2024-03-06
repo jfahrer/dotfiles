@@ -32,7 +32,7 @@ if [ -f ~/.fzf.bash ]; then
   export FZF_DEFAULT_OPTS='--bind ctrl-j:down,ctrl-k:up,ctrl-a:select-all,ctrl-d:deselect-all'
   bind "$(bind -s | grep __fzf_cd__ | sed 's/\\ec/\\C-g/')"
   bind "$(bind -s | grep __fzf_select | sed 's/\\C-t/\\C-n/')"
-  bind -x '"\C-p": $(fzf | ifne xargs echo vim);'
+  bind -x '"\C-p": $(fzf | xargs -r echo vim);'
 fi
 
 bind '"\C-t": transpose-chars'
