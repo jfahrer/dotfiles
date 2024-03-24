@@ -1,32 +1,28 @@
 gem_group :development, :test do
   gem "awesome_print"
   gem "byebug"
-  gem "capybara"
   gem "dotenv"
-  gem "factory_bot_rails"
-  gem "irbtools", require: 'irbtools/binding'
-  gem "rspec-rails"
-  gem "spring-commands-rspec"
+  gem "irbtools", require: "irbtools/binding"
   gem "standard"
 end
 
-gem_group :development
+gem_group :development do
   gem "better_errors"
+  gem "binding_of_caller"
   gem "rails-erd"
   gem "solargraph"
   gem "strong_migrations"
 end
 
 gem "rails_config"
-gem "sidekiq"
+gem "phlex-rails"
 
 after_bundle do
-  generate('rspec:install')
-  run "bundle exec spring binstub rspec"
+  generate("phlex:install")
   run "curl -o solargraph_rails.rb https://gist.githubusercontent.com/castwide/28b349566a223dfb439a337aea29713e/raw"
   run "solargraph bundle"
 
   git :init
-  git add: '.'
+  git add: "."
   git commit: "-a -m 'Initial commit'"
 end
