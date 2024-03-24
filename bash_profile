@@ -65,14 +65,27 @@ if [ -n "$TMUX" ]; then
   _source_if_exists .bash_env.local
 fi
 
-if [[ ! "$PATH" == *$HOME/go/bin* ]]; then
-  export PATH=$HOME/go/bin:$PATH
-fi
-if [[ ! "$PATH" == *$HOME/bin* ]]; then
-  export PATH=$HOME/bin:$PATH
-fi
-if [[ ! "$PATH" == *./bin* ]]; then
-  export PATH=./bin:$PATH
+# Ensure PATH is set
+
+if [[ ! "$PATH" == *$GOPATH/bin* ]]; then
+  export PATH=$GOPATH/bin:$PATH
 fi
 
+# We first remove ./bin and $HOME/bin from PATH since 
+# /etc/profile might eval `/usr/libexec/path_helper -s` and 
+# effectively move my home dirs to the bottom of the list
+# when starting a new tmux session.
+# This currently relies on the fact that neither directory
+# will be at the very end of the list
+case ":$PATH:" in
+  *":./bin:"*) PATH=${PATH//\.\/bin:/} ;;
+esac
+case ":$PATH:" in
+  *":$HOME/bin:"*) PATH=${PATH//$HOME\/bin:/} ;;
+esac
+ 
+# Setting PATH in the right order
+export PATH=$HOME/bin:$PATH
+export PATH=./bin:$PATH
+ 
 export CDPATH=.:$WS:$HOME
