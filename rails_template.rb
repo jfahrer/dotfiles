@@ -12,7 +12,7 @@ gem_group :development do
   gem "brakeman"
   gem "rails-erd"
   gem "reek"
-  gem "solargraph"
+  gem "solargraph-rails"
   gem "spring"
 end
 
@@ -53,12 +53,34 @@ file ".reek.yml", <<~CODE
     - "db/"
 CODE
 
+file ".solargraph.yml", <<~CODE
+  ---
+  include:
+    - "**/*.rb"
+  exclude:
+    - spec/**/*
+    - vendor/**/*
+    - ".bundle/**/*"
+  require: []
+  domains: []
+  plugins:
+    - solargraph-rails
+  reporters:
+    - require_not_found
+  formatter: []
+  require_paths: []
+  max_files: 5000
+  
+CODE
+
 after_bundle do
   generate("phlex:install")
   environment "config.enable_reloading = true", env: "test"
   run "bundle exec spring binstub --all"
   run "curl -o solargraph_rails.rb https://gist.githubusercontent.com/castwide/28b349566a223dfb439a337aea29713e/raw"
   run "solargraph bundle"
+  run "yard gems . "
+  run "standardrb --fix-unsafely"
 
   git :init
   git add: "."
