@@ -33,7 +33,7 @@ map("n", "Q", "<CMD>close<CR>", { desc = "Close window", noremap = true, silent 
 map("n", "<leader>O", function()
   vim.cmd("only!")
   Snacks.bufdelete.other()
-end, { desc = "Close window", noremap = true, silent = true })
+end, { desc = "Close all other windows and buffers", noremap = true, silent = true })
 
 -- Macro recording re-mappings
 map("n", "<leader>q", "qq", { desc = "Start recording macro to q", noremap = true, silent = true })
