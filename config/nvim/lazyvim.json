@@ -2,7 +2,8 @@
   "extras": [
     "lazyvim.plugins.extras.lang.ruby",
     "lazyvim.plugins.extras.lang.go",
-    "lazyvim.plugins.extras.lang.scala"
+    "lazyvim.plugins.extras.lang.scala",
+    "lazyvim.plugins.extras.coding.mini-surround"
   ],
   "install_version": 8,
   "news": {
