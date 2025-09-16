@@ -13,14 +13,12 @@ return {
       -- Patch bufferline integration for LazyVim compatibility
       local ok, bufferline_integration = pcall(require, "catppuccin.groups.integrations.bufferline")
       if ok and not bufferline_integration.get and bufferline_integration.get_theme then
-        bufferline_integration.get = function()
-          return bufferline_integration.get_theme()
-        end
+        bufferline_integration.get = function() return bufferline_integration.get_theme() end
       end
     end,
     keys = {
       {
-        "<leader>tt",
+        "<leader>ut",
         function()
           require("user.theme").toggle_flavour({
             { flavour = "mocha", background = "dark" },
