@@ -2,6 +2,7 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local helpers = require("user.keymap")
 local map = vim.keymap.set
 local del = vim.keymap.del
 
@@ -9,10 +10,18 @@ local del = vim.keymap.del
 del("n", ";")
 
 -- Change some LazyVim default mappings:
---- Change window management to <leader>w (also see plugins/which-key.lua)
-require("user.keymap").remap({ "n", "v", "x" }, " w", "<leader>v")
---- Change session management to <leader>z
-require("user.keymap").remap({ "n", "v", "x" }, " q", "<leader>z")
+--- Change window management to <leader>v (also see plugins/which-key.lua) since <leader>w is used to write the buffer
+helpers.remap({ "n", "v", "x" }, "<leader>w", "<leader>v")
+--- Change session management to <leader>z as <leader>q is used for <leader>q us used for macro recording
+helpers.remap({ "n", "v", "x" }, "<leader>q", "<leader>z")
+
+-- Use CWD as the default for finding stuff
+helpers.switch({ "n" }, "<leader>ff", "<leader>fF")
+helpers.switch({ "n" }, "<leader>fe", "<leader>fE")
+helpers.switch({ "n" }, "<leader>fr", "<leader>fR")
+helpers.switch({ "n" }, "<leader>sg", "<leader>sG")
+helpers.copy("n", "<leader>sg", "<leader>/")
+helpers.copy("n", "<leader>ff", "<leader><leader>")
 
 -- Default mappings I don't want
 --- Saving files
@@ -36,5 +45,5 @@ map("n", "<leader>O", function()
 end, { desc = "Close all other windows and buffers", noremap = true, silent = true })
 
 -- Macro recording re-mappings
-map("n", "<leader>q", "qq", { desc = "Start recording macro to q", noremap = true, silent = true })
+map("n", "<leader>q", "q", { desc = "Start recording a macro", noremap = true, silent = true })
 map("n", "<leader>Q", "qqqqq", { desc = "Start recursive macro recording to q", noremap = true, silent = true })
