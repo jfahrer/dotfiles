@@ -1,16 +1,14 @@
-require 'irb/completion'
-require 'irb/ext/save-history'
+require "irb/completion"
+# require "irb/ext/save-history"
 IRB.conf[:SAVE_HISTORY] = 1000
-IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
+IRB.conf[:HISTORY_FILE] = "#{ENV["HOME"]}/.irb-save-history"
 IRB.conf[:EVAL_HISTORY] = 5
 IRB.conf[:USE_AUTOCOMPLETE] = false
 
-%w[ irbtools active_support/all awesome_print].each do |gem|
-  begin
-    require gem
-  rescue LoadError
-    puts "Failed to load #{gem} gem."
-  end
+%w[irbtools active_support/all awesome_print].each do |gem|
+  require gem
+rescue LoadError
+  puts "Failed to load #{gem} gem."
 end
 
 class Object
@@ -20,4 +18,4 @@ class Object
 end
 
 # http://ozmm.org/posts/railsrc.html
-load File.dirname(__FILE__) + '/.rails-irbrc' if defined?(Rails) && Rails.env
+load File.dirname(__FILE__) + "/.rails-irbrc" if defined?(Rails) && Rails.env
