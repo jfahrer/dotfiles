@@ -17,7 +17,6 @@ fi
 export EDITOR=nvim
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export WS=$HOME/workspace
-export CDPATH=.:$WS:$HOME
 export HISTCONTROL=ignoreboth
 export HISTSIZE=10000
 export HISTIGNORE="h:history"
@@ -62,6 +61,11 @@ _source_if_exists ~/.bash_profile.local
 if [ -n "$TMUX" ]; then
   _source_if_exists .bash_env.local
 fi
+
+# Setting up CD path to include my workspace.
+# This happens after including local env files
+# so that they can overwrite the path.
+export CDPATH=.:$WS:$HOME
 
 # Ensure PATH is set correctly
 ## Make sure GOPATH is included
