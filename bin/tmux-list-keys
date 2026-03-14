@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# List tmux keys and cut them of at 180 chars
+# This can be fed into fzf for finding bindings.
+tmux list-keys |
+  awk '{ for (i = 1; i <= NF; i++) if ($i == "-T") { cmd = $(i+3); for (j = i+4; j <= NF; j++) cmd = cmd OFS $j; table = $(i+1); weight = (table == "root" ? 0 : table == "prefix" ? 1 : 2); print weight, table,
+  $(i+2), substr(cmd, 1, 180); break } }' |
+  sort -k1,1n -k2,2 -k3,3 |
+  cut -d' ' -f2-
