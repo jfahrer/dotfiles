@@ -9,6 +9,11 @@ if [ -f "/opt/homebrew/bin/brew" ] && [ -z "$HOMEBREW_PRESENT" ]; then
   export HOMEBREW_PRESENT=true
 fi
 
+# Ghostty shell integration for Bash. This should be at the top of your bashrc!
+if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+    builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
+fi
+
 export EDITOR=nvim
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export WS=$HOME/workspace
