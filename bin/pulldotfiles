@@ -8,11 +8,12 @@ for dir in $DOTFILES_DIRS; do
   echo "Pullling updates in [$dir]"
   cd "$dir"
   if [ $(git status --porcelain | wc -l) != "0" ]; then
-    echo "ERROR: Found uncommited local changes"
+    echo "WARNING: Found uncommited local changes in $DOTFILES_DIRS - skipping"
     exit 1
   fi
   git pull
 done
 
 echo "Linking dotfiles"
+cd ~
 rcup -v
