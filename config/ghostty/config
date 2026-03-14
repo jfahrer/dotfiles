@@ -1,5 +1,13 @@
 # Default before the generated override exists.
 theme = TokyoNight Moon
 
+# Make sure SSH works properly
+shell-integration-features = ssh-terminfo,ssh-env
+
+# Font
+font-family = "JetBrains Mono"
+# font-family = FiraCode Nerd Font Mono
+font-size = 20
+
 # Optional override managed by the shared theme helper in ~/.config/ghostty/.
 config-file = ?generated-theme
