@@ -49,6 +49,7 @@ _source_if_exists ~/.config/op/plugins.sh
 _source_if_exists ~/.iterm2_shell_integration.bash
 _source_if_exists ~/.coursier.bash
 
+# Add binding to transpose chars - needs to happen after loading fzf.bash
 bind '"\C-t": transpose-chars'
 
 export GOPATH=$HOME/go
