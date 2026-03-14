@@ -11,7 +11,7 @@ fi
 
 # Ghostty shell integration for Bash. This should be at the top of your bashrc!
 if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
-    builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
+  builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
 fi
 
 export EDITOR=nvim
@@ -38,7 +38,7 @@ _source_if_exists ~/.aliases_local
 _source_if_exists ~/.asdf.bash
 _source_if_exists ~/.fzf.bash
 
-if [ ! -z $(which brew) ] && [ -f $(brew --prefix)/etc/bash_completion  ]; then
+if command -v brew >/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
