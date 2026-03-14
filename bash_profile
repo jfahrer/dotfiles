@@ -17,30 +17,26 @@ fi
 export EDITOR=nvim
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export WS=$HOME/workspace
+export CDPATH=.:$WS:$HOME
 export HISTCONTROL=ignoreboth
 export HISTSIZE=10000
 export HISTIGNORE="h:history"
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# For some projects it is useful to keep a seperate bash history file
+# So if one exists in the local directory, we use it
+PROJECT_HIST_FILE=$(pwd)/.bash_history
+if [ -f $PROJECT_HIST_FILE ] && [ -n "$TMUX" ]; then
+  export HISTFILE=$PROJECT_HIST_FILE
+fi
+
 _source_if_exists ~/.bash_env.local
 _source_if_exists ~/.bashrc
 _source_if_exists ~/.aliases
 _source_if_exists ~/.aliases_local
 _source_if_exists ~/.asdf.bash
-
-if [ -f ~/.fzf.bash ]; then
-  source ~/.fzf.bash
-  # Old setting using `ag` instead of `rg`
-  # export FZF_DEFAULT_COMMAND='ag --skip-vcs-ignores --path-to-ignore ~/.agignore -l --nocolor -g ""'
-  export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-  export FZF_DEFAULT_OPTS='--bind ctrl-j:down,ctrl-k:up,ctrl-a:select-all,ctrl-d:deselect-all'
-  bind "$(bind -s | grep __fzf_cd__ | sed 's/\\ec/\\C-g/')"
-  bind "$(bind -s | grep __fzf_select | sed 's/\\C-t/\\C-n/')"
-  bind -x '"\C-p": $(fzf | xargs -r echo vim);'
-fi
-
-bind '"\C-t": transpose-chars'
+_source_if_exists ~/.fzf.bash
 
 if [ ! -z $(which brew) ] && [ -f $(brew --prefix)/etc/bash_completion  ]; then
   . $(brew --prefix)/etc/bash_completion
@@ -53,15 +49,11 @@ _source_if_exists ~/.config/op/plugins.sh
 _source_if_exists ~/.iterm2_shell_integration.bash
 _source_if_exists ~/.coursier.bash
 
+bind '"\C-t": transpose-chars'
+
 export GOPATH=$HOME/go
 
-# For some projects it is useful to keep a seperate bash history file
-# So if one exists in the local directory, we use it
-PROJECT_HIST_FILE=$(pwd)/.bash_history
-if [ -f $PROJECT_HIST_FILE ] && [ -n "$TMUX" ]; then
-  export HISTFILE=$PROJECT_HIST_FILE
-fi
-
+# Source local overwrites
 _source_if_exists ~/.bash_profile.local
 
 # For some projects it can be helpful to set env vars.
@@ -70,27 +62,25 @@ if [ -n "$TMUX" ]; then
   _source_if_exists .bash_env.local
 fi
 
-# Ensure PATH is set
-
+# Ensure PATH is set correctly
+## Make sure GOPATH is included
 if [[ ! "$PATH" == *$GOPATH/bin* ]]; then
   export PATH=$GOPATH/bin:$PATH
 fi
 
-# We first remove ./bin and $HOME/bin from PATH since 
-# /etc/profile might eval `/usr/libexec/path_helper -s` and 
-# effectively move my home dirs to the bottom of the list
-# when starting a new tmux session.
-# This currently relies on the fact that neither directory
-# will be at the very end of the list
+## Ensure ./bin and $HOME/bin are in the beginning of PATH
+## We first remove ./bin and $HOME/bin from PATH since 
+## /etc/profile might eval `/usr/libexec/path_helper -s` and 
+## effectively move my home dirs to the bottom of the list
+## when starting a new tmux session.
+## This currently relies on the fact that neither directory
+## will be at the very end of the list
 case ":$PATH:" in
   *":./bin:"*) PATH=${PATH//\.\/bin:/} ;;
 esac
 case ":$PATH:" in
   *":$HOME/bin:"*) PATH=${PATH//$HOME\/bin:/} ;;
 esac
- 
-# Setting PATH in the right order
+## Now prepend ./bin and $HOME/bin
 export PATH=$HOME/bin:$PATH
 export PATH=./bin:$PATH
- 
-export CDPATH=.:$WS:$HOME
