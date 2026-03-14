@@ -23,8 +23,6 @@ alias ci="gh pr checks"
 alias pr="gh pr create -B main --draft"
 alias dod="docker container run --rm -it -v \$(pwd):/\$(pwd) -w \$(pwd)"
 
-alias tmux='TERM=screen-256color-bce tmux'
-
 # Bundler / rails
 alias b="bundle"
 alias be="bundle exec"

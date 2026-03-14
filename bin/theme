@@ -1,0 +1,154 @@
+#!/bin/bash
+set -euo pipefail
+
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/theme"
+STATE_FILE="$STATE_DIR/mode"
+GHOSTTY_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty"
+GHOSTTY_THEME_FILE="$GHOSTTY_DIR/generated-theme"
+
+normalize_mode() {
+  case "${1:-}" in
+    light)
+      printf 'light\n'
+      ;;
+    dark)
+      printf 'dark\n'
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+write_state() {
+  mkdir -p "$STATE_DIR"
+  printf '%s\n' "$1" >"$STATE_FILE"
+}
+
+variant_for_mode() {
+  if [ "$1" = "light" ]; then
+    printf 'day\n'
+  else
+    printf 'moon\n'
+  fi
+}
+
+current_mode() {
+  local mode
+
+  if [ -f "$STATE_FILE" ]; then
+    mode="$(tr -d '[:space:]' <"$STATE_FILE")"
+    if mode="$(normalize_mode "$mode" 2>/dev/null)"; then
+      printf '%s\n' "$mode"
+      return
+    fi
+  fi
+
+  printf 'dark\n'
+}
+
+write_ghostty_theme() {
+  mkdir -p "$GHOSTTY_DIR"
+  cat >"$GHOSTTY_THEME_FILE" <<EOF
+# Managed by theme helper.
+theme = TokyoNight $1
+EOF
+}
+
+ghostty_theme_name() {
+  if [ "$1" = "light" ]; then
+    printf 'Day\n'
+  else
+    printf 'Moon\n'
+  fi
+}
+
+tmux_running() {
+  command -v tmux >/dev/null 2>&1 && ([ -n "${TMUX:-}" ] || tmux list-sessions >/dev/null 2>&1)
+}
+
+reload_ghostty() {
+  kill -SIGUSR2 $(ps -ef | grep '[g]hostty$' | awk '{print $2}') >/dev/null 2>&1 || true
+}
+
+tmux_theme_file() {
+  local variant="$1"
+  local candidate
+
+  for candidate in \
+    "$HOME/.local/share/config/nvim/lazy/tokyonight.nvim/extras/tmux/tokyonight_${variant}.tmux" \
+    "$HOME/.local/share/nvim/lazy/tokyonight.nvim/extras/tmux/tokyonight_${variant}.tmux"
+  do
+    if [ -f "$candidate" ]; then
+      printf '%s\n' "$candidate"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+sync_tmux() {
+  local mode="$1"
+  local variant
+  local theme_file
+
+  if ! tmux_running; then
+    return
+  fi
+
+  variant="$(variant_for_mode "$mode")"
+  tmux set-option -gq @theme_mode "$mode" || true
+  tmux set-option -gq @tokyonight_variant "$variant" || true
+
+  theme_file="$(tmux_theme_file "$variant" || true)"
+  if [ -n "$theme_file" ]; then
+    tmux source-file "$theme_file" >/dev/null 2>&1 || true
+  fi
+
+  tmux refresh-client -S >/dev/null 2>&1 || true
+}
+
+set_mode() {
+  local mode="$1"
+
+  mode="$(normalize_mode "$mode")"
+  write_state "$mode"
+  write_ghostty_theme "$(ghostty_theme_name "$mode")"
+  reload_ghostty
+  sync_tmux "$mode"
+  printf '%s\n' "$mode"
+}
+
+toggle_mode() {
+  if [ "$(current_mode)" = "dark" ]; then
+    set_mode "light"
+  else
+    set_mode "dark"
+  fi
+}
+
+command="${1:-current}"
+
+case "$command" in
+  current)
+    current_mode
+    ;;
+  variant)
+    variant_for_mode "$(current_mode)"
+    ;;
+  light | dark)
+    set_mode "$command"
+    ;;
+  toggle)
+    toggle_mode
+    ;;
+  init-tmux | sync-tmux)
+    mode="$(current_mode)"
+    sync_tmux "$mode"
+    ;;
+  *)
+    printf 'usage: %s [current|variant|light|dark|toggle|init-tmux|sync-tmux]\n' "${0##*/}" >&2
+    exit 1
+    ;;
+esac

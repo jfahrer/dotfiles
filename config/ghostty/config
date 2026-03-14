@@ -1,0 +1,5 @@
+# Default before the generated override exists.
+theme = TokyoNight Moon
+
+# Optional override managed by the shared theme helper in ~/.config/ghostty/.
+config-file = ?generated-theme
