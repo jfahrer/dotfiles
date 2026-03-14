@@ -34,13 +34,26 @@ local function run_theme_command(...)
   return vim.trim(result.stdout)
 end
 
-function M.current_mode()
+function M.system_mode()
   local mode = run_theme_command("current")
   if mode == "light" or mode == "dark" then
     return mode
   end
 
+  return nil
+end
+
+function M.editor_mode()
   return vim.o.background == "light" and "light" or "dark"
+end
+
+function M.current_mode()
+  local mode = M.system_mode()
+  if mode then
+    return mode
+  end
+
+  return M.editor_mode()
 end
 
 function M.tokyonight_opts()
@@ -85,6 +98,21 @@ function M.toggle()
   end
 
   M.apply_mode(mode)
+end
+
+function M.sync_or_toggle()
+  local system_mode = M.system_mode()
+  if not system_mode then
+    vim.notify("Unable to determine system theme", vim.log.levels.ERROR)
+    return
+  end
+
+  if M.editor_mode() == system_mode then
+    M.toggle()
+    return
+  end
+
+  M.apply_mode(system_mode, false)
 end
 
 return M

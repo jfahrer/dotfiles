@@ -10,13 +10,8 @@ return {
     keys = {
       {
         "<leader>ut",
-        function() require("user.theme").toggle() end,
-        desc = "Toggle Tokyo Night theme",
-      },
-      {
-        "<leader>uT",
-        function() require("user.theme").sync() end,
-        desc = "Sync Tokyo Night theme",
+        function() require("user.theme").sync_or_toggle() end,
+        desc = "Toggle or sync Tokyo Night theme",
       },
     },
   },
