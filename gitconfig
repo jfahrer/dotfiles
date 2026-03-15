@@ -3,11 +3,11 @@
 	name = Julian Fahrer
 	initials = jf
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = ~/.gitignore
 	pager = less -FXRS -x2
 [push]
-	default = current
+	default = simple
 [alias]
 	a = add
 	aa = add --all
@@ -54,7 +54,7 @@
 	status = auto
 	ui = true
 [pull]
-	default = current
+	default = simple
 [credentials]
 	helper = osxkeychain
 [init]
