@@ -63,6 +63,14 @@ ghostty_theme_name() {
   fi
 }
 
+mode_bg_color() {
+  if [ "$1" = "light" ]; then
+    printf '%s\n' '#e1e2e7'
+  else
+    printf '%s\n' '#222436'
+  fi
+}
+
 tmux_running() {
   command -v tmux >/dev/null 2>&1 && ([ -n "${TMUX:-}" ] || tmux list-sessions >/dev/null 2>&1)
 }
@@ -92,6 +100,7 @@ sync_tmux() {
   local mode="$1"
   local variant
   local theme_file
+  local bg_color
 
   if ! tmux_running; then
     return
@@ -104,6 +113,14 @@ sync_tmux() {
   theme_file="$(tmux_theme_file "$variant" || true)"
   if [ -n "$theme_file" ]; then
     tmux source-file "$theme_file" >/dev/null 2>&1 || true
+  fi
+
+  # Set the pane background so tmux reports the correct color in OSC 10/11
+  # responses.  Without this, tools like opencode and codex that query the
+  # terminal background at startup will see a stale value.
+  bg_color="$(mode_bg_color "$mode" || true)"
+  if [ -n "$bg_color" ]; then
+    tmux set -g window-style "bg=$bg_color" >/dev/null 2>&1 || true
   fi
 
   tmux refresh-client -S >/dev/null 2>&1 || true
