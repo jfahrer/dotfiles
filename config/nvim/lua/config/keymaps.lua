@@ -47,3 +47,5 @@ end, { desc = "Close all other windows and buffers", noremap = true, silent = tr
 -- Macro recording re-mappings
 map("n", "<leader>q", "q", { desc = "Start recording a macro", noremap = true, silent = true })
 map("n", "<leader>Q", "qqqqq", { desc = "Start recursive macro recording to q", noremap = true, silent = true })
+
+map("n", "<leader>gb", "<CMD>Gitsigns blame<CR>", { desc = "Blame buffer", noremap = true, silent = true })

@@ -11,7 +11,7 @@ return {
     {
       "<leader>ai",
       function() require("agentic").toggle() end,
-      mode = { "n", "v", "i" },
+      mode = { "n", "v" },
       desc = "Toggle Agentic Chat",
     },
     {
