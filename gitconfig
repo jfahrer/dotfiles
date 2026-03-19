@@ -24,7 +24,7 @@
 	fp = push --force-with-lease
 	g = log --pretty=format:\"%h %an - %s\" --graph
 	lc = log ORIG_HEAD.. --stat --no-merges
-	lgo = log --oneline
+	lgo = !git log --color=always --pretty=format:'%C(yellow)%h%Creset %ad %s (%an)' --date=short
 	ol = log --format=\"%C(yellow)%h%Creset %C(cyan)%aN%Creset\t%s\"
 	recent = !git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/ | head -n 100
 	stat = !git diff --stat $(git merge-base HEAD \"main\")
