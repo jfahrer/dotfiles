@@ -26,6 +26,8 @@ end
 
 return {
   "carlos-algms/agentic.nvim",
+  -- dev = true,
+  -- dir = "/Users/jfahrer/co/agentic.nvim", -- .worktrees/add-tool-call-response-folding-superpowers",
   lazy = false,
 
   dependencies = {
@@ -42,6 +44,12 @@ return {
   opts = {
     -- Available by default: "claude-agent-acp" | "gemini-acp" | "codex-acp" | "opencode-acp" | "cursor-acp" | "auggie-acp" | "mistral-vibe-acp"
     provider = "opencode-acp", -- setting the name here is all you need to get started
+    folding = {
+      tool_calls = {
+        enabled = true,
+        threshold = 0,
+      },
+    },
     diff_preview = {
       enabled = true,
       layout = "split", -- "split" or "inline"
