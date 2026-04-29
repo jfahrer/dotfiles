@@ -3,6 +3,7 @@ set -euo pipefail
 
 STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/theme"
 STATE_FILE="$STATE_DIR/mode"
+OPENCODE_STATE_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/opencode/kv.json"
 GHOSTTY_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty"
 GHOSTTY_THEME_FILE="$GHOSTTY_DIR/generated-theme"
 
@@ -53,6 +54,16 @@ write_ghostty_theme() {
 # Managed by theme helper.
 theme = TokyoNight $1
 EOF
+}
+
+sync_opencode_state() {
+  local mode="$1"
+
+  if [ ! -f "$OPENCODE_STATE_FILE" ]; then
+    return
+  fi
+
+  sed -i '' -E "s/(\"theme_mode_lock\"[[:space:]]*:[[:space:]]*\")[^\"]*(\")/\\1$mode\\2/; s/(\"theme_mode\"[[:space:]]*:[[:space:]]*\")[^\"]*(\")/\\1$mode\\2/" "$OPENCODE_STATE_FILE"
 }
 
 ghostty_theme_name() {
@@ -131,6 +142,7 @@ set_mode() {
 
   mode="$(normalize_mode "$mode")"
   write_state "$mode"
+  sync_opencode_state "$mode"
   write_ghostty_theme "$(ghostty_theme_name "$mode")"
   reload_ghostty
   sync_tmux "$mode"
