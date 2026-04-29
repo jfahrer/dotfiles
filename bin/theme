@@ -4,6 +4,7 @@ set -euo pipefail
 STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/theme"
 STATE_FILE="$STATE_DIR/mode"
 OPENCODE_STATE_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/opencode/kv.json"
+CODEX_CONFIG_FILE="${CODEX_CONFIG_FILE:-$HOME/.codex/config.toml}"
 GHOSTTY_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty"
 GHOSTTY_THEME_FILE="$GHOSTTY_DIR/generated-theme"
 
@@ -66,11 +67,45 @@ sync_opencode_state() {
   sed -i '' -E "s/(\"theme_mode_lock\"[[:space:]]*:[[:space:]]*\")[^\"]*(\")/\\1$mode\\2/; s/(\"theme_mode\"[[:space:]]*:[[:space:]]*\")[^\"]*(\")/\\1$mode\\2/" "$OPENCODE_STATE_FILE"
 }
 
+sync_codex_theme() {
+  local mode="$1"
+  local theme
+
+  if [ ! -f "$CODEX_CONFIG_FILE" ]; then
+    return
+  fi
+
+  theme="$(codex_theme_name "$mode")"
+  THEME="$theme" perl -0pi -e '
+    my $theme = $ENV{THEME};
+    s{
+      (^\[tui\]\n)
+      (.*?)
+      (?=^\[|\z)
+    }{
+      my ($header, $body) = ($1, $2);
+      if ($body =~ s/^\s*theme\s*=.*$/theme = "$theme"/m) {
+        $header . $body
+      } else {
+        $header . qq(theme = "$theme"\n) . $body
+      }
+    }emsx;
+  ' "$CODEX_CONFIG_FILE"
+}
+
 ghostty_theme_name() {
   if [ "$1" = "light" ]; then
     printf 'Day\n'
   else
     printf 'Moon\n'
+  fi
+}
+
+codex_theme_name() {
+  if [ "$1" = "light" ]; then
+    printf 'catppuccin-latte\n'
+  else
+    printf 'catppuccin-frappe\n'
   fi
 }
 
@@ -143,6 +178,7 @@ set_mode() {
   mode="$(normalize_mode "$mode")"
   write_state "$mode"
   sync_opencode_state "$mode"
+  sync_codex_theme "$mode"
   write_ghostty_theme "$(ghostty_theme_name "$mode")"
   reload_ghostty
   sync_tmux "$mode"
