@@ -13,7 +13,7 @@ local function mode_to_variant(mode)
     return "day"
   end
 
-  return "moon"
+  return "night"
 end
 
 local function theme_command()

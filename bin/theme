@@ -10,15 +10,15 @@ GHOSTTY_THEME_FILE="$GHOSTTY_DIR/generated-theme"
 
 normalize_mode() {
   case "${1:-}" in
-    light)
-      printf 'light\n'
-      ;;
-    dark)
-      printf 'dark\n'
-      ;;
-    *)
-      return 1
-      ;;
+  light)
+    printf 'light\n'
+    ;;
+  dark)
+    printf 'dark\n'
+    ;;
+  *)
+    return 1
+    ;;
   esac
 }
 
@@ -31,7 +31,7 @@ variant_for_mode() {
   if [ "$1" = "light" ]; then
     printf 'day\n'
   else
-    printf 'moon\n'
+    printf 'night\n'
   fi
 }
 
@@ -97,7 +97,7 @@ ghostty_theme_name() {
   if [ "$1" = "light" ]; then
     printf 'Day\n'
   else
-    printf 'Moon\n'
+    printf 'Night\n'
   fi
 }
 
@@ -113,7 +113,7 @@ mode_bg_color() {
   if [ "$1" = "light" ]; then
     printf '%s\n' '#e1e2e7'
   else
-    printf '%s\n' '#222436'
+    printf '%s\n' '#1a1b26'
   fi
 }
 
@@ -131,8 +131,7 @@ tmux_theme_file() {
 
   for candidate in \
     "$HOME/.local/share/config/nvim/lazy/tokyonight.nvim/extras/tmux/tokyonight_${variant}.tmux" \
-    "$HOME/.local/share/nvim/lazy/tokyonight.nvim/extras/tmux/tokyonight_${variant}.tmux"
-  do
+    "$HOME/.local/share/nvim/lazy/tokyonight.nvim/extras/tmux/tokyonight_${variant}.tmux"; do
     if [ -f "$candidate" ]; then
       printf '%s\n' "$candidate"
       return 0
@@ -196,24 +195,24 @@ toggle_mode() {
 command="${1:-current}"
 
 case "$command" in
-  current)
-    current_mode
-    ;;
-  variant)
-    variant_for_mode "$(current_mode)"
-    ;;
-  light | dark)
-    set_mode "$command"
-    ;;
-  toggle)
-    toggle_mode
-    ;;
-  init-tmux | sync-tmux)
-    mode="$(current_mode)"
-    sync_tmux "$mode"
-    ;;
-  *)
-    printf 'usage: %s [current|variant|light|dark|toggle|init-tmux|sync-tmux]\n' "${0##*/}" >&2
-    exit 1
-    ;;
+current)
+  current_mode
+  ;;
+variant)
+  variant_for_mode "$(current_mode)"
+  ;;
+light | dark)
+  set_mode "$command"
+  ;;
+toggle)
+  toggle_mode
+  ;;
+init-tmux | sync-tmux)
+  mode="$(current_mode)"
+  sync_tmux "$mode"
+  ;;
+*)
+  printf 'usage: %s [current|variant|light|dark|toggle|init-tmux|sync-tmux]\n' "${0##*/}" >&2
+  exit 1
+  ;;
 esac

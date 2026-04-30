@@ -1,5 +1,5 @@
 # Default before the generated override exists.
-theme = TokyoNight Moon
+theme = TokyoNight Night
 
 # Make sure SSH works properly
 shell-integration-features = ssh-terminfo,ssh-env,no-cursor
