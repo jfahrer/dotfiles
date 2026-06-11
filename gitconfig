@@ -20,6 +20,8 @@
 	cp = git cherry-pick
 	d = diff
 	dc = diff --cached
+	dt = -c diff.external=difft diff
+	dct = -c diff.external=difft diff --cached
 	fixup = commit --amend -C HEAD
 	fp = push --force-with-lease
 	g = log --pretty=format:\"%h %an - %s\" --graph
@@ -37,8 +39,6 @@
 	rc = rebase --continue
 	cb = rev-parse --abbrev-ref HEAD
   slist = !git stash list | cut -f 1 -d ':' | fzf --preview 'git stash show -p {}' | xargs -r git stash pop
-[include]
-	path = ~/.gitconfig.local
 [hub]
 	protocol = https
 [autosetup]
@@ -61,3 +61,5 @@
 	defaultBranch = main
 [diff]
   colorMoved = zebra
+[include]
+	path = ~/.gitconfig.local
