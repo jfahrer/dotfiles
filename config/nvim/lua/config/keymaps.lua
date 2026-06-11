@@ -20,6 +20,7 @@ helpers.switch({ "n" }, "<leader>ff", "<leader>fF")
 helpers.switch({ "n" }, "<leader>fe", "<leader>fE")
 helpers.switch({ "n" }, "<leader>fr", "<leader>fR")
 helpers.switch({ "n" }, "<leader>sg", "<leader>sG")
+helpers.switch({ "n" }, "<leader>sw", "<leader>sW")
 helpers.copy("n", "<leader>sg", "<leader>/")
 helpers.copy("n", "<leader>ff", "<leader><leader>")
 
