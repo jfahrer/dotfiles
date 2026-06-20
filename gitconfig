@@ -8,6 +8,7 @@
 	pager = less -FXRS -x2
 [push]
 	default = simple
+	autoSetupRemote = true
 [alias]
 	a = add
 	aa = add --all
