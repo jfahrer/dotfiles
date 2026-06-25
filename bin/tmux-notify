@@ -18,6 +18,9 @@
 #   only target records whose server start time matches the current server and
 #   whose pane id still exists. The picker shows the newest live notification per
 #   pane, with a dot marking unread rows. Jump uses the newest unread live pane.
+#   Send suppresses all notifications when the emitting pane is visible in a
+#   window currently shown by an attached tmux client and, on macOS, Ghostty's
+#   front window matches the emitting tmux session.
 #   macOS notifications are best-effort via terminal-notifier.
 
 require "base64"
@@ -31,8 +34,12 @@ STATE_DIR = File.join(ENV["XDG_STATE_HOME"].to_s.empty? ? File.join(Dir.home, ".
 HISTORY_PATH = File.join(STATE_DIR, "history.tsv")
 LOCK_PATH = File.join(STATE_DIR, "history.tsv.lock")
 TMUX_START_TIME = "\#{start_time}"
+TMUX_SESSION_ID = "\#{session_id}"
 TMUX_SESSION_NAME = "\#{session_name}"
+TMUX_WINDOW_ID = "\#{window_id}"
 TMUX_WINDOW_INDEX = "\#{window_index}"
+TMUX_WINDOW_ZOOMED_FLAG = "\#{window_zoomed_flag}"
+TMUX_PANE_ACTIVE = "\#{pane_active}"
 TMUX_PANE_INDEX = "\#{pane_index}"
 TMUX_PANE_ID = "\#{pane_id}"
 TMUX_PANE_CURRENT_PATH = "\#{pane_current_path}"
@@ -177,8 +184,12 @@ module Tmux
     target = source_pane_id
     {
       server_start_time: format(TMUX_START_TIME, target: target),
+      session_id: format(TMUX_SESSION_ID, target: target),
       session: format(TMUX_SESSION_NAME, target: target),
+      window_id: format(TMUX_WINDOW_ID, target: target),
       window_index: format(TMUX_WINDOW_INDEX, target: target),
+      window_zoomed: format(TMUX_WINDOW_ZOOMED_FLAG, target: target),
+      pane_active: format(TMUX_PANE_ACTIVE, target: target),
       pane_index: format(TMUX_PANE_INDEX, target: target),
       pane_id: format(TMUX_PANE_ID, target: target),
       path: format(TMUX_PANE_CURRENT_PATH, target: target),
@@ -193,6 +204,26 @@ module Tmux
     system("tmux", "display-message", message, out: File::NULL, err: File::NULL)
   rescue Errno::ENOENT
     false
+  end
+
+  def displayed_window_ids(session_id)
+    return [] if session_id.to_s.empty?
+
+    stdout, _stderr, status = Open3.capture3("tmux", "list-clients", "-t", session_id, "-F", TMUX_WINDOW_ID)
+    return [] unless status.success?
+
+    stdout.lines.map(&:chomp).reject(&:empty?)
+  rescue Errno::ENOENT
+    []
+  end
+
+  def pane_visible?(context)
+    session_id = context[:session_id]
+    window_id = context[:window_id]
+    return false if window_id.to_s.empty?
+    return false unless displayed_window_ids(session_id).include?(window_id)
+
+    context[:window_zoomed] != "1" || context[:pane_active] == "1"
   end
 
   def pane_exists?(pane_id)
@@ -257,6 +288,45 @@ rescue Errno::ENOENT
   false
 end
 
+def macos_frontmost_app
+  return nil unless RbConfig::CONFIG["host_os"].include?("darwin")
+  return nil unless command_available?("osascript")
+
+  stdout, _stderr, status = Open3.capture3(
+    "osascript",
+    "-e",
+    'tell application "System Events" to get name of first application process whose frontmost is true'
+  )
+  return nil unless status.success?
+
+  stdout.chomp
+rescue Errno::ENOENT
+  nil
+end
+
+def ghostty_front_window_name
+  return nil unless RbConfig::CONFIG["host_os"].include?("darwin")
+  return nil unless command_available?("osascript")
+
+  stdout, _stderr, status = Open3.capture3(
+    "osascript",
+    "-e",
+    'tell application "Ghostty" to get name of front window'
+  )
+  return nil unless status.success?
+
+  stdout.chomp
+rescue Errno::ENOENT
+  nil
+end
+
+def foreground_ghostty_session?(session_name)
+  return true unless RbConfig::CONFIG["host_os"].include?("darwin")
+  return false unless macos_frontmost_app.to_s.downcase == "ghostty"
+
+  ghostty_front_window_name == session_name
+end
+
 def command_available?(command)
   ENV.fetch("PATH", "").split(File::PATH_SEPARATOR).any? do |directory|
     File.executable?(File.join(directory, command))
@@ -317,6 +387,8 @@ def send_notification(args)
     context = Tmux.current_context
 
     if context && context.values.none? { |value| value.to_s.empty? }
+      exit 0 if Tmux.pane_visible?(context) && foreground_ghostty_session?(context[:session])
+
       record = Record.new(
         server_start_time: clean_field(context[:server_start_time]),
         sent_at: Time.now.to_i.to_s,
