@@ -1,0 +1,412 @@
+#!/usr/bin/ruby
+#
+# Usage:
+#   tmux-notify send "Tests finished"
+#   long-running-command && echo "Build finished" | tmux-notify send
+#   tmux-notify jump
+#   tmux-notify choose
+#   tmux-notify list
+#   tmux-notify clear
+#
+# Design:
+#   Notifications sent from inside tmux are recorded in a small locked TSV
+#   history file under XDG state. Each record stores the emitting pane's
+#   TMUX_PANE id, tmux server start time, readable session/window/pane labels,
+#   current path, message, and navigation state.
+#
+#   Pane ids are only valid within one tmux server lifetime, so jump and choose
+#   only target records whose server start time matches the current server and
+#   whose pane id still exists. The picker shows the newest live notification per
+#   pane, with a dot marking unread rows. Jump uses the newest unread live pane.
+#   macOS notifications are best-effort via osascript and do not affect history.
+
+require "base64"
+require "fileutils"
+require "open3"
+require "rbconfig"
+
+MAX_HISTORY = 25
+STATE_DIR = File.join(ENV["XDG_STATE_HOME"].to_s.empty? ? File.join(Dir.home, ".local", "state") : ENV["XDG_STATE_HOME"], "tmux-notify")
+HISTORY_PATH = File.join(STATE_DIR, "history.tsv")
+LOCK_PATH = File.join(STATE_DIR, "history.tsv.lock")
+TMUX_START_TIME = "\#{start_time}"
+TMUX_SESSION_NAME = "\#{session_name}"
+TMUX_WINDOW_INDEX = "\#{window_index}"
+TMUX_PANE_INDEX = "\#{pane_index}"
+TMUX_PANE_ID = "\#{pane_id}"
+TMUX_PANE_CURRENT_PATH = "\#{pane_current_path}"
+
+Record = Struct.new(
+  :server_start_time,
+  :sent_at,
+  :navigated_at,
+  :pane_id,
+  :session,
+  :window_index,
+  :pane_index,
+  :path,
+  :message,
+  keyword_init: true
+) do
+  def self.from_tsv(line)
+    fields = line.chomp.split("\t", -1)
+    return nil if fields.length < 9
+
+    new(
+      server_start_time: fields[0],
+      sent_at: fields[1],
+      navigated_at: fields[2],
+      pane_id: fields[3],
+      session: fields[4],
+      window_index: fields[5],
+      pane_index: fields[6],
+      path: fields[7],
+      message: fields[8..-1].join("\t")
+    )
+  end
+
+  def to_tsv
+    [
+      server_start_time,
+      sent_at,
+      navigated_at,
+      pane_id,
+      session,
+      window_index,
+      pane_index,
+      path,
+      message,
+    ].join("\t")
+  end
+
+  def identity
+    [
+      server_start_time,
+      sent_at,
+      pane_id,
+      session,
+      window_index,
+      pane_index,
+      path,
+      message,
+    ].join("\t")
+  end
+
+  def source
+    "#{session}:#{window_index}.#{pane_index}"
+  end
+end
+
+module History
+  module_function
+
+  def with_lock
+    FileUtils.mkdir_p(STATE_DIR)
+    File.open(LOCK_PATH, File::RDWR | File::CREAT, 0o600) do |file|
+      file.flock(File::LOCK_EX)
+      yield
+    end
+  end
+
+  def read
+    return [] unless File.file?(HISTORY_PATH)
+
+    File.readlines(HISTORY_PATH, chomp: true).map { |line| Record.from_tsv(line) }.compact
+  end
+
+  def write(records)
+    FileUtils.mkdir_p(STATE_DIR)
+    tmp_path = "#{HISTORY_PATH}.#{$$}.tmp"
+    File.open(tmp_path, File::WRONLY | File::CREAT | File::TRUNC, 0o600) do |file|
+      records.first(MAX_HISTORY).each { |record| file.puts(record.to_tsv) }
+    end
+    File.rename(tmp_path, HISTORY_PATH)
+  ensure
+    File.delete(tmp_path) if defined?(tmp_path) && File.exist?(tmp_path)
+  end
+
+  def mark_navigated(identity, navigated_at)
+    with_lock do
+      records = read
+      record = records.find { |entry| entry.identity == identity }
+      return false unless record
+
+      record.navigated_at = navigated_at
+      write(records)
+      true
+    end
+  end
+end
+
+module Tmux
+  module_function
+
+  def inside?
+    !ENV["TMUX"].to_s.empty? && server_available?
+  end
+
+  def server_available?
+    !format(TMUX_START_TIME).to_s.empty?
+  end
+
+  def source_available?
+    !source_pane_id.empty? && !format(TMUX_PANE_ID, target: source_pane_id).to_s.empty?
+  end
+
+  def source_pane_id
+    ENV["TMUX_PANE"].to_s
+  end
+
+  def format(value, target: nil)
+    args = ["tmux", "display-message", "-p"]
+    args.concat(["-t", target]) unless target.to_s.empty?
+    args << value
+
+    stdout, _stderr, status = Open3.capture3(*args)
+    return nil unless status.success?
+
+    stdout.chomp
+  rescue Errno::ENOENT
+    nil
+  end
+
+  def current_context
+    return nil unless inside? && source_available?
+
+    target = source_pane_id
+    {
+      server_start_time: format(TMUX_START_TIME, target: target),
+      session: format(TMUX_SESSION_NAME, target: target),
+      window_index: format(TMUX_WINDOW_INDEX, target: target),
+      pane_index: format(TMUX_PANE_INDEX, target: target),
+      pane_id: format(TMUX_PANE_ID, target: target),
+      path: format(TMUX_PANE_CURRENT_PATH, target: target),
+    }
+  end
+
+  def server_start_time
+    format(TMUX_START_TIME)
+  end
+
+  def display(message)
+    system("tmux", "display-message", message, out: File::NULL, err: File::NULL)
+  rescue Errno::ENOENT
+    false
+  end
+
+  def pane_exists?(pane_id)
+    return false if pane_id.to_s.empty?
+
+    stdout, _stderr, status = Open3.capture3("tmux", "display-message", "-p", "-t", pane_id, TMUX_PANE_ID)
+    status.success? && stdout.chomp == pane_id
+  rescue Errno::ENOENT
+    false
+  end
+
+  def switch_to(pane_id)
+    system("tmux", "switch-client", "-t", pane_id, out: File::NULL, err: File::NULL)
+  rescue Errno::ENOENT
+    false
+  end
+end
+
+def usage
+  warn "Usage: tmux-notify send [MESSAGE] | jump | choose | list | clear"
+  exit 1
+end
+
+def clean_field(value)
+  value.to_s.gsub(/[\t\r\n]+/, " ").strip
+end
+
+def read_message(args)
+  return clean_field(args.join(" ")) unless args.empty?
+
+  line = STDIN.gets
+  clean_field(line)
+end
+
+def applescript_string(value)
+  value.to_s.gsub("\\", "\\\\\\\\").gsub('"', '\"')
+end
+
+def macos_notify(title, message)
+  return false unless RbConfig::CONFIG["host_os"].include?("darwin")
+
+  script = %(display notification "#{applescript_string(message)}" with title "#{applescript_string(title)}")
+  system("osascript", "-e", script, out: File::NULL, err: File::NULL)
+rescue Errno::ENOENT
+  false
+end
+
+def command_available?(command)
+  ENV.fetch("PATH", "").split(File::PATH_SEPARATOR).any? do |directory|
+    File.executable?(File.join(directory, command))
+  end
+end
+
+def fail_with(message, status = 1)
+  Tmux.display(message) if Tmux.inside?
+  warn message
+  exit status
+end
+
+def current_server_start_time!
+  server_start_time = Tmux.server_start_time
+  fail_with("tmux-notify: unable to read tmux server start time") if server_start_time.to_s.empty?
+  server_start_time
+end
+
+def unread?(record)
+  record.navigated_at.to_s.empty?
+end
+
+def live?(record, server_start_time)
+  record.server_start_time == server_start_time &&
+    Tmux.pane_exists?(record.pane_id)
+end
+
+def latest_per_pane(records)
+  seen = {}
+  records.each_with_object([]) do |record, unique_records|
+    key = [record.server_start_time, record.pane_id]
+    next if seen[key]
+
+    seen[key] = true
+    unique_records << record
+  end
+end
+
+def unread_marker(record)
+  unread?(record) ? "● " : "  "
+end
+
+def send_notification(args)
+  message = read_message(args)
+  usage if message.empty?
+
+  title = "tmux-notify"
+  tmux_ok = false
+  recorded = false
+
+  if Tmux.inside?
+    context = Tmux.current_context
+
+    if context && context.values.none? { |value| value.to_s.empty? }
+      record = Record.new(
+        server_start_time: clean_field(context[:server_start_time]),
+        sent_at: Time.now.to_i.to_s,
+        navigated_at: "",
+        pane_id: clean_field(context[:pane_id]),
+        session: clean_field(context[:session]),
+        window_index: clean_field(context[:window_index]),
+        pane_index: clean_field(context[:pane_index]),
+        path: clean_field(context[:path]),
+        message: message
+      )
+      title = "#{record.source}"
+
+      History.with_lock do
+        records = History.read
+        records.reject! { |entry| entry.server_start_time == record.server_start_time && entry.pane_id == record.pane_id }
+        records.unshift(record)
+        History.write(records)
+      end
+      recorded = true
+    end
+
+    tmux_ok = Tmux.display("Message from #{title}: #{message}")
+  end
+
+  macos_ok = macos_notify(title, message)
+  exit(tmux_ok || macos_ok || recorded ? 0 : 1)
+end
+
+def jump
+  fail_with("tmux-notify: jump requires tmux") unless Tmux.inside?
+
+  server_start_time = current_server_start_time!
+  selected = History.with_lock do
+    records = History.read.select { |record| live?(record, server_start_time) }
+    latest_per_pane(records).find { |record| unread?(record) }
+  end
+
+  unless selected
+    Tmux.display("no unread notifications")
+    exit 0
+  end
+
+  unless Tmux.switch_to(selected.pane_id)
+    fail_with("tmux-notify: selected pane is gone")
+  end
+
+  History.mark_navigated(selected.identity, Time.now.to_i.to_s)
+end
+
+def choose
+  fail_with("tmux-notify: choose requires tmux") unless Tmux.inside?
+  fail_with("tmux-notify: fzf is required for choose", 2) unless command_available?("fzf")
+
+  server_start_time = current_server_start_time!
+  records = History.with_lock do
+    latest_per_pane(History.read.select { |record| live?(record, server_start_time) })
+  end
+  fail_with("tmux-notify: no live notifications") if records.empty?
+
+  input = records.map do |record|
+    hidden = Base64.strict_encode64(record.identity)
+    "#{hidden}\t#{unread_marker(record)}#{record.source}  #{record.message}  #{record.path}"
+  end.join("\n")
+
+  selected, = Open3.capture3(
+    "fzf",
+    "--delimiter=\t",
+    "--with-nth=2..",
+    "--no-multi",
+    "--reverse",
+    stdin_data: "#{input}\n"
+  )
+  exit 1 if selected.to_s.empty?
+
+  identity = Base64.decode64(selected.split("\t", 2).first)
+  record = History.with_lock { History.read.find { |entry| entry.identity == identity } }
+  fail_with("tmux-notify: selected notification is no longer in history") unless record
+  fail_with("tmux-notify: selected pane is gone") unless Tmux.pane_exists?(record.pane_id)
+  fail_with("tmux-notify: selected pane is gone") unless Tmux.switch_to(record.pane_id)
+
+  History.mark_navigated(record.identity, Time.now.to_i.to_s)
+end
+
+def list
+  records = History.with_lock { History.read }
+  fail_with("tmux-notify: no history") if records.empty?
+
+  records.each { |record| puts record.to_tsv }
+end
+
+def clear
+  History.with_lock do
+    File.delete(HISTORY_PATH) if File.exist?(HISTORY_PATH)
+  end
+end
+
+command = ARGV.shift
+
+case command
+when "send"
+  send_notification(ARGV)
+when "jump"
+  usage unless ARGV.empty?
+  jump
+when "choose"
+  usage unless ARGV.empty?
+  choose
+when "list"
+  usage unless ARGV.empty?
+  list
+when "clear"
+  usage unless ARGV.empty?
+  clear
+else
+  usage
+end
