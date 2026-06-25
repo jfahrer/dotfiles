@@ -18,12 +18,13 @@
 #   only target records whose server start time matches the current server and
 #   whose pane id still exists. The picker shows the newest live notification per
 #   pane, with a dot marking unread rows. Jump uses the newest unread live pane.
-#   macOS notifications are best-effort via osascript and do not affect history.
+#   macOS notifications are best-effort via terminal-notifier.
 
 require "base64"
 require "fileutils"
 require "open3"
 require "rbconfig"
+require "shellwords"
 
 MAX_HISTORY = 25
 STATE_DIR = File.join(ENV["XDG_STATE_HOME"].to_s.empty? ? File.join(Dir.home, ".local", "state") : ENV["XDG_STATE_HOME"], "tmux-notify")
@@ -226,15 +227,32 @@ def read_message(args)
   clean_field(line)
 end
 
-def applescript_string(value)
-  value.to_s.gsub("\\", "\\\\\\\\").gsub('"', '\"')
+def click_command(identity)
+  env = {
+    "TMUX" => ENV["TMUX"],
+    "TMUX_PANE" => ENV["TMUX_PANE"],
+    "XDG_STATE_HOME" => ENV["XDG_STATE_HOME"],
+    "PATH" => ENV["PATH"],
+  }.compact
+
+  Shellwords.join(
+    [
+      "/usr/bin/env",
+      *env.map { |key, value| "#{key}=#{value}" },
+      File.expand_path(__FILE__),
+      "jump",
+      Base64.strict_encode64(identity),
+    ]
+  )
 end
 
-def macos_notify(title, message)
+def macos_notify(title, message, identity: nil)
   return false unless RbConfig::CONFIG["host_os"].include?("darwin")
+  return false unless command_available?("terminal-notifier")
 
-  script = %(display notification "#{applescript_string(message)}" with title "#{applescript_string(title)}")
-  system("osascript", "-e", script, out: File::NULL, err: File::NULL)
+  args = ["terminal-notifier", "-title", title, "-message", message, "-sound", "funky"]
+  args.concat(["-execute", click_command(identity)]) if identity
+  system(*args, out: File::NULL, err: File::NULL)
 rescue Errno::ENOENT
   false
 end
@@ -255,6 +273,12 @@ def current_server_start_time!
   server_start_time = Tmux.server_start_time
   fail_with("tmux-notify: unable to read tmux server start time") if server_start_time.to_s.empty?
   server_start_time
+end
+
+def decode_identity!(encoded_identity)
+  Base64.strict_decode64(encoded_identity)
+rescue ArgumentError
+  fail_with("tmux-notify: invalid notification target")
 end
 
 def unread?(record)
@@ -318,21 +342,26 @@ def send_notification(args)
     tmux_ok = Tmux.display("Message from #{title}: #{message}")
   end
 
-  macos_ok = macos_notify(title, message)
+  macos_ok = macos_notify(title, message, identity: record&.identity)
   exit(tmux_ok || macos_ok || recorded ? 0 : 1)
 end
 
-def jump
+def jump(encoded_identity = nil)
   fail_with("tmux-notify: jump requires tmux") unless Tmux.inside?
 
+  requested_identity = decode_identity!(encoded_identity) if encoded_identity
   server_start_time = current_server_start_time!
   selected = History.with_lock do
     records = History.read.select { |record| live?(record, server_start_time) }
-    latest_per_pane(records).find { |record| unread?(record) }
+    if requested_identity
+      records.find { |record| record.identity == requested_identity }
+    else
+      latest_per_pane(records).find { |record| unread?(record) }
+    end
   end
 
   unless selected
-    Tmux.display("no unread notifications")
+    Tmux.display(encoded_identity ? "selected notification is gone" : "no unread notifications")
     exit 0
   end
 
@@ -396,8 +425,8 @@ case command
 when "send"
   send_notification(ARGV)
 when "jump"
-  usage unless ARGV.empty?
-  jump
+  usage if ARGV.length > 1
+  jump(ARGV.first)
 when "choose"
   usage unless ARGV.empty?
   choose
