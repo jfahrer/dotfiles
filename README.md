@@ -34,7 +34,7 @@ git clone git@github.com:jfahrer/dotfiles ~/.dotfiles
 `prefix k` / `prefix C-k` | Previous window
 `prefix j` / `prefix C-j` | Previous window
 `prefix v` | Vertical split
-`prefix n` | Horizontal split
+`prefix n` / `prefix C-n` | Horizontal split
 `prefix x` | Close pane
 `prefix c` | New window
 `prefix X` | Close window
@@ -56,6 +56,8 @@ git clone git@github.com:jfahrer/dotfiles ~/.dotfiles
 `M-h/k/k/l` | Resizing
 `prefix i` | Synchronize panes
 
+`prefix N` | Jump to last notification
+`prefix H` | List notifications
 
 Layout
 `prefix z` | List dirs in workspace to start a new session
