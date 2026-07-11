@@ -4,6 +4,7 @@
 Prerequisites:
 * git
 * [rcm](https://thoughtbot.github.io/rcm/)
+* [mise](https://mise.jdx.dev/)
 
 ```bash
 git clone git@github.com:jfahrer/dotfiles ~/.dotfiles
@@ -67,4 +68,3 @@ Layout
 `prefix M-<1-5>` | Choose a layout (3 is large on on the top)
 `prefix {` | Move pane left
 `prefix }` | Move pane right
-

@@ -34,7 +34,6 @@ _source_if_exists ~/.bash_env.local
 _source_if_exists ~/.bashrc
 _source_if_exists ~/.aliases
 _source_if_exists ~/.aliases_local
-_source_if_exists ~/.asdf.bash
 _source_if_exists ~/.fzf.bash
 
 if command -v brew >/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -51,8 +50,6 @@ _source_if_exists ~/.coursier.bash
 # Add binding to transpose chars - needs to happen after loading fzf.bash
 bind '"\C-t": transpose-chars'
 
-export GOPATH=$HOME/go
-
 # Source local overwrites
 _source_if_exists ~/.bash_profile.local
 
@@ -67,11 +64,8 @@ fi
 # so that they can overwrite the path.
 export CDPATH=.:$WS:$HOME
 
-# Ensure PATH is set correctly
-## Make sure GOPATH is included
-if [[ ! "$PATH" == *$GOPATH/bin* ]]; then
-  export PATH=$GOPATH/bin:$PATH
-fi
+# Activate mise
+_source_if_exists ~/.mise.bash
 
 ## Ensure ./bin and $HOME/bin are in the beginning of PATH
 ## We first remove ./bin and $HOME/bin from PATH since 
