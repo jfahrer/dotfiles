@@ -1,4 +1,4 @@
-EXCLUDES="README.md CHEATSHEET.md LICENSE script/setup"
+EXCLUDES="README.md CHEATSHEET.md LICENSE script/setup TODO.md"
 DOTFILES_DIRS="~/.dotfiles"
 UNDOTTED=bin
 SYMLINK_DIRS="nvim"
