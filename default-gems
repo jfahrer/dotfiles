@@ -1,9 +1,6 @@
 activesupport
 awesome_print
 bundler
-erb_lint
 irbtools
 pry
-solargraph
 standard
-tty-markdown
