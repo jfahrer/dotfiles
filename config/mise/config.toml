@@ -6,3 +6,6 @@ yarn = "1.22.22"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "ruby"]
+
+[settings.ruby]
+compile = false
