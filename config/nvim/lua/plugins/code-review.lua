@@ -1,0 +1,26 @@
+return {
+  dir = "/Users/julian/workspace/code-review.nvim",
+  opts = {},
+  cmd = {
+    "ReviewStart",
+    "ReviewAdd",
+    "ReviewOpen",
+    "ReviewCopy",
+    "ReviewClose",
+    "ReviewFinish",
+    "ReviewNext",
+    "ReviewPrev",
+  },
+  keys = {
+    { "<leader>rs", "<cmd>ReviewStart<cr>", desc = "Review: Start" },
+    { "<leader>ra", function() require("code-review").add() end, mode = { "n", "v" }, desc = "Review: Add" },
+    { "<leader>ro", "<cmd>ReviewOpen<cr>", desc = "Review: Open" },
+    { "<leader>rv", "<cmd>ReviewOpen v<cr>", desc = "Review: Open (vertical)" },
+    { "<leader>rh", "<cmd>ReviewOpen h<cr>", desc = "Review: Open (horizontal)" },
+    { "<leader>ry", "<cmd>ReviewCopy<cr>", desc = "Review: Copy" },
+    { "<leader>rq", "<cmd>ReviewClose<cr>", desc = "Review: Close window" },
+    { "<leader>rf", "<cmd>ReviewFinish<cr>", desc = "Review: Finish" },
+    { "<leader>rn", "<cmd>ReviewNext<cr>", desc = "Review: Next" },
+    { "<leader>rp", "<cmd>ReviewPrev<cr>", desc = "Review: Previous" },
+  },
+}
