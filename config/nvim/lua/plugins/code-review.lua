@@ -1,5 +1,6 @@
 return {
-  dir = "/Users/julian/workspace/code-review.nvim",
+  "jfahrer/code-review.nvim",
+  lazy = false,
   opts = {},
   cmd = {
     "ReviewStart",
