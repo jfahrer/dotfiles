@@ -13,3 +13,5 @@ tmp/**/*
 .bash_history
 .bash_env.local
 .ignore/
+
+**/.claude/settings.local.json
