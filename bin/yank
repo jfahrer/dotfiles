@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Read input from stdin
+input=$(cat | base64 -w 0)
+
+if [ -n "$TMUX" ]; then
+  # Inside tmux: Wrap the sequence in a tmux DCS passthrough escape
+  printf "\033Ptmux;\033\033]52;c;%s\a\033\\" "$input" >/dev/tty
+else
+  # Regular terminal: Send standard OSC 52
+  printf "\033]52;c;%s\a" "$input" >/dev/tty
+fi
