@@ -1,7 +1,12 @@
 return {
   "jfahrer/code-review.nvim",
   lazy = false,
-  opts = {},
+  opts = {
+    persist = {
+      enabled = true,
+      file = ".code-review.nvim",
+    },
+  },
   cmd = {
     "ReviewStart",
     "ReviewAdd",
